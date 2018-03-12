@@ -1,0 +1,253 @@
+" Startup {{{
+filetype indent plugin on
+
+
+" vim 文件折叠方式为 marker
+" 文件折叠显示切换快捷键为za
+augroup ft_vim
+    au!
+
+    autocmd FileType vim setlocal foldmethod=marker
+
+    " 打开文件总是定位到上次编辑的位置
+    autocmd BufReadPost *
+      \ if line("'\"") > 1 && line("'\"") <= line("$") |
+      \   exe "normal! g`\"" |
+      \ endif
+
+    augroup END
+augroup END
+" }}}
+
+
+" General {{{
+"set pythonthreedll=python36.dll
+"禁止生成临时文件
+set nobackup
+set noswapfile
+
+"历史记录数
+set history=1024
+
+"1不显示书签栏
+set showtabline=1
+
+"设置当文件在外部被修改，自动更新该文件
+set autoread
+
+set autochdir
+"set whichwrap=b,s,<,>,[,]
+set nobomb
+
+"使回格键（backspace）正常处理indent, eol, start等
+set backspace=indent,eol,start whichwrap+=<,>,[,]
+
+" Vim 的默认寄存器和系统剪贴板共享
+set clipboard+=unnamed
+
+" 设置 alt 键不映射到菜单栏
+set winaltkeys=no
+
+
+" }}}
+
+
+" Lang & Encoding {{{
+"查询当前编辑的文件的字符编码方式并打开
+set fileencodings=utf-8,gbk2312,gbk,gb18030,cp936
+
+"vim内部使用的字符编码方式
+set encoding=utf-8
+set langmenu=zh_CN.UTF-8
+let $LANG = 'en_US.UTF-8'
+"vim提示信息乱码的解决
+"language messages zh_CN.UTF-8
+"工作的终端或者Windows的Console窗口的字符编码方式
+"set termencoding=utf-8
+
+"vim的菜单乱码解决
+source $VIMRUNTIME/delmenu.vim
+source $VIMRUNTIME/menu.vim
+" }}}
+
+
+" GUI {{{
+colorscheme molokai
+"colorscheme github
+"let g:molokai_original = 1
+
+set cursorline
+set hlsearch
+set number
+" 窗口大小
+set lines=32 columns=120
+" 分割出来的窗口位于当前窗口下边/右边
+set splitbelow
+set splitright
+"不显示工具/菜单栏
+set guioptions-=T " 隐藏工具栏
+set guioptions-=m " 隐藏菜单栏
+"set guioptions-=L
+"set guioptions-=r
+"set guioptions-=b
+" 使用内置 tab 样式而不是 gui
+set guioptions-=e
+set nolist
+
+" set listchars=tab:▶\ ,eol:¬,trail:·,extends:>,precedes:<
+set guifont=Consolas:h12:cANSI
+" }}}
+
+
+" Keymap {{{
+"配置前缀键
+let mapleader=","
+nnoremap \ ,
+nnoremap J j
+nnoremap K k
+inoremap jk <ESC>
+nnoremap <Up> <Nop>
+nnoremap <Down> <Nop>
+nnoremap <Left> <Nop>
+nnoremap <Right> <Nop>
+nnoremap // :nohlsearch<CR>
+inoremap {} {<CR>}<ESC>O
+"重载配置文件
+nnoremap <leader>sv :source $MYVIMRC<cr>
+"打开配置文件
+nnoremap <leader>ev :vs $MYVIMRC<cr>
+
+nnoremap <leader>tn :tabnew<cr>
+nnoremap <leader>tc :tabclose<cr>
+nnoremap <leader>th :tabp<cr>
+nnoremap <leader>tl :tabn<cr>
+
+" 当前文件父目录
+"cnoremap <expr> %% getcmdtype( ) == ':' ? expand('%:h').'/' : '%%'
+
+" 移动分割窗口
+nnoremap <C-j> <C-W>j
+nnoremap <C-k> <C-W>k
+nnoremap <C-h> <C-W>h
+nnoremap <C-l> <C-W>l
+
+" 正常模式下 alt+j,k,h,l 调整分割窗口大小
+"nnoremap <M-j> :resize +5<cr>
+"nnoremap <M-k> :resize -5<cr>
+"nnoremap <M-h> :vertical resize -5<cr>
+"nnoremap <M-l> :vertical resize +5<cr>
+
+" 打开当前目录 windows
+nnoremap <silent> <leader>ex :!start explorer %:p:h<CR>
+
+" 打开当前目录CMD
+nnoremap <silent> <leader>cmd :!start cmd /k cd %:p:h<cr>
+" 打印当前时间
+nnoremap <F3> a<C-R>=strftime("%Y-%m-%d %a %I:%M %p")<CR><Esc>
+
+" 复制当前文件/路径到剪贴板
+nnoremap ,fn :let @*=substitute(expand("%"), "/", "\\", "g")<CR>
+nnoremap ,fp :let @*=substitute(expand("%:p"), "/", "\\", "g")<CR>
+
+" }}}
+
+
+" Plugin {{{
+set nocompatible
+filetype off  
+set rtp+=$VIM/bundle/Vundle.vim  
+"vundle 管理的插件列表必须位于 vundle#begin() 和 vundle#end() 之间  
+call vundle#begin('$VIM/bundle')  
+Plugin 'VundleVim/Vundle.vim'  
+Plugin 'Lokaltog/vim-powerline' "status 美化  
+Plugin 'scrooloose/nerdcommenter' "多行注释，leader键+cc生成, leader+cu删除注释
+Plugin 'kien/ctrlp.vim' "搜索历史打开文件，在命令行模式下按ctrl+p触发  
+Plugin 'vim-scripts/grep.vim' "在命令行模式使用grep命令，:Grep
+
+"-------------------------------------NERDTree Start--------------------------------------------
+Plugin 'scrooloose/nerdtree' "文件浏览
+"NERDTree窗口切换快捷键
+nnoremap <leader>l :NERDTreeToggle<CR>
+" 显示行号
+let NERDTreeShowLineNumbers=1
+let NERDTreeAutoCenter=1
+" 是否显示隐藏文件
+let NERDTreeShowHidden=1
+" 设置宽度
+let NERDTreeWinSize=24
+" 在终端启动vim时，共享NERDTree
+let g:nerdtree_tabs_open_on_console_startup=1
+" 忽略一下文件的显示
+let NERDTreeIgnore=['\.idea', '\.vscode', 'node_modules','\.pyc','\~$','\.swp','\.swp']
+" 显示书签列表
+"let NERDTreeShowBookmarks=1
+"-------------------------------------NERDTree END----------------------------------------------
+
+"-----------------------------------Markdown Start----------------------------------------------
+Plugin 'godlygeek/tabular'
+Plugin 'plasticboy/vim-markdown'
+let g:vim_markdown_folding_disabled = 1
+"-----------------------------------Markdown End------------------------------------------------
+
+"Plugin 'nathanaelkane/vim-indent-guides.git' "缩进对齐显示
+"Plugin 'octol/vim-cpp-enhanced-highlight' "对c++语法高亮增强  
+"Plugin 'kshenoy/vim-signature' "书签可视化的插件  
+"Plugin 'vim-scripts/BOOKMARKS--Mark-and-Highlight-Full-Lines' "书签行高亮  
+"Plugin 'majutsushi/tagbar' "taglist的增强版，查看标签，依赖于ctags
+"Plugin 'Lokaltog/vim-easymotion' "快速跳转，按两下leader键和f组合  
+"Plugin 'vim-scripts/ShowTrailingWhitespace.git' "高亮显示行尾的多余空白字符  
+"Plugin 'vim-scripts/indentpython.vim.git'  
+"Plugin 'vim-scripts/Solarized.git' "主题方案
+"Plugin 'Valloric/YouCompleteMe' "自动补全
+"Plugin 'vim-scripts/indexer.tar.gz' "自动生成标签  
+"Plugin 'vim-scripts/DfrankUtil' "indexer 依赖  
+"Plugin 'vim-scripts/vimprj' "indexer 依赖  
+"Plugin 'davidhalter/jedi-vim' "python 补全，不依赖于tags,但比较慢，可以使用indexer替换，但不能跳转项目外  
+"Plugin 'vim-scripts/Markdown'  
+"Plugin 'tpope/vim-surround'  
+"Plugin 'ekalinin/Dockerfile.vim'
+"Plugin 'w0rp/ale'
+"Plugin 'python-mode/python-mode'
+"let g:pymode_python = 'python3'
+"Plugin 'davidhalter/jedi-vim'
+"let g:jedi#completions_command = "<C-N>"
+"Plugin 'vim-syntastic/syntastic'
+" 插件列表结束
+call vundle#end()  
+filetype on  
+" }}}
+
+
+" 代码风格 {{{
+"通用设置
+set ruler
+set showmode
+syntax on
+
+set autoindent
+set shiftwidth=4
+set tabstop=4
+set softtabstop=4
+set expandtab
+
+"TAB缩进
+"autocmd FileType c,cpp,python set shiftwidth=4
+"autocmd FileType c,cpp,python set tabstop=4
+
+"autocmd FileType javascript,html,xml,css,java set shiftwidth=2
+"autocmd FileType javascript,html,xml,css,java set tabstop=2
+
+"python TAB to Blank
+"autocmd FileType python,javascript set expandtab
+"autocmd FileType python,javascript set softtabstop=4
+
+"自动缩进
+"autocmd FileType c,cpp set cindent
+"autocmd FileType python set autoindent
+"autocmd FileType javascript,html,xml,css,java set autoindent
+
+"代码运行
+autocmd FileType java nnoremap <F5> :!start cmd /k cd %:p:h && javac -encoding UTF-8 % && java %:r && pause && exit<CR>
+autocmd FileType python nnoremap <F5> :!start cmd /k cd %:p:h && python % && pause && exit<CR>
+
+" }}}
