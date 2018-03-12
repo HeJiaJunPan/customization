@@ -1,0 +1,260 @@
+{
+    "createdBy": "Redirector v3.1.1",
+    "createdAt": "2017-12-12T08:48:06.305Z",
+    "redirects": [
+        {
+            "description": "去豆瓣跳转",
+            "exampleUrl": "https://www.douban.com/link2/?url=http%3A%2F%2Fblog.sina.com.cn%2Fs%2Fblog_69a4e04201014j4w.html",
+            "exampleResult": "http://blog.sina.com.cn/s/blog_69a4e04201014j4w.html",
+            "error": null,
+            "includePattern": "https://www.douban.com/link\\d*?/\\?url=(.*)",
+            "excludePattern": "",
+            "redirectUrl": "$1",
+            "patternType": "R",
+            "processMatches": "urlDecode",
+            "disabled": false,
+            "appliesTo": [
+                "main_frame"
+            ]
+        },
+        {
+            "description": "pixiv去跳转",
+            "exampleUrl": "http://www.pixiv.net/jump.php?http%3A%2F%2Fcocoronica.weebly.com%2F",
+            "exampleResult": "http://cocoronica.weebly.com/",
+            "error": null,
+            "includePattern": "http://www.pixiv.net/jump.php\\?(http.*)",
+            "excludePattern": "",
+            "redirectUrl": "$1",
+            "patternType": "R",
+            "processMatches": "urlDecode",
+            "disabled": false,
+            "appliesTo": [
+                "main_frame"
+            ]
+        },
+        {
+            "description": "去知乎跳转",
+            "exampleUrl": "http://link.zhihu.com/?target=https://play.google.com",
+            "exampleResult": "https://play.google.com",
+            "error": null,
+            "includePattern": "https?://link.zhihu.com/\\?target=(.+)",
+            "excludePattern": "",
+            "redirectUrl": "$1",
+            "patternType": "R",
+            "processMatches": "noProcessing",
+            "disabled": false,
+            "appliesTo": [
+                "main_frame"
+            ]
+        },
+        {
+            "description": "Google ajax/fonts >> 科大",
+            "exampleUrl": "https://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js",
+            "exampleResult": "https://ajax.proxy.ustclug.org/ajax/libs/jquery/1.8.1/jquery.min.js",
+            "error": null,
+            "includePattern": "https?://(ajax|fonts)\\.googleapis\\.com/(.*)$",
+            "excludePattern": "",
+            "redirectUrl": "https://$1.proxy.ustclug.org/$2",
+            "patternType": "R",
+            "processMatches": "noProcessing",
+            "disabled": false,
+            "appliesTo": [
+                "main_frame",
+                "sub_frame",
+                "stylesheet",
+                "script",
+                "image",
+                "object",
+                "xmlhttprequest",
+                "other"
+            ]
+        },
+        {
+            "description": "Google themes >> 科大",
+            "exampleUrl": "http://themes.googleusercontent.com/",
+            "exampleResult": "https://google-themes.proxy.ustclug.org/",
+            "error": null,
+            "includePattern": "https?://themes\\.googleusercontent\\.com/(.*)$",
+            "excludePattern": "",
+            "redirectUrl": "https://google-themes.proxy.ustclug.org/$1",
+            "patternType": "R",
+            "processMatches": "noProcessing",
+            "disabled": false,
+            "appliesTo": [
+                "main_frame",
+                "sub_frame",
+                "stylesheet",
+                "script",
+                "image",
+                "object",
+                "xmlhttprequest",
+                "other"
+            ]
+        },
+        {
+            "description": "去除URL的highlight防止卡死",
+            "exampleUrl": "http://bbs.kafan.cn/forum.php?mod=viewthread&tid=1480897&highlight=noscript",
+            "exampleResult": "http://bbs.kafan.cn/forum.php?mod=viewthread&tid=1480897",
+            "error": null,
+            "includePattern": "^(http:\\/\\/.*\\.(com|cn|net)\\/.*?)&highlight=(.*)",
+            "excludePattern": "",
+            "redirectUrl": "$1",
+            "patternType": "R",
+            "processMatches": "noProcessing",
+            "disabled": false,
+            "appliesTo": [
+                "main_frame"
+            ]
+        },
+        {
+            "description": "Github http >> https",
+            "exampleUrl": "http://example.github.io/example",
+            "exampleResult": "https://example.github.io/example",
+            "error": null,
+            "includePattern": "^http://(.*?)(github\\.io)(.*)",
+            "excludePattern": "",
+            "redirectUrl": "https://$1$2$3",
+            "patternType": "R",
+            "processMatches": "noProcessing",
+            "disabled": false,
+            "appliesTo": [
+                "main_frame"
+            ]
+        },
+        {
+            "description": "常用hosts网站2 http >> https",
+            "exampleUrl": "http://web.archive.org/example",
+            "exampleResult": "https://web.archive.org/example",
+            "error": null,
+            "includePattern": "^http://(web\\.archive\\.org|duckduckgo\\.com|telegram\\.org)(.*)",
+            "excludePattern": "",
+            "redirectUrl": "https://$1$2",
+            "patternType": "R",
+            "processMatches": "noProcessing",
+            "disabled": false,
+            "appliesTo": [
+                "main_frame"
+            ]
+        },
+        {
+            "description": "常用hosts网站1 http >> https",
+            "exampleUrl": "http://www.youtube.com/example",
+            "exampleResult": "https://www.youtube.com/example",
+            "error": null,
+            "includePattern": "^http://(.*)?(youtube|google|wordpress|github|twitter|deviantart|facebook|pinterest|vimeo|feedly|flickr|quora|instagram)\\.com\\/(.*)",
+            "excludePattern": "",
+            "redirectUrl": "https://$1$2.com/$3",
+            "patternType": "R",
+            "processMatches": "noProcessing",
+            "disabled": false,
+            "appliesTo": [
+                "main_frame"
+            ]
+        },
+        {
+            "description": "去除Google搜索结果跳转",
+            "exampleUrl": "https://www.google.com.hk/url?sa=p&hl=zh-CN&pref=hkredirect&pval=yes&q=https://www.google.com.hk/search?example",
+            "exampleResult": "https://www.google.com/ncr#example&hl=en-US&safe=off",
+            "error": null,
+            "includePattern": "^https?://www\\.google\\.com\\.hk/url\\?sa=p&hl=zh-CN&pref=hkredirect&pval=yes&q=https?://www\\.google\\.com\\.hk/search\\?(.*)",
+            "excludePattern": "^https://www\\.google\\.com/.*\\&hl=en-US&safe=off(.*)",
+            "redirectUrl": "https://www.google.com/ncr#$1&hl=en-US&safe=off",
+            "patternType": "R",
+            "processMatches": "noProcessing",
+            "disabled": false,
+            "appliesTo": [
+                "main_frame"
+            ]
+        },
+        {
+            "description": "去除Google搜索验证",
+            "exampleUrl": "https://ipv4.google.com/sorry/index?continue=https://www.google.com/search?exampleq=example&q=example",
+            "exampleResult": "https://www.google.com/ncr#exampleq=example",
+            "error": null,
+            "includePattern": "^https?://ipv4\\.google\\.com/sorry/index\\?continue=https?://www\\.google\\.com(?:\\.hk|)/search\\?(.*q=.*)&q=.*",
+            "excludePattern": "",
+            "redirectUrl": "https://www.google.com/ncr#$1",
+            "patternType": "R",
+            "processMatches": "urlDecode",
+            "disabled": false,
+            "appliesTo": [
+                "main_frame"
+            ]
+        },
+        {
+            "description": "Google搜索 >> 关闭安全搜索",
+            "exampleUrl": "https://www.google.com/search?q=%E5%A4%A9%E5%9C%B0",
+            "exampleResult": "https://www.google.com/search?q=%E5%A4%A9%E5%9C%B0&hl=en-US&safe=off",
+            "error": null,
+            "includePattern": "^https?://www\\.google\\.com/(s\\?|search\\?|webhp\\?)(.*)",
+            "excludePattern": "^https://www\\.google\\.com/.*\\&hl=en-US&safe=off(.*)",
+            "redirectUrl": "https://www.google.com/$1$2&hl=en-US&safe=off",
+            "patternType": "R",
+            "processMatches": "noProcessing",
+            "disabled": false,
+            "appliesTo": [
+                "main_frame"
+            ]
+        },
+        {
+            "description": "Google HK http >> https",
+            "exampleUrl": "http://www.google.com.hk/example",
+            "exampleResult": "https://www.google.com.hk/example",
+            "error": null,
+            "includePattern": "^http://www\\.google\\.com\\.hk/(.*)",
+            "excludePattern": "",
+            "redirectUrl": "https://www.google.com.hk/$1",
+            "patternType": "R",
+            "processMatches": "noProcessing",
+            "disabled": false,
+            "appliesTo": [
+                "main_frame"
+            ]
+        },
+        {
+            "description": "Google中文 >> Google英文",
+            "exampleUrl": "https://www.google.com.hk/search?q=example",
+            "exampleResult": "https://www.google.com/ncr#q=example&hl=en-US&safe=off",
+            "error": null,
+            "includePattern": "^https?://www\\.google\\.com\\.hk\\/search\\?(.*)",
+            "excludePattern": "^https://www\\.google\\.com\\/.*\\&hl=en-US&safe=off(.*)",
+            "redirectUrl": "https://www.google.com/ncr#$1&hl=en-US&safe=off",
+            "patternType": "R",
+            "processMatches": "noProcessing",
+            "disabled": false,
+            "appliesTo": [
+                "main_frame"
+            ]
+        },
+        {
+            "description": "WiKi http >> https",
+            "exampleUrl": "http://zh.wikipedia.org/wiki/example",
+            "exampleResult": "https://zh.wikipedia.org/wiki/example",
+            "error": null,
+            "includePattern": "^http://([^/]+\\.wikipedia\\.org\\/.+)",
+            "excludePattern": "",
+            "redirectUrl": "https://$1",
+            "patternType": "R",
+            "processMatches": "noProcessing",
+            "disabled": false,
+            "appliesTo": [
+                "main_frame"
+            ]
+        },
+        {
+            "description": "Wiki繁体 >> 简体",
+            "exampleUrl": "https://zh.wikipedia.org/wiki/example",
+            "exampleResult": "https://zh.wikipedia.org/zh-cn/example",
+            "error": null,
+            "includePattern": "^(https?://zh\\.wikipedia\\.org)/(wiki|zh|zh((?!\\-cn)[^/])+)/(.*)",
+            "excludePattern": "",
+            "redirectUrl": "$1/zh-cn/$4",
+            "patternType": "R",
+            "processMatches": "noProcessing",
+            "disabled": false,
+            "appliesTo": [
+                "main_frame"
+            ]
+        }
+    ]
+}
