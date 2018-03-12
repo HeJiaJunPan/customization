@@ -1,0 +1,66 @@
+/*去除无用书签右键菜单*/
+#placesContext_open,
+#BMB_mobileBookmarks,
+#BMB_bookmarksShowAll,
+#BMB_bookmarksShowAllTop,
+#BMB_viewBookmarksSidebar,
+#BMB_bookmarksToolbar,
+#BMB_unsortedBookmarks,
+[command="placesCmd_open:tab"], 
+[class="openintabs-menuitem"],/*在标签页中打开书签组*/
+[id="placesContext_open:newprivatewindow"],/*在新隐私窗口中打开*/
+[id="placesContext_openContainer:tabs"]/*在标签页中打开书签组*/ {
+    display: none;
+}
+
+
+/*显示书签选项*/
+#bookmarks-menu-button .toolbarbutton-menubutton-dropmarker {
+	display: block !important;
+}
+
+/*隐藏打开书签组*/
+.bookmarks-actions-menuseparator,.openintabs-menuitem {
+	display: none !important;
+}
+
+/*column bookmark*/
+
+#bookmarksMenu menupopup .scrollbox-innerbox, .bookmark-item[container="true"] menupopup .scrollbox-innerbox
+{
+    width: 520px !important; /*3 colonnes*/
+    /* width: 850px !important; *//*4 colonnes*/
+    display: table !important;
+}
+
+#bookmarksMenu .bookmark-item, .bookmark-item[container="true"] .bookmark-item
+{
+    min-width: 250px !important;
+    max-width: 250px !important;
+    margin-left: 8px !important;
+}
+/*分割线
+#bookmarksMenu menupopup menuseparator, .bookmark-item[container="true"] menupopup menuseparator
+{
+display: block !important;
+margin-bottom: 8px !important;
+}*/
+
+/*滚动条
+#bookmarksMenu scrollbox, .bookmark-item[container="true"] scrollbox
+{
+    overflow-y: auto !important;
+}*/
+
+/*********************************图标调整**********************************/
+
+/*收藏夹文件夹图标修改
+.bookmark-item[type="menu"] > .toolbarbutton-icon {
+    list-style-image: url("data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAA8klEQVQ4EWP8//8/AyWABaS5vHGyDMv/f5VAw7LQDWNkZJzG+OdvR0tL0WN0ORAfbADTv79ZDvbmWdaWhhhqjp04n7Xv4IlPQIlKDEmgAGNV/YSp2GzGphhdDOQ6FpDmitJUhj9//qDL4+WzsLAwdHTPzgJ74dev3wy/fv3CqwFdko0NEvhgA/79+8fw9+8/dDV4+SA9IAA24D+QAxPAqwtJEqQHBKAu+M/w999fJGnCzH//0LzwjxIvgGwnNRZgLgZ74e9foAFATAoA6QEBsAHsbGwkByJID9gAUGqaMmM5Rh4AyxIgwPmE0tzIRMASgtIAakRwutP91xoAAAAASUVORK5CYII=") !important;
+    -moz-image-region: rect(0 16px 16px 0) !important;
+}*//*收藏夹文件夹主图标*/
+
+/*.bookmark-item[container] {
+    list-style-image: url("data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAA8klEQVQ4EWP8//8/AyWABaS5vHGyDMv/f5VAw7LQDWNkZJzG+OdvR0tL0WN0ORAfbADTv79ZDvbmWdaWhhhqjp04n7Xv4IlPQIlKDEmgAGNV/YSp2GzGphhdDOQ6FpDmitJUhj9//qDL4+WzsLAwdHTPzgJ74dev3wy/fv3CqwFdko0NEvhgA/79+8fw9+8/dDV4+SA9IAA24D+QAxPAqwtJEqQHBKAu+M/w999fJGnCzH//0LzwjxIvgGwnNRZgLgZ74e9foAFATAoA6QEBsAHsbGwkByJID9gAUGqaMmM5Rh4AyxIgwPmE0tzIRMASgtIAakRwutP91xoAAAAASUVORK5CYII=")!important;
+    -moz-image-region: rect(0px, 16px, 16px, 0px)!important;
+}收藏夹文件夹二级图标*/

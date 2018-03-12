@@ -1,0 +1,10 @@
+<SearchPlugin xmlns="http://www.mozilla.org/2006/browser/search/" xmlns:os="http://a9.com/-/spec/opensearch/1.1/">
+<os:ShortName>知乎</os:ShortName>
+<os:Description>知乎</os:Description>
+<os:InputEncoding>UTF-8</os:InputEncoding>
+<os:Image width="16" height="16">data:image/x-icon;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABHNCSVQICAgIfAhkiAAAAslJREFUOI1dk01oFVcUx3/nzsz7yMt7mZpMNAQSv6BUJI2tYpus0oVIRdGCaNVV6aaiRcxSuih+gLQoLbSL0l1LoY1QLDEbsQtto27U+NFiVwrGVw2GF/Ne3sybmXtcTJpAz92ce7n/c+6P+z/S/43+GVfvDwGEFmKFsiNkoYAsZyKgFsSAWryejZMmqf41BEIjtgz35jkyWGYuTkE1U6GgiqiCzc40taAQVx8MuapKai1zYcxvhwfY/MVdGmFKwxNAWZUz/BtZ/h89eYMALijPWgkn31sBwLG3KhSGi3iugxX44IfH/HqwbwnlP7Q9Y9P05B0MAPWIw9v6uHz7CcNv+GxeWyRuvqSgEUiT3VsDwoU5iOuEC3Ps3hpAfQEAt9FKObTFZz6M2fbZVcZGt4AY9n73N5RL0IgA+PCrKQhKMNNg/8g6aEVgy7htjnDx7iw/XnkMficYDzEGChUoFKGZZq8ut9Pd8RrPw0UUVRBwsTCvHj99MkBOLINrKojA2EcebcUcO769lwmMh5g8GC/bWwELxqKs6XDxcxZNQkQsUSuGZAHiJoV2u9xRF78XQC2K4hqE+XrC+9//Ay9q/H5qmPFbTzl34RF0tkM9WvKUqix6A1ABq7hqwTEeQanMTKyMbOhmZEM3vV0+o79Mg7OoaCQ8jyy8aC0VFAUDAuIwEwlfH1jPdC2k/+gljm9fzZf7+jN/AxdPvMnHm0roxPYlLyiCrByd0npsWefD1OeD7DxzjfF7s7yztsL10yPIwcvwrEb1wi7yRllxYAIKDsGqAKdYxk2tsrpD+PnT1zl0/ibjD5sEnV3cqDZ5+8Qf+OU8NSqUPKjsnaCrz0fcPMbLo1aRlcfvaNxqMvuyDp4haCshbg5NE+I0wXMcsCkztXkCv4S4BTAOINnqPauTSfXWu2pTEIMYJ2NbpsxGWFMUJ7sjAILbOzD5Ck2gKxGz7mB8AAAAAElFTkSuQmCC</os:Image>
+<SearchForm>http://www.zhihu.com/</SearchForm>
+<os:Url type="text/html" method="GET" template="http://www.zhihu.com/search?q={searchTerms}" resultDomain="zhihu.com">
+</os:Url><os:Url type="application/opensearchdescription+xml" method="GET" template="http://mycroftproject.com/updateos.php/id0/zhihu.xml" rel="self" resultDomain="mycroftproject.com">
+</os:Url>
+</SearchPlugin>

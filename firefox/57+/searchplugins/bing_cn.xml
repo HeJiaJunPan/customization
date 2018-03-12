@@ -1,0 +1,11 @@
+<SearchPlugin xmlns="http://www.mozilla.org/2006/browser/search/" xmlns:os="http://a9.com/-/spec/opensearch/1.1/">
+<os:ShortName>必应</os:ShortName>
+<os:Description>Bing without https</os:Description>
+<os:InputEncoding>UTF-8</os:InputEncoding>
+<os:Image width="16" height="16">data:image/x-icon;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAADBSURBVDhPY+BpaflPCUYxQGPSpP+mM2eiKCCEUQyo37fv/6MPH/7POXv2v3RPD4pCXBjDABAAGQJyDbIcLkxbA4gxBKcBoMBcdeUKODwiVq3CaRheF8D4IHDhxYv/fceOYRhE0AuHHzwAi8EASA2yHoKBCPIKsiFEGwDSmLFpE9jpyAAkhqwHqwGffv7EcDqIDwpMZPUgjNUAZAByDUgcPfBgGMUAkCKQYpAmEMYW6ugYxQAYBvmf2EyF1QDicct/AAVLf1Rr99ZRAAAAAElFTkSuQmCC</os:Image>
+<SearchForm>http://www.bing.com/</SearchForm>
+<os:Url type="text/html" method="GET" template="http://www.bing.com/search?q={searchTerms}&amp;go=&amp;form=QBLH" resultDomain="bing.com">
+</os:Url><os:Url type="application/x-suggestions+json" method="GET" template="http://api.bing.com/osjson.aspx?market=en-US&amp;query={searchTerms}" resultDomain="api.bing.com">
+</os:Url><os:Url type="application/opensearchdescription+xml" method="GET" template="http://mycroftproject.com/updateos.php/id0/bingnossl.xml" rel="self" resultDomain="mycroftproject.com">
+</os:Url>
+</SearchPlugin>

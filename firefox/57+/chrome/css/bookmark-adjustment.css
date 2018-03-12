@@ -1,0 +1,109 @@
+/*书签按钮下拉菜单、历史下拉菜单、三道杠菜单背景文字调整*/
+panelview .toolbarbutton-1:not(:-moz-any([disabled],[open],:active)):hover,toolbarbutton.subviewbutton:not(:-moz-any([disabled],[open],:active)):hover,.toolbaritem-combined-buttons:-moz-any(:not([cui-areatype="toolbar"]),[overflowedItem=true]) > toolbarbutton:not(:-moz-any([disabled],[open],:active)):hover,.subviewbutton:not([disabled])[_moz-menuactive],#BMB_bookmarksPopup .panel-subview-footer:not([disabled])[_moz-menuactive] > .menu-text {
+	background-color:#91C9F7 !important;
+	/*color:white !important;
+	*/
+border-color:transparent !important;
+} 
+/*书签按钮下拉菜单*/
+/*#BMB_bookmarksPopup{
+  min-width:220px !important;
+	max-width:220px !important;
+}*/	
+/*书签项二级菜单宽度*/
+/*.bookmark-item[container], *//*书签二级文件夹*/
+.bookmark-item menuitem {
+	min-width:190px !important;
+	max-width:190px !important;
+}	
+/*隐藏在标签页中打开书签组*/
+.bookmarks-actions-menuseparator,.openintabs-menuitem {
+	display:none !important;
+}
+
+/*添加和编辑书签时自动弹出面板*/
+#editBookmarkPanel [collapsed="true"],#editBMPanel_descriptionRow,#editBMPanel_locationRow {
+	visibility:visible !important
+}
+#editBookmarkPanel *|*.textbox-input:-moz-placeholder {
+	color:transparent !important;
+	text-shadow:none !important;
+}
+#editBMPanel_folderTree {
+	min-height:25em !important;
+}
+#editBMPanel_tagsSelector {
+	max-height:4em !important;
+}
+#editBMPanel_descriptionField {
+	max-height:3em !important;
+}
+
+/*书签工具栏文件夹图标*/
+#PersonalToolbar toolbarbutton[class="bookmark-item"][type="menu"],menu[container="true"][class="menu-iconic bookmark-item"] {
+	list-style-image: url("../../image/bookmark-toolbar-folder.svg") !important;
+}	
+/*书签文件夹图标及网站图标自动补全*/
+menu.bookmark-item:not([query]):not([label="Bookmarks Toolbar"]) {
+	list-style-image: url("../../image/bookmark-folder.svg") !important;
+}
+menu.bookmark-item:not([query]):not([label="Bookmarks Toolbar"])[open] {
+	list-style-image: url("../../image/open-bookmark-folder.svg") !important;
+}
+
+/*隐藏书签按钮菜单多余项*/
+#BMB_viewBookmarksSidebar,#BMB_viewBookmarksSidebar+menuseparator,#BMB_bookmarkThisPage,#BMB_subscribeToPageMenuitem,#BMB_subscribeToPageMenupopup,#BMB_subscribeToPageMenupopup+menuseparator,#BMB_bookmarksToolbar,#BMB_unsortedBookmarks,#BMB_unsortedBookmarks+menuseparator {
+	display:none !important;
+}
+#BMB_bookmarksShowAllTop,#BMB_bookmarksShowAllTop+menuseparator {
+	display:none !important;
+}
+#BMB_bookmarksPopup > menuseparator:nth-child(13) {
+	display:none !important;
+}
+#BMB_pocket,#BMB_pocket+menuseparator {
+	display:none !important;
+}
+/*最近书签*/
+menu.subviewbutton:nth-child(9),.small-separator {
+	display:none !important;
+}
+/*移动书签及下面的分隔线*/	
+#BMB_mobileBookmarks,#BMB_mobileBookmarks + menuseparator {
+	display: none !important;
+}
+
+/*书签工具栏显示效果修正*/
+#nav-bar ~ #PersonalToolbar:not([customizing]) {
+   padding: 1px !important;
+   margin-top: -1px !important;
+	background: #F6F6F6 !important;
+	/*书签工具栏背景颜色，可自行更换颜色代码*/
+}
+
+/*书签工具栏文件夹鼠标指向效果*/
+#PersonalToolbar toolbarbutton {
+	-moz-appearance:none;
+	margin-left:1px !important;
+	border:none;
+	background:none;
+	border:1px solid;
+	border-color:transparent;
+	border-radius:0px !important;
+	padding:1px 2px !important;
+	transition-property:background-color,border-color;
+	transition-duration:150ms;
+}
+#PersonalToolbar toolbarbutton:not([open]):not(:active):hover {
+	background:var(--toolbarbutton-hover-background) !important;
+	border-color:var(--toolbarbutton-hover-bordercolor) !important;
+	box-shadow:var(--toolbarbutton-hover-boxshadow) !important;
+	border:1px solid #B3B3B3 !important;
+}
+#PersonalToolbar toolbarbutton:hover:active:not([disabled]),#PersonalToolbar toolbarbutton[open] {
+	background:var(--toolbarbutton-active-background) !important;
+	border-color:var(--toolbarbutton-active-bordercolor) !important;
+	box-shadow:var(--toolbarbutton-active-boxshadow) !important;
+	border:1px solid #B3B3B3 !important;
+	transition-duration:10ms;
+}

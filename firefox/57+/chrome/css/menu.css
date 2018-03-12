@@ -1,0 +1,73 @@
+/*********************************右键菜单调整**********************************/
+/*隐藏无效右键菜单*/
+menuitem[disabled="true"] {
+    display: none !important;
+}
+
+/*去除“发送到设备”右键*/
+#context-sendpagetodevice, #context-sep-sendpagetodevice,
+#context-sendlinktodevice, #context-sep-sendlinktodevice,
+#context_sendTabToDevice, #context_sendTabToDevice_separator {
+    display: none !important;
+}
+
+/*地址栏下拉栏隐藏*/
+.urlbar-history-dropmarker {
+	display: none!important;
+}
+
+/*隐藏identity bar*/
+#identity-icon-labels, #identity-popup {
+	display: none!important;
+}
+
+/*隐藏定制面板里的非线性图标*/
+#tuchuang-button,
+#wrapper-superstart-toolbar-icon,
+#wrapper-xThunderToolbarBtn,
+#wrapper-firebug-inspectorButton,
+#wrapper-tuchuang-button{
+	display: none !important;
+}
+
+
+/*去除无用H5视频右键菜单*/
+#context-media-pause,
+#context-media-mute,
+#context-media-unmute,
+#context-media-hidecontrols {
+    display: none;
+}
+
+/*隐藏所有右键菜单分割线*/
+menuseparator {
+    display: none;
+}
+
+
+/*隐藏右键菜单*/
+#context-searchselect,/*隐藏火狐自带的搜索菜单*/
+#context-openlinkprivate,
+#context-setDesktopBackground,
+#context-sendimage,
+#spell-check-enabled,
+#context-keywordfield,
+#_446900e4-71c2-419f-a6a7-df9c091e268b__root,
+#lpt_lplogintolastpass,
+#lpt_lpcontentareacontextmenu,
+#lpt_lpfillformsmenu4
+{display: none !important;}
+
+/*隐藏右键菜单箭头*/
+#contentAreaContextMenu .autorepeatbutton-up,
+#contentAreaContextMenu .autorepeatbutton-down
+{display: none !important;}
+
+
+/*隐藏前进后退收藏按钮*/
+#context-sep-navigation, #context-navigation,
+#context-savepage, #context-sendpage, #context-sep-viewbgimage,
+#context-sendimage, #context-sep-undo,  #context-bookmarklink,
+#context-setWallpaper, #context-setDesktopBackground,
+#context-inspect ~ menuseparator
+{display: none !important;}

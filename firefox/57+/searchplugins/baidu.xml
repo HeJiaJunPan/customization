@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/" xmlns:moz="http://www.mozilla.org/2006/browser/search/">
+  <!-- Created on Sun, 28 Jun 2015 02:17:47 GMT -->
+  <ShortName>百度 </ShortName>
+  <Description>百度搜索</Description>
+  <Url type="text/html" method="get" template="https://www.baidu.com/s?wd={searchTerms}"/>
+  <Url type="application/x-suggestions+json" template="http://suggestion.baidu.com/su?wd={searchTerms}&amp;action=opensearch&amp;firefox={inputEncoding}&amp;from=firefox"/>
+  <Image width="16" height="16">data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAdklEQVQ4jc2SsQ3AIAwEbwGK1NmFDdIwE3OxCCOkZYAU+RSRMEFyIuUkN7Z5vwH4IxtQgKYoyk2RgQokICiScnlmcgWWTm1RbeikaJpFUo9J47RsEdTznYB7BfclwvgZGxCfBC4nvY8UgX1WxOJVkdUj4jp84wDU6yD4kZGU+wAAAABJRU5ErkJggg==</Image>
+  <Developer>Max Wang</Developer>
+  <InputEncoding>GB2312</InputEncoding>
+  <moz:SearchForm>http://www.baidu.com/</moz:SearchForm>
+  <Url type="application/opensearchdescription+xml" rel="self" template="http://mycroftproject.com/updateos.php/id0/baidu.xml"/>
+</OpenSearchDescription>

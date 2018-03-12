@@ -1,0 +1,49 @@
+#sidebar-search-container #search-box{
+  -moz-appearance: none !important;
+  border-color: transparent !important;
+  background-color: #FCFCFC !important;
+}
+#sidebar-search-container{
+  -moz-appearance: none !important;
+  margin-left: 5px !important;
+  margin-right: 5px !important;
+}
+#bookmarks-view-children{
+  --treechildren-outline: none;
+  --treechildren-2ndBorderColor: transparent !important;
+  --treechildren-selectedColor: transparent !important;
+  --treechildren-focusColor: transparent !important;
+  --treechildren-selectedFocusColor: transparent !important;
+  --treechildren-currentColor: transparent !important;
+  --treechildren-hoverColor: transparent !important;
+  --treechildren-selectedBorder: transparent !important;
+  --treechildren-selectedBottomBorder: transparent !important;
+  --treechildren-selectedImage: none !important;
+  --treechildren-selectedBackground: transparent !important;
+  --treechildren-currentFocusBorder: transparent !important;
+  --treechildren-currentFocusBottomBorder: transparent !important;
+  --treechildren-selectedFocusBorder: transparent !important;
+  --treechildren-selectedFocusBottomBorder: transparent !important;
+  --treechildren-selectedFocusImage: none !important;
+  --treechildren-selectedFocusBackground: #D3D3D3 !important;
+  --treechildren-selectedFocusCurrentBorder: transparent !important;
+  --treechildren-selectedFocusCurrentBottomBorder: transparent !important;
+  --treechildren-selectedFocusCurrentImage: none !important;
+  --treechildren-hoverBorder: transparent !important;
+  --treechildren-hoverBottomBorder: transparent !important;
+  --treechildren-hoverImage: transparent !important;
+  --treechildren-hoverCurrentBorder: transparent !important;
+  --treechildren-hoverCurrentBottomBorder: transparent !important;
+  --treechildren-hoverCurrentImage: transparent !important;
+  --treechildren-hoverSelectedBorder: transparent !important;
+  --treechildren-hoverSelectedBottomBorder: transparent !important;
+  --treechildren-hoverSelectedImage: transparent !important;
+}
+
+treechildren:not(.autocomplete-treebody)::-moz-tree-row(hover){
+  background-image: none !important;
+  background-color: #E3E3E3;
+}
+#sidebar-box{
+  background-color: #EEE !important;
+}

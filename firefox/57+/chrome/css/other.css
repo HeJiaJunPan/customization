@@ -1,0 +1,36 @@
+/*********************************工具栏调整**********************************/
+
+/*隐藏 Bitwraden 扩展角标*/
+#_446900e4-71c2-419f-a6a7-df9c091e268b_-browser-action>stack>label {
+    display: none;
+}
+
+/*隐藏三道杠前竖线*/
+#PanelUI-button{border: none !important;}
+
+/*隐藏三道杠图标*/
+/*#PanelUI-menu-button{display: none !important;}*/
+
+/***********其他调整************/
+
+/*指向文字加粗*/
+a:hover {
+/*color: #0000FF ;*/
+    -webkit-transition-property: color;
+    -webkit-transition-duration: 0.0s;
+    font-weight: bold
+}
+
+/* 阅读过的链接变灰色 */
+a:visited,.fl:visited {
+    color: rgb(130,130,130) !important
+}
+
+/*HTML5视频最大化去边框*/
+#main-window[inFullscreen="true"] #browser-panel{border:none !important;}
+
+/*优酷播放器底部问题可以临时用css修正下*/
+/*隐藏附加组件兼容检查警告*/
+.view-header.global-warning-container,.global-warning-container.global-warning,.addon.addon-view .warning {
+	display: none!important;
+}

@@ -1,0 +1,24 @@
+/***********************************地址栏调整************************************/
+
+/*隐藏页面动作按钮*/
+#pageActionButton {
+    display: none;
+}
+
+/*将显示历史下拉箭头移至最后*/
+.urlbar-history-dropmarker {
+    -moz-box-ordinal-group: 100 !important;
+}
+
+/*显示历史下拉箭头一直显示
+#urlbar .autocomplete-history-dropmarker,
+#urlbar .urlbar-history-dropmarker,
+#urlbar:not(:hover) > .urlbar-textbox-container > .urlbar-history-dropmarker {
+    opacity: 1 !important;
+}*/
+
+/*===========================去除地址栏最左侧的FLASH标志==========================*/
+/*#notification-popup-box {visibility: collapse;}*/
+
+/*隐藏地址栏flash提醒*/
+#notification-popup-box{display:none !important}
