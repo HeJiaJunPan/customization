@@ -1,0 +1,253 @@
+" General {{{
+
+    filetype plugin indent on   " Automatically detect file types.
+    filetype on                 " 开启文件类型侦测
+    filetype plugin on          " 根据侦测到的不同类型:加载对应的插件
+    syntax on                   " Syntax highlighting
+    
+    " 插入模式下用绝对行号, 普通模式下用相对
+    autocmd InsertEnter * :set norelativenumber number
+    autocmd InsertLeave * :set relativenumber
+    
+    "set mouse=a                 " Automatically enable mouse usage
+    "set mousehide               " Hide the mouse cursor while typing
+    set ruler
+    set showmode
+    set hlsearch
+    set number
+    set nobackup
+    set noswapfile  "禁止生成临时文件
+    set history=1024    "历史记录数
+    set autoread    "设置当文件在外部被修改，自动更新该文件
+    set autochdir
+    "set whichwrap=b,s,<,>,[,]
+    set nobomb
+    "使回格键（backspace）正常处理indent, eol, start等
+    set backspace=indent,eol,start whichwrap+=<,>,[,]
+    set winaltkeys=no   " 设置 alt 键不映射到菜单栏
+
+    if has('clipboard')
+        if has('unnamedplus')  " When possible use + register for copy-paste
+            set clipboard=unnamed,unnamedplus
+        else         " On mac and Windows, use * register for copy-paste
+            set clipboard=unnamed
+        endif
+    endif
+    
+    " 打开文件时自动回到上次编辑的地方
+    if has("autocmd")
+        autocmd BufReadPost *
+            \ if line("'\"") > 0 && line ("'\"") <= line("$") |
+            \   exe "normal g'\"" |
+            \ endif
+    endif
+    
+    " take config into effect after saving
+    au! bufwritepost .vimrc source %
+    au! bufwritepost .vimrc.bundles source %
+    au! bufwritepost .vimrc.local source %
+
+" }}}
+
+" Lang & Encoding {{{
+    
+    "查询当前编辑的文件的字符编码方式并打开
+    set fileencodings=utf-8,gbk2312,gbk,gb18030,cp936
+
+    "vim内部使用的字符编码方式
+    set encoding=utf-8
+    
+    let $LANG = 'en_US.UTF-8'
+    "vim提示信息乱码的解决
+    "language messages zh_CN.UTF-8
+    "工作的终端或者Windows的Console窗口的字符编码方式
+    "set termencoding=utf-8
+
+    if has('gui_running')
+        set langmenu=zh_CN.UTF-8
+        "vim的菜单乱码解决
+        source $VIMRUNTIME/delmenu.vim
+        source $VIMRUNTIME/menu.vim
+    endif
+    
+" }}}
+
+" GUI {{{
+
+    if has('gui_running')
+        set lines=32 columns=120
+    endif
+    
+    if WINDOWS()
+        set guifont=Consolas:h12
+    endif
+    
+    " 分割出来的窗口位于当前窗口下边/右边
+    set splitbelow
+    set splitright
+    
+    set showtabline=1   "1不显示书签栏
+    set guioptions-=T   " 隐藏工具栏
+    set guioptions-=m   " 隐藏菜单栏
+    set guioptions-=L
+    set guioptions-=r
+    set guioptions-=b
+    set guioptions-=e   " 使用内置 tab 样式而不是 gui
+    set nolist
+
+    " set listchars=tab:▶\ ,eol:¬,trail:·,extends:>,precedes:<
+    "set guifont=Consolas:h12:cANSI
+" }}}
+
+" Keymap {{{
+
+    let mapleader=" "   "配置前缀键
+    nnoremap \ ,
+    nnoremap J j
+    nnoremap K k
+    inoremap jk <ESC>
+    nnoremap <Up> <Nop>
+    nnoremap <Down> <Nop>
+    nnoremap <Left> <Nop>
+    nnoremap <Right> <Nop>
+    nnoremap // :nohlsearch<CR>
+    inoremap {} {<CR>}<ESC>O
+    
+    nnoremap <leader>sv :source $MYVIMRC<cr>    "重载配置文件
+    nnoremap <leader>ev :vs $MYVIMRC<cr>    "打开配置文件
+
+    nnoremap <leader>tn :tabnew<cr>
+    nnoremap <leader>tc :tabclose<cr>
+    nnoremap <leader>th :tabp<cr>
+    nnoremap <leader>tl :tabn<cr>
+
+    " 当前文件父目录
+    "cnoremap <expr> %% getcmdtype( ) == ':' ? expand('%:h').'/' : '%%'
+
+    " 移动分割窗口
+    nnoremap <C-j> <C-W>j
+    nnoremap <C-k> <C-W>k
+    nnoremap <C-h> <C-W>h
+    nnoremap <C-l> <C-W>l
+
+    " 正常模式下 alt+j,k,h,l 调整分割窗口大小
+    nnoremap <M-j> :resize +5<cr>
+    nnoremap <M-k> :resize -5<cr>
+    nnoremap <M-h> :vertical resize -5<cr>
+    nnoremap <M-l> :vertical resize +5<cr>
+
+    " 打印当前时间
+    nnoremap <F3> a<C-R>=strftime("%Y-%m-%d %a %I:%M %p")<CR><Esc>
+
+    " 复制当前文件/路径到剪贴板
+    nnoremap ,fn :let @*=substitute(expand("%"), "/", "\\", "g")<CR>
+    nnoremap ,fp :let @*=substitute(expand("%:p"), "/", "\\", "g")<CR>
+    
+    nnoremap <F2> :g/^\s*$/d<CR>    " <F2> 去空行
+    map <F3> :%s/\s\+$//<CR>    " <F3> 删除多余空格
+    
+    nnoremap <F4> :call NumberToggle()<cr>  " <F4> 相对和绝对行号切换
+    function! NumberToggle()
+        if(&relativenumber == 1)
+            set norelativenumber number
+        else
+            set relativenumber
+        endif
+    endfunc
+    
+    if WINDOWS()
+        " 打开当前目录 windows
+        nnoremap <silent> <leader>ex :!start explorer %:p:h<CR> 
+        " 打开当前目录CMD
+        nnoremap <silent> <leader>cmd :!start cmd /k cd %:p:h<cr>
+    endif
+
+" }}}
+
+" 代码风格 {{{
+
+    set autoindent
+    set shiftwidth=4
+    set tabstop=4
+    set softtabstop=4
+    set expandtab
+    autocmd FileType python set textwidth=79
+
+    "TAB缩进
+    "autocmd FileType c,cpp,python set shiftwidth=4
+    "autocmd FileType c,cpp,python set tabstop=4
+
+    "autocmd FileType javascript,html,xml,css,java set shiftwidth=2
+    "autocmd FileType javascript,html,xml,css,java set tabstop=2
+
+    "python TAB to Blank
+    "autocmd FileType python,javascript set expandtab
+    "autocmd FileType python,javascript set softtabstop=4
+
+    "自动缩进
+    "autocmd FileType c,cpp set cindent
+    "autocmd FileType python set autoindent
+    "autocmd FileType javascript,html,xml,css,java set autoindent
+
+" }}}
+
+" 主题 {{{
+
+    set t_Co=256
+    if  filereadable(expand("~/.vim/colors/space-vim-dark.vim"))
+        "set background=dark
+        "set termguicolors
+        colorscheme space-vim-dark
+		hi LineNr ctermbg=NONE guibg=NONE
+        if !has('gui_running')
+            hi Normal ctermbg=NONE guibg=NONE
+            hi SignColumn ctermbg=NONE guibg=NONE       
+        endif
+    endif
+
+" }}}
+
+" 代码风格 {{{
+    if LINUX()
+		map <F5> :call CompileRun()<CR>
+	elseif WINDOWS()
+		autocmd FileType java nnoremap <F5> :!start cmd /k cd %:p:h && javac -encoding UTF-8 % && java %:r && pause && exit<CR>
+		autocmd FileType python nnoremap <F5> :!start cmd /k cd %:p:h && python % && pause && exit<CR>
+	endif
+	
+    func! CompileRun()
+        exec "w"
+        if &filetype == 'c'
+            exec "!g++ % -o %<"
+            exec "!time ./%<"
+            exec "!rm ./%<"
+        elseif &filetype == 'cpp'
+            exec "!g++ % -o %<"
+            exec "!time ./%<"
+            exec "!rm ./%<"
+        elseif &filetype == 'java'
+            exec "!javac %"
+            exec "!time java %<"
+            exec "!rm ./%<.class"
+        elseif &filetype == 'sh'
+            exec "!time bash %"
+        elseif &filetype == 'python'
+            "exec "!time python %"
+            exec "!python3 %"
+        elseif &filetype == 'html'
+            exec "!chrome % &"
+        elseif &filetype == 'go'
+            exec "!go build %<"
+            exec "!time go run %"
+        elseif &filetype == 'md' "MarkDown 解决方案为VIM + Chrome浏览器的MarkDown Preview Plus插件，保存后实时预览
+            exec ":!open -a /Applications/Google\ Chrome.app/ % &"
+        elseif &filetype == 'javascript'
+            exec "!time node %"
+        elseif &filetype == 'coffee'
+            exec "!time coffee %"
+        elseif &filetype == 'ruby'
+            exec "!time ruby %"
+        endif
+    endfunc
+
+" }}}

@@ -1,0 +1,278 @@
+" Plug {{{
+
+    call plug#begin('~/.vim/plugged')
+    
+    Plug 'junegunn/vim-plug'  
+    "Plug 'Lokaltog/vim-powerline' "status 美化  
+    Plug 'scrooloose/nerdcommenter' "多行注释，leader键+cc生成, leader+cu删除注释
+    Plug 'kien/ctrlp.vim' "搜索历史打开文件，在命令行模式下按ctrl+p触发  
+    Plug 'vim-scripts/grep.vim' "在命令行模式使用grep命令，:Grep
+    Plug 'scrooloose/nerdtree'
+    Plug 'godlygeek/tabular'
+    Plug 'plasticboy/vim-markdown'
+    "Plug 'aperezdc/vim-template'
+    Plug 'maralla/completor.vim'
+    Plug 'vim-airline/vim-airline'
+    Plug 'vim-airline/vim-airline-themes'
+    Plug 'liuchengxu/space-vim-dark'
+    Plug 'tyrannicaltoucan/vim-quantum'
+    Plug 'altercation/vim-colors-solarized'
+    
+    call plug#end()
+
+" }}}
+
+" Config {{{
+    " vim-airline {{{
+        if isdirectory(expand("~/.vim/plugged/vim-airline-themes/"))
+            let g:airline_theme="bubblegum"
+            let g:airline_powerline_fonts = 0
+            let g:airline_symbols_ascii = 1
+            let g:airline_exclude_preview = 0
+            let g:airline_highlighting_cache = 1
+            let g:airline#extensions#whitespace#enabled = 0
+            " tab序号
+            let g:airline#extensions#tabline#tab_nr_type = 1
+            let g:airline#extensions#tabline#enabled = 0
+            " disable buffers on topright
+            "let g:airline#extensions#tabline#tabs_label = ''
+            "let g:airline#extensions#tabline#show_splits = 0
+            "let g:airline#extensions#tabline#show_close_button = 0
+            "let g:airline#extensions#tabline#buffer_nr_show = 0
+            "let g:airline#extensions#bufferline#enabled = 1
+            " shw full_path of the file,and the time
+            let g:airline_section_c = "\ %F\ \ %{strftime(\"%Y/%m/%d\ %H:%M\")}"
+	        if !exists('g:airline_symbols')
+                let g:airline_symbols = {}
+            endif
+            let g:airline_symbols.crypt = '🔒'
+            let g:airline_symbols.linenr = '☰'
+            let g:airline_symbols.maxlinenr = ''
+            let g:airline_symbols.branch = '⎇'
+            let g:airline_symbols.paste = 'ρ'
+            let g:airline_symbols.notexists = '∄'
+            let g:airline_symbols.whitespace = 'Ξ'
+            "let g:airline_left_sep = '▶'
+            let g:airline_left_alt_sep = '❯'
+            "let g:airline_right_sep = '◀'
+            let g:airline_right_alt_sep = '❮'
+        elseif has('statusline')
+            if isdirectory(expand("~/.vim/plugged/vim-fugitive"))
+                set statusline=\ %{fugitive#statusline()}
+            else
+                set statusline=%<
+            endif
+            set statusline+=\ %F\ \ %{strftime(\"%Y/%m/%d\ %H:%M\")}
+            if isdirectory(expand("~/.vim/plugged/ale"))
+                set statusline+=\ %{ALEGetStatusLine()}
+            endif
+            "set statusline+=\ [%{&ff}/%Y]
+	        set statusline+=%=%25([%{&ff}/%Y]\ %p%%\ \ %l/%L:\ %c%)\ %<
+		endif
+    " }}}
+    
+    " NerdTree {{{
+        if isdirectory(expand("~/.vim/plugged/nerdtree"))
+            nmap <leader>nn :NERDTreeToggle<CR>
+            nmap <leader>nf :NERDTreeFind<CR>
+            let g:NERDShutUp=1
+            let s:has_nerdtree = 1
+            let g:nerdtree_tabs_open_on_gui_startup=0
+            let g:nerdtree_tabs_open_on_console_startup = 0
+            let g:nerdtree_tabs_smart_startup_focus = 2
+            let g:nerdtree_tabs_focus_on_files = 1
+            let g:NERDTreeWinSize=30
+            let g:NERDTreeShowBookmarks=1
+            let g:nerdtree_tabs_smart_startup_focus = 0
+            let g:NERDTreeIgnore=['\.py[cd]$', '\~$', '\.swo$', '\.swp$', '^\.git$', '^\.hg$', '^\.svn$', '\.bzr$']
+            let g:NERDTreeChDirMode=0
+            let g:NERDTreeQuitOnOpen=1
+            let g:NERDTreeMouseMode=2
+            let g:NERDTreeShowHidden=1
+            let g:NERDTreeKeepTreeInNewTab=1
+            let g:nerdtree_tabs_focus_on_files = 1
+            let g:nerdtree_tabs_open_on_gui_startup = 0
+            let g:NERDTreeWinPos=0
+            let g:NERDTreeDirArrowExpandable = '▸'
+            let g:NERDTreeDirArrowCollapsible = '▾'
+            au bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") &&b:NERDTreeType == "primary") | q | endif
+            " nerdtree-git
+            if isdirectory(expand("~/.vim/plugged/nerdtree-git-plugin"))
+                let g:NERDTreeIndicatorMapCustom = {
+                    \ "Modified"  : "*",
+                    \ "Staged"    : "+",
+                    \ "Untracked" : "★",
+                    \ "Renamed"   : "→ ",
+                    \ "Unmerged"  : "=",
+                    \ "Deleted"   : "X",
+                    \ "Dirty"     : "●",
+                    \ "Clean"     : "√",
+                    \ "Unknown"   : "?"
+                    \ }
+            endif
+        endif
+    " }}}
+    
+    " PyMode {{{
+        if isdirectory(expand("~/.vim/plugged/python-mode"))
+            " python version
+            if has('python3')
+                let g:pymode_python = 'python3'
+            else
+                let g:pymode_python = 'python'
+            endif
+            " disable pymode_rope and pymode_folding for slow problem
+            let g:pymode_rope = 0
+            let g:pymode_folding = 0
+            let g:pymode_trim_whitespaces = 1
+            let g:pymode_options = 0
+            " doc for python
+            let g:pymode_doc = 0
+            " motion
+            let g:pymode_motion = 1
+            " run python
+            let g:pymode_run_bind = '<leader>R'
+            " breakpoint
+            let g:pymode_breakpoint = 1
+            let g:pymode_breakpoint_bind = '<LocalLeader>p'
+            let g:pymode_breakpoint_cmd = 'import pdb;pdb.set_trace()'
+            " pymode check disable
+            if count(g:spf13_bundle_groups, 'syntax')
+                let g:pymode_lint = 0
+            else
+                let g:pymode_lint = 1
+                nmap <F9> :PymodeLint<CR>
+                let g:pymode_lint_signs = 1
+                " no check when white
+                let g:pymode_lint_on_write = 0
+                " check when save
+                let g:pymode_lint_unmodified = 0
+                " not check of fly
+                let g:pymode_lint_on_fly = 0
+                " show message of error line
+                let g:pymode_lint_message = 1
+                " checkers
+                let g:pymode_lint_checkers = ['pyflakes','pep8']
+                "let g:pymode_lint_checkers = ['pep8']
+                let g:pymode_lint_ignore = "E128,E2,E3,E501"
+                " not Auto open cwindow (quickfix) if any errors have been found
+                let g:pymode_lint_cwindow = 0
+            endif
+            if isdirectory(expand("~/.vim/plugged/python-syntax"))
+                let g:pymode_syntax = 0
+                let g:pymode_syntax_all = 0
+            else
+                let g:pymode_syntax = 1
+                let g:pymode_syntax_all = 1
+            endif
+        endif
+    " }}}
+    
+    " ctrlp {{{
+        if isdirectory(expand("~/.vim/plugged/ctrlp.vim/"))
+            let g:ctrlp_working_path_mode = 'ar'
+            let g:ctrlp_custom_ignore = {
+                \ 'dir':  '\.git$\|\.hg$\|\.svn$',
+                \ 'file': '\.exe$\|\.so$\|\.dll$\|\.pyc$' }
+            if executable('ag')
+                let s:ctrlp_fallback = 'ag %s --nocolor -l -g ""'
+            elseif executable('ack-grep')
+                let s:ctrlp_fallback = 'ack-grep %s --nocolor -f'
+            elseif executable('ack')
+                let s:ctrlp_fallback = 'ack %s --nocolor -f'
+            " On Windows use "dir" as fallback command.
+            elseif WINDOWS()
+                let s:ctrlp_fallback = 'dir %s /-n /b /s /a-d'
+            else
+                let s:ctrlp_fallback = 'find %s -type f'
+            endif
+            if exists("g:ctrlp_user_command")
+                unlet g:ctrlp_user_command
+            endif
+            let g:ctrlp_user_command = {
+                    \ 'types': {
+                    \ 1: ['.git', 'cd %s && git ls-files . --cached --exclude-standard --others'],
+                    \ 2: ['.hg', 'hg --cwd %s locate -I .'],
+                    \ },
+                    \ 'fallback': s:ctrlp_fallback
+                \ }
+            if isdirectory(expand("~/.vim/plugged/ctrlp-funky/"))
+                " CtrlP extensions
+                let g:ctrlp_extensions = ['funky']
+                " funky
+                nnoremap <Leader>fu :CtrlPFunky<Cr>
+            endif
+            nnoremap <leader>mu :CtrlPMRU<CR>
+        endif
+    " }}}
+    
+    " ale {{{
+        if isdirectory(expand("~/.vim/plugged/ale"))
+            let g:ale_completion_enabled   = 1
+            let g:ale_lint_on_enter        = 0
+            let g:ale_lint_on_text_changed = 'always'
+            nmap <F9> :ALEToggle<CR>
+            " signs fo
+            let g:ale_sign_column_always   = 1
+            let g:ale_set_signs            = 1
+            let g:ale_set_highlights       = 0
+            let g:ale_sign_error           = 'E'
+            let g:ale_sign_warning         = 'w'
+            " message format
+            let g:ale_echo_msg_error_str   = 'E'
+            let g:ale_echo_msg_warning_str = 'W'
+            let g:ale_echo_msg_format      = '[%linter%] %s [%code%]'
+
+            let g:ale_fix_on_save          = 0
+            let g:ale_set_loclist          = 0
+            let g:ale_set_quickfix         = 0
+            let g:ale_statusline_format    = ['E:%d', 'W:%d', '']
+            "highlight clear ALEErrorSign
+            "highlight clear ALEWarningSign
+            nmap <silent> <leader>[ <Plug>(ale_previous_wrap)
+            nmap <silent> <leader>] <Plug>(ale_next_wrap)
+            " 特定后缀指定lint方式
+            let g:ale_pattern_options_enabled = 1
+            let b:ale_warn_about_trailing_whitespace = 0
+            let g:ale_fixers ={}
+            nmap <leader>gt :ALEGoToDefinition<CR>
+        endif
+    " }}}
+    
+    " vim-template {{{
+    "   if isdirectory(expand("~/.vim/plugged/vim-template"))
+    "       let g:templates_directory = ['/home/pylego/.vim/templates',]
+    "       let g:templates_user_variables = [['EMAIL', 'GetMail'], ['FULLPATH', 'GetFullPath']]
+    "   endif
+        
+    "    function! GetMail()
+    "        return 'zhiyeyou@gmail.com'
+    "    endfunction
+
+    "    function! GetFullPath()
+    "        return expand('%:p')
+    "    endfunction
+    " }}}
+
+    " vim-markdown {{{
+        if isdirectory(expand("~/.vim/plugged/vim-markdown"))
+            let g:vim_markdown_folding_disabled = 1
+        endif
+    " }}}
+
+    " completor.vim {{{
+        if isdirectory(expand("~/.vim/plugged/completor.vim"))
+			if LINUX()
+				let g:completor_python_binary = '/usr/bin/python3'
+			elseif WINDOWS()
+				let g:completor_python_binary = 'D:/Python/python3.exe'
+			endif
+        endif
+    " }}}
+
+" PlugName {{{
+"        if isdirectory(expand("~/.vim/plugged/PlugDir"))
+"        endif
+" }}}
+
+" }}}
