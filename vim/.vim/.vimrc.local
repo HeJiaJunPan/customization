@@ -6,6 +6,7 @@
     syntax on                   " Syntax highlighting
     
     " 插入模式下用绝对行号, 普通模式下用相对
+    set relativenumber  "初始状态，相对行号
     autocmd InsertEnter * :set norelativenumber number
     autocmd InsertLeave * :set relativenumber
     
@@ -14,7 +15,6 @@
     set ruler
     set showmode
     set hlsearch
-    set number
     set nobackup
     set noswapfile  "禁止生成临时文件
     set history=1024    "历史记录数
