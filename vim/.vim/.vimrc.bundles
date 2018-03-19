@@ -265,9 +265,14 @@
 			if LINUX()
 				let g:completor_python_binary = '/usr/bin/python3'
 			elseif WINDOWS()
-				let g:completor_python_binary = 'D:/Python/python3.exe'
+				let g:completor_python_binary = 'D:/Python/python.exe'
 			endif
         endif
+		
+		"Use Tab to select completion
+		inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+        inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+        inoremap <expr> <cr> pumvisible() ? "\<C-y>\<cr>" : "\<cr>"	
     " }}}
 
 " PlugName {{{
