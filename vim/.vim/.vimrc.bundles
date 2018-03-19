@@ -11,20 +11,27 @@
     Plug 'godlygeek/tabular'
     Plug 'plasticboy/vim-markdown'
     "Plug 'aperezdc/vim-template'
-    Plug 'maralla/completor.vim'
+    "Plug 'maralla/completor.vim'
     Plug 'vim-airline/vim-airline'
     Plug 'vim-airline/vim-airline-themes'
     Plug 'liuchengxu/space-vim-dark'
     Plug 'tyrannicaltoucan/vim-quantum'
     Plug 'altercation/vim-colors-solarized'
-    
+    Plug 'Xuyuanp/nerdtree-git-plugin'
+    Plug 'mbbill/undotree'
+    if executable('git')
+        Plug 'tpope/vim-fugitive'
+    endif
+    if executable('ctags') || isdirectory(expand("~/.vim/depend/ctags"))
+        Plug 'majutsushi/tagbar'
+    endif
     call plug#end()
 
 " }}}
 
 " Config {{{
     " vim-airline {{{
-        if isdirectory(expand("~/.vim/plugged/vim-airline-themes/"))
+        if isdirectory(expand("~/.vim/plugged/vim-airline-themes"))
             let g:airline_theme="bubblegum"
             let g:airline_powerline_fonts = 0
             let g:airline_symbols_ascii = 1
@@ -96,7 +103,6 @@
             let g:NERDTreeDirArrowExpandable = '▸'
             let g:NERDTreeDirArrowCollapsible = '▾'
             au bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") &&b:NERDTreeType == "primary") | q | endif
-            " nerdtree-git
             if isdirectory(expand("~/.vim/plugged/nerdtree-git-plugin"))
                 let g:NERDTreeIndicatorMapCustom = {
                     \ "Modified"  : "*",
@@ -107,6 +113,7 @@
                     \ "Deleted"   : "X",
                     \ "Dirty"     : "●",
                     \ "Clean"     : "√",
+                    \ "Ignored"   : "☒",
                     \ "Unknown"   : "?"
                     \ }
             endif
@@ -169,7 +176,7 @@
     " }}}
     
     " ctrlp {{{
-        if isdirectory(expand("~/.vim/plugged/ctrlp.vim/"))
+        if isdirectory(expand("~/.vim/plugged/ctrlp.vim"))
             let g:ctrlp_working_path_mode = 'ar'
             let g:ctrlp_custom_ignore = {
                 \ 'dir':  '\.git$\|\.hg$\|\.svn$',
@@ -196,7 +203,7 @@
                     \ },
                     \ 'fallback': s:ctrlp_fallback
                 \ }
-            if isdirectory(expand("~/.vim/plugged/ctrlp-funky/"))
+            if isdirectory(expand("~/.vim/plugged/ctrlp-funky"))
                 " CtrlP extensions
                 let g:ctrlp_extensions = ['funky']
                 " funky
@@ -245,11 +252,11 @@
     "       let g:templates_user_variables = [['EMAIL', 'GetMail'], ['FULLPATH', 'GetFullPath']]
     "   endif
         
-    "    function! GetMail()
+    "    function GetMail()
     "        return 'zhiyeyou@gmail.com'
     "    endfunction
 
-    "    function! GetFullPath()
+    "    function GetFullPath()
     "        return expand('%:p')
     "    endfunction
     " }}}
@@ -261,7 +268,7 @@
     " }}}
 
     " completor.vim {{{
-        if isdirectory(expand("~/.vim/plugged/completor.vim"))
+        if isdirectory(expand("~/.vim/plugged/completor.vim")) && 0
 			if LINUX()
 				let g:completor_python_binary = '/usr/bin/python3'
 			elseif WINDOWS()
@@ -269,12 +276,50 @@
 			endif
         endif
 		
-        "Use Tab to select completion
-        inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+		"Use Tab to select completion
+		inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
         inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-        inoremap <expr> <cr> pumvisible() ? "\<C-y>\<cr>" : "\<cr>"	
+        inoremap <expr> <cr> pumvisible() ? "\<C-y>\<cr>" : "\<cr>"
     " }}}
 
+    " vim-fugitive {{{
+    "    if isdirectory(expand("~/.vim/plugged/vim-fugitive"))
+    "        nnoremap <leader>GG :Git<Space>
+    "        nnoremap + :Git<Space>
+    "    endif
+    " }}}
+
+    " tagbar {{{
+        if isdirectory(expand("~/.vim/plugged/tagbar"))
+            if WINDOWS()
+                let g:tagbar_ctags_bin='~/.vim/depend/ctags/ctags.exe'  "默认/usr/bin/ctags
+            endif
+    
+            let g:tagbar_width=30
+            let g:tagbar_sort = 0
+            set tags=./tags;/,~/.vimtags
+            " Make tags placed in .git/tags file available in all levels of a repository
+            let gitroot = substitute(system('git rev-parse --show-toplevel'), '[\n\r]', '', 'g')
+            if gitroot != ''
+                let &tags = &tags . ',' . gitroot . '/.git/tags'
+            endif
+            nnoremap <silent><leader>tt :TagbarToggle<CR>
+            nnoremap <silent><leader>tj :TagbarOpen j<CR>
+            " AutoCloseTag
+            " Make it so AutoCloseTag works for xml and xhtml files as well
+            au FileType xhtml,xml ru ftplugin/html/autoclosetag.vim
+            nnoremap <Leader>ta <Plug>ToggleAutoCloseMappings
+        endif
+    " }}}
+
+    " UndoTree {{{
+        if isdirectory(expand("~/.vim/plugged/undotree"))
+            nnoremap <silent><Leader>u :UndotreeToggle<CR>
+            " If undotree is opened, it is likely one wants to interact with it.
+            let g:undotree_SetFocusWhenToggle=1
+        endif
+    " }}}
+    
 " PlugName {{{
 "        if isdirectory(expand("~/.vim/plugged/PlugDir"))
 "        endif
