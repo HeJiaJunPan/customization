@@ -210,6 +210,7 @@
 		hi LineNr ctermbg=NONE guibg=NONE
         if !has('gui_running')
             hi Normal ctermbg=NONE guibg=NONE
+            hi LineNr ctermfg=DarkGray  "修正终端透明下行号颜色
             hi SignColumn ctermbg=NONE guibg=NONE       
         endif
     endif
