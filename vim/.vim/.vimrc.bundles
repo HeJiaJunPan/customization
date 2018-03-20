@@ -271,7 +271,7 @@
     " }}}
 
     " completor.vim {{{
-        if isdirectory(expand("~/.vim/plugged/completor.vim")) && 0
+        if isdirectory(expand("~/.vim/plugged/completor.vim"))
 			if LINUX()
 				let g:completor_python_binary = '/usr/bin/python3'
 			elseif WINDOWS()
