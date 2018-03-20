@@ -15,12 +15,13 @@
     Plug 'vim-airline/vim-airline'
     Plug 'vim-airline/vim-airline-themes'
     Plug 'liuchengxu/space-vim-dark'
-    Plug 'tyrannicaltoucan/vim-quantum'
+    "Plug 'tyrannicaltoucan/vim-quantum'
     "Plug 'altercation/vim-colors-solarized'
     Plug 'Xuyuanp/nerdtree-git-plugin'
     Plug 'mbbill/undotree'
     Plug 'w0rp/ale'
     Plug 'skywind3000/asyncrun.vim'
+    Plug 'tpope/vim-surround'
     if executable('git')
         Plug 'tpope/vim-fugitive'
     endif
