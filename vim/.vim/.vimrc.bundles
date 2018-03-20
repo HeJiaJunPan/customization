@@ -1,24 +1,26 @@
 " Plug {{{
 
     call plug#begin('~/.vim/plugged')
-    
-    Plug 'junegunn/vim-plug'  
-    "Plug 'Lokaltog/vim-powerline' "status 美化  
+
+    Plug 'junegunn/vim-plug'
+    "Plug 'Lokaltog/vim-powerline' "status 美化
     Plug 'scrooloose/nerdcommenter' "多行注释，leader键+cc生成, leader+cu删除注释
-    Plug 'kien/ctrlp.vim' "搜索历史打开文件，在命令行模式下按ctrl+p触发  
+    Plug 'kien/ctrlp.vim' "搜索历史打开文件，在命令行模式下按ctrl+p触发
     Plug 'vim-scripts/grep.vim' "在命令行模式使用grep命令，:Grep
     Plug 'scrooloose/nerdtree'
     Plug 'godlygeek/tabular'
     Plug 'plasticboy/vim-markdown'
     "Plug 'aperezdc/vim-template'
-    "Plug 'maralla/completor.vim'
+    Plug 'maralla/completor.vim'
     Plug 'vim-airline/vim-airline'
     Plug 'vim-airline/vim-airline-themes'
     Plug 'liuchengxu/space-vim-dark'
     Plug 'tyrannicaltoucan/vim-quantum'
-    Plug 'altercation/vim-colors-solarized'
+    "Plug 'altercation/vim-colors-solarized'
     Plug 'Xuyuanp/nerdtree-git-plugin'
     Plug 'mbbill/undotree'
+    Plug 'w0rp/ale'
+    Plug 'skywind3000/asyncrun.vim'
     if executable('git')
         Plug 'tpope/vim-fugitive'
     endif
@@ -77,7 +79,7 @@
 	        set statusline+=%=%25([%{&ff}/%Y]\ %p%%\ \ %l/%L:\ %c%)\ %<
 		endif
     " }}}
-    
+
     " NerdTree {{{
         if isdirectory(expand("~/.vim/plugged/nerdtree"))
             nmap <leader>nn :NERDTreeToggle<CR>
@@ -119,7 +121,7 @@
             endif
         endif
     " }}}
-    
+
     " PyMode {{{
         if isdirectory(expand("~/.vim/plugged/python-mode"))
             " python version
@@ -174,7 +176,7 @@
             endif
         endif
     " }}}
-    
+
     " ctrlp {{{
         if isdirectory(expand("~/.vim/plugged/ctrlp.vim"))
             let g:ctrlp_working_path_mode = 'ar'
@@ -212,7 +214,7 @@
             nnoremap <leader>mu :CtrlPMRU<CR>
         endif
     " }}}
-    
+
     " ale {{{
         if isdirectory(expand("~/.vim/plugged/ale"))
             let g:ale_completion_enabled   = 1
@@ -245,13 +247,13 @@
             nmap <leader>gt :ALEGoToDefinition<CR>
         endif
     " }}}
-    
+
     " vim-template {{{
     "   if isdirectory(expand("~/.vim/plugged/vim-template"))
     "       let g:templates_directory = ['/home/pylego/.vim/templates',]
     "       let g:templates_user_variables = [['EMAIL', 'GetMail'], ['FULLPATH', 'GetFullPath']]
     "   endif
-        
+
     "    function GetMail()
     "        return 'zhiyeyou@gmail.com'
     "    endfunction
@@ -272,7 +274,7 @@
 			if LINUX()
 				let g:completor_python_binary = '/usr/bin/python3'
 			elseif WINDOWS()
-				let g:completor_python_binary = 'D:/Python/python.exe'
+				let g:completor_python_binary = 'D:/Anaconda3/python.exe'   "windows10企业版python3莫名卡顿，换用Anaconda3
 			endif
         endif
         "Use Tab to select completion
@@ -294,7 +296,7 @@
             if WINDOWS()
                 let g:tagbar_ctags_bin='~/.vim/depend/ctags/ctags.exe'  "默认/usr/bin/ctags
             endif
-    
+
             let g:tagbar_width=30
             let g:tagbar_sort = 0
             set tags=./tags;/,~/.vimtags
@@ -319,7 +321,42 @@
             let g:undotree_SetFocusWhenToggle=1
         endif
     " }}}
-    
+
+    " asyncrun {{{
+        if isdirectory(expand("~/.vim/plugged/asyncrun.vim"))
+            nmap <Leader>tr :AsyncRun
+            function! RUNIT()
+                exec "w"
+                cclose
+                call asyncrun#quickfix_toggle(8)
+                if &filetype == 'c'
+                    exec ":AsyncRun g++ % -o %<"
+                    exec ":AsyncRun ./%<"
+                elseif &filetype == 'cpp'
+                    exec ":AsyncRun g++ % -o %<"
+                    exec ":AsyncRun ./%<"
+                elseif &filetype == 'java'
+                    exec ":AsyncRun javac %"
+                    exec ":AsyncRun java %<"
+                elseif &filetype == 'sh'
+                    exec ":AsyncRun bash %"
+                elseif &filetype == 'python'
+                    if LINUX()
+                        exec ":AsyncRun python3 %"
+                    else
+                        exec ":AsyncRun python %"
+                    endif
+                elseif &filetype == 'perl'
+                    exec ":AsyncRun perl %"
+                elseif &filetype == 'go'
+                    exec ":AsyncRun go run %"
+                endif
+            endfunction
+            nmap <F5> :call RUNIT()<CR>
+            nmap <leader><F5> :call asyncrun#quickfix_toggle(8)<CR>
+        endif
+    " }}}
+
 " PlugName {{{
 "        if isdirectory(expand("~/.vim/plugged/PlugDir"))
 "        endif

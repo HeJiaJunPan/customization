@@ -10,6 +10,12 @@
     autocmd InsertEnter * :set norelativenumber number
     autocmd InsertLeave * :set relativenumber
     
+    " auto close qfixwindows when leave vim
+    aug QFClose
+        au!
+        au WinEnter * if winnr('$') == 1 && getbufvar(winbufnr(winnr()), "&buftype") == "quickfix"|q|endif
+    aug END
+
     "set mouse=a                 " Automatically enable mouse usage
     "set mousehide               " Hide the mouse cursor while typing
     set ruler
@@ -113,8 +119,8 @@
     nnoremap // :nohlsearch<CR>
     inoremap {} {<CR>}<ESC>O
     
-    nnoremap <leader>sv :source $MYVIMRC<cr>    "重载配置文件
-    nnoremap <leader>ev :vs $MYVIMRC<cr>    "打开配置文件
+    "nnoremap <leader>sv :source $MYVIMRC<cr>    "重载配置文件
+    "nnoremap <leader>ev :vs $MYVIMRC<cr>    "打开配置文件
 
     nnoremap <leader>tn :tabnew<cr>
     nnoremap <leader>tc :tabclose<cr>
@@ -145,6 +151,9 @@
     
     nnoremap <F2> :g/^\s*$/d<CR>    " <F2> 去空行
     map <F3> :%s/\s\+$//<CR>    " <F3> 删除多余空格
+
+    "代码格式化
+    autocmd FileType python nnoremap <leader>= :0,$!yapf<CR>
     
     nnoremap <F4> :call NumberToggle()<cr>  " <F4> 相对和绝对行号切换
     function! NumberToggle()
@@ -208,46 +217,46 @@
 " }}}
 
 " 代码风格 {{{
-    if LINUX()
-		map <F5> :call CompileRun()<CR>
-	elseif WINDOWS()
-		autocmd FileType java nnoremap <F5> :!start cmd /k cd %:p:h && javac -encoding UTF-8 % && java %:r && pause && exit<CR>
-		autocmd FileType python nnoremap <F5> :!start cmd /k cd %:p:h && python % && pause && exit<CR>
-	endif
+    "if LINUX()
+		"map <F5> :call CompileRun()<CR>
+	"elseif WINDOWS()
+		"autocmd FileType java nnoremap <F5> :!start cmd /k cd %:p:h && javac -encoding UTF-8 % && java %:r && pause && exit<CR>
+		"autocmd FileType python nnoremap <F5> :!start cmd /k cd %:p:h && python % && pause && exit<CR>
+	"endif
 	
-    func! CompileRun()
-        exec "w"
-        if &filetype == 'c'
-            exec "!g++ % -o %<"
-            exec "!time ./%<"
-            exec "!rm ./%<"
-        elseif &filetype == 'cpp'
-            exec "!g++ % -o %<"
-            exec "!time ./%<"
-            exec "!rm ./%<"
-        elseif &filetype == 'java'
-            exec "!javac %"
-            exec "!time java %<"
-            exec "!rm ./%<.class"
-        elseif &filetype == 'sh'
-            exec "!time bash %"
-        elseif &filetype == 'python'
-            "exec "!time python %"
-            exec "!python3 %"
-        elseif &filetype == 'html'
-            exec "!chrome % &"
-        elseif &filetype == 'go'
-            exec "!go build %<"
-            exec "!time go run %"
-        elseif &filetype == 'md' "MarkDown 解决方案为VIM + Chrome浏览器的MarkDown Preview Plus插件，保存后实时预览
-            exec ":!open -a /Applications/Google\ Chrome.app/ % &"
-        elseif &filetype == 'javascript'
-            exec "!time node %"
-        elseif &filetype == 'coffee'
-            exec "!time coffee %"
-        elseif &filetype == 'ruby'
-            exec "!time ruby %"
-        endif
-    endfunc
+    "func! CompileRun()
+        "exec "w"
+        "if &filetype == 'c'
+            "exec "!g++ % -o %<"
+            "exec "!time ./%<"
+            "exec "!rm ./%<"
+        "elseif &filetype == 'cpp'
+            "exec "!g++ % -o %<"
+            "exec "!time ./%<"
+            "exec "!rm ./%<"
+        "elseif &filetype == 'java'
+            "exec "!javac %"
+            "exec "!time java %<"
+            "exec "!rm ./%<.class"
+        "elseif &filetype == 'sh'
+            "exec "!time bash %"
+        "elseif &filetype == 'python'
+            ""exec "!time python %"
+            "exec "!python3 %"
+        "elseif &filetype == 'html'
+            "exec "!chrome % &"
+        "elseif &filetype == 'go'
+            "exec "!go build %<"
+            "exec "!time go run %"
+        "elseif &filetype == 'md' "MarkDown 解决方案为VIM + Chrome浏览器的MarkDown Preview Plus插件，保存后实时预览
+            "exec ":!open -a /Applications/Google\ Chrome.app/ % &"
+        "elseif &filetype == 'javascript'
+            "exec "!time node %"
+        "elseif &filetype == 'coffee'
+            "exec "!time coffee %"
+        "elseif &filetype == 'ruby'
+            "exec "!time ruby %"
+        "endif
+    "endfunc
 
 " }}}
