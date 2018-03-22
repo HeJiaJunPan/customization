@@ -1,0 +1,50 @@
+{
+  "timeStamp": 1521727039618,
+  "version": "1.15.18",
+  "userSettings": {
+    "advancedUserEnabled": true,
+    "alwaysDetachLogger": false,
+    "autoUpdate": true,
+    "cloudStorageEnabled": false,
+    "collapseBlocked": true,
+    "colorBlindFriendly": false,
+    "contextMenuEnabled": false,
+    "dynamicFilteringEnabled": false,
+    "externalLists": "https://git.oschina.net/halflife/list/raw/master/ad.txt\nhttps://raw.githubusercontent.com/ZeroDot1/CoinBlockerLists/master/list_browser.txt",
+    "firewallPaneMinimized": true,
+    "hyperlinkAuditingDisabled": true,
+    "ignoreGenericCosmeticFilters": false,
+    "largeMediaSize": 50,
+    "parseAllABPHideFilters": true,
+    "prefetchingDisabled": true,
+    "requestLogMaxEntries": 1000,
+    "showIconBadge": true,
+    "tooltipsDisabled": false,
+    "webrtcIPAddressHidden": false
+  },
+  "selectedFilterLists": [
+    "https://git.oschina.net/halflife/list/raw/master/ad.txt",
+    "malware-1",
+    "malware-0",
+    "easyprivacy",
+    "user-filters",
+    "https://raw.githubusercontent.com/ZeroDot1/CoinBlockerLists/master/list_browser.txt"
+  ],
+  "hiddenSettings": {
+    "assetFetchTimeout": 30,
+    "autoUpdateAssetFetchPeriod": 120,
+    "autoUpdatePeriod": 7,
+    "ignoreRedirectFilters": false,
+    "ignoreScriptInjectFilters": false,
+    "streamScriptInjectFilters": false,
+    "manualUpdateAssetFetchPeriod": 2000,
+    "popupFontSize": "unset",
+    "suspendTabsUntilReady": false,
+    "userResourcesLocation": "unset"
+  },
+  "netWhitelist": "about-scheme\nbehind-the-scene\nchrome-extension-scheme\nchrome-scheme\nmoz-extension-scheme\nopera-scheme\nvivaldi-scheme",
+  "dynamicFilteringString": "behind-the-scene * 3p-frame noop\nbehind-the-scene * 3p noop",
+  "urlFilteringString": "",
+  "hostnameSwitchesString": "",
+  "userFilters": "! 2018/3/17 下午5:53:09 https://pan.baidu.com/play/video#video/path=%2F%E5%89%B5%E4%B8%96%E7%B4%80%2F%5B%E7%B2%A4%E8%AF%AD%E5%89%A7www.YueYuJu.com%5D%E5%89%B5%E4%B8%96%E7%B4%80%5B%E9%AB%98%E6%B8%85TV%E7%B2%A4%E8%AF%AD%5D03.mp4&t=-1\npan.baidu.com##.tips-box\n\n! 2018/3/17 下午5:53:23 https://pan.baidu.com/play/video#video/path=%2F%E5%89%B5%E4%B8%96%E7%B4%80%2F%5B%E7%B2%A4%E8%AF%AD%E5%89%A7www.YueYuJu.com%5D%E5%89%B5%E4%B8%96%E7%B4%80%5B%E9%AB%98%E6%B8%85TV%E7%B2%A4%E8%AF%AD%5D03.mp4&t=-1\npan.baidu.com##.privilege-button\n"
+}
