@@ -3,32 +3,44 @@
     call plug#begin('~/.vim/plugged')
 
     Plug 'junegunn/vim-plug'
-    "Plug 'Lokaltog/vim-powerline' "status 美化
     Plug 'scrooloose/nerdcommenter' "多行注释，leader键+cc生成, leader+cu删除注释
-    Plug 'kien/ctrlp.vim' "搜索历史打开文件，在命令行模式下按ctrl+p触发
+    Plug 'ctrlpvim/ctrlp.vim', { 'on': ['CtrlP', 'CtrlPMRU'] }
     Plug 'vim-scripts/grep.vim' "在命令行模式使用grep命令，:Grep
-    Plug 'scrooloose/nerdtree'
+    
+    Plug 'scrooloose/nerdtree', { 'on':  ['NERDTreeToggle', 'NERDTreeFind'] }
+    Plug 'Xuyuanp/nerdtree-git-plugin', { 'on': ['NERDTreeToggle', 'NERDTreeFind'] }
+    
     Plug 'godlygeek/tabular'
-    Plug 'plasticboy/vim-markdown'
+    Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
+    Plug 'mzlogin/vim-markdown-toc', { 'on': ['GenTocGFM', 'GenTocRedcarpet', 'GenTocGitLab', 'UpdateToc', 'RemoveToc'] }
+    
     "Plug 'aperezdc/vim-template'
     Plug 'maralla/completor.vim'
+    
     Plug 'vim-airline/vim-airline'
     Plug 'vim-airline/vim-airline-themes'
+    
     Plug 'liuchengxu/space-vim-dark'
-    Plug 'tyrannicaltoucan/vim-quantum'
-    "Plug 'altercation/vim-colors-solarized'
-    Plug 'Xuyuanp/nerdtree-git-plugin'
-    Plug 'mbbill/undotree'
-    Plug 'w0rp/ale'
+    "Plug 'tyrannicaltoucan/vim-quantum'
+    
+    Plug 'mbbill/undotree', { 'on':  'UndotreeToggle' }
+    Plug 'w0rp/ale', { 'on': [] }
+    call timer_start(200, 'Defer_ale')
+    
     Plug 'skywind3000/asyncrun.vim'
     Plug 'tpope/vim-surround'
-    Plug 'easymotion/vim-easymotion'
+    Plug 'easymotion/vim-easymotion', { 'on': [] }
+    call timer_start(600, 'Defer_motion')
+    
     if executable('git')
-        Plug 'tpope/vim-fugitive'
+        Plug 'tpope/vim-fugitive', { 'on': [] }
     endif
+    call timer_start(800, 'Defer_fugitive')
+    
     if executable('ctags') || isdirectory(expand("~/.vim/depend/ctags"))
-        Plug 'majutsushi/tagbar'
+        Plug 'majutsushi/tagbar', { 'on': ['TagbarToggle', 'TagbarOpen'] }
     endif
+    
     call plug#end()
 
 " }}}
@@ -265,9 +277,19 @@
     "    endfunction
     " }}}
 
-    " vim-markdown {{{
+    " markdown {{{
         if isdirectory(expand("~/.vim/plugged/vim-markdown"))
             let g:vim_markdown_folding_disabled = 1
+            let g:vim_markdown_math = 1
+            let g:vim_markdown_frontmatter = 1
+            let g:vim_markdown_conceal = 0
+        endif
+
+        if isdirectory(expand("~/.vim/plugged/vim-markdown-toc"))
+            let g:vmt_auto_update_on_save = 1
+            let g:vmt_dont_insert_fence = 0
+            let g:vim_markdown_toc_autofit = 1
+            autocmd FileType markdown nnoremap <C-m> :GenTocGFM<CR>
         endif
     " }}}
 
@@ -356,6 +378,21 @@
             endfunction
             nmap <F5> :call RUNIT()<CR>
             nmap <leader><F5> :call asyncrun#quickfix_toggle(8)<CR>
+        endif
+    " }}}
+
+    " Theme {{{
+        if  filereadable(expand("~/.vim/plugged/space-vim-dark/colors/space-vim-dark.vim"))
+            set t_Co=256
+            "set background=dark
+            "set termguicolors
+            "colorscheme space-vim-dark
+            hi LineNr ctermbg=NONE guibg=NONE
+            if !has('gui_running')
+                hi Normal ctermbg=NONE guibg=NONE
+                hi LineNr ctermfg=DarkGray  "行号颜色修正，终端透明情况下
+                hi SignColumn ctermbg=NONE guibg=NONE       
+            endif
         endif
     " }}}
 
