@@ -251,3 +251,134 @@ autocmd FileType java nnoremap <F5> :!start cmd /k cd %:p:h && javac -encoding U
 autocmd FileType python nnoremap <F5> :!start cmd /k cd %:p:h && python % && pause && exit<CR>
 
 " }}}
+    " PyMode {{{
+        if isdirectory(expand("~/.vim/plugged/python-mode"))
+            " python version
+            if has('python3')
+                let g:pymode_python = 'python3'
+            else
+                let g:pymode_python = 'python'
+            endif
+            " disable pymode_rope and pymode_folding for slow problem
+            let g:pymode_rope = 0
+            let g:pymode_folding = 0
+            let g:pymode_trim_whitespaces = 1
+            let g:pymode_options = 0
+            " doc for python
+            let g:pymode_doc = 0
+            " motion
+            let g:pymode_motion = 1
+            " run python
+            let g:pymode_run_bind = '<leader>R'
+            " breakpoint
+            let g:pymode_breakpoint = 1
+            let g:pymode_breakpoint_bind = '<LocalLeader>p'
+            let g:pymode_breakpoint_cmd = 'import pdb;pdb.set_trace()'
+            " pymode check disable
+            if count(g:spf13_bundle_groups, 'syntax')
+                let g:pymode_lint = 0
+            else
+                let g:pymode_lint = 1
+                nmap <F9> :PymodeLint<CR>
+                let g:pymode_lint_signs = 1
+                " no check when white
+                let g:pymode_lint_on_write = 0
+                " check when save
+                let g:pymode_lint_unmodified = 0
+                " not check of fly
+                let g:pymode_lint_on_fly = 0
+                " show message of error line
+                let g:pymode_lint_message = 1
+                " checkers
+                let g:pymode_lint_checkers = ['pyflakes','pep8']
+                "let g:pymode_lint_checkers = ['pep8']
+                let g:pymode_lint_ignore = "E128,E2,E3,E501"
+                " not Auto open cwindow (quickfix) if any errors have been found
+                let g:pymode_lint_cwindow = 0
+            endif
+            if isdirectory(expand("~/.vim/plugged/python-syntax"))
+                let g:pymode_syntax = 0
+                let g:pymode_syntax_all = 0
+            else
+                let g:pymode_syntax = 1
+                let g:pymode_syntax_all = 1
+            endif
+        endif
+    " }}}
+    
+" 延时启动函数 {{{
+    " 200
+    function! Defer_ale(timer) abort
+      call plug#load('ale')
+    endfunction
+
+    " 250
+    "function! Defer_airline(timer) abort
+      "call plug#load('vim-airline')
+      "call plug#load('vim-airline-themes')
+      "redraws!
+    "endfunction
+
+    " 300
+    "function! Defer_gitgutter(timer) abort
+      "call plug#load('vim-gitgutter')
+      "silent! GitGutterEnable
+    "endfunction
+
+    " 400
+    "function! Defer_programming(timer) abort
+      "call plug#load('rainbow')
+      "call plug#load('vim-rooter')
+      "call plug#load('vim-polyglot')
+    "endfunction
+
+    " 500
+    "function! Defer_defaults(timer) abort
+      "if has('patch-8.0.1206') || has('nvim-0.2.3')
+        "call plug#load('traces.vim')
+      "endif
+      "call plug#load('vim_current_word')
+      "call plug#load('vim-signature')
+      "call plug#load('vim-rsi')
+    "endfunction
+
+    " 600
+    function! Defer_motion(timer) abort
+      "call plug#load('vim-sneak')
+      call plug#load('vim-easymotion')
+      "call plug#load('incsearch-easymotion.vim')
+    endfunction
+
+    " 700
+    "function! Defer_fzf(timer) abort
+      "call plug#load('fzf')
+      "call plug#load('fzf.vim')
+    "endfunction
+
+    " 800
+    function! Defer_fugitive(timer) abort
+      call plug#load('vim-fugitive')
+    endfunction
+
+    " 1000
+    "function! Defer_ycm(timer) abort
+      "call plug#load('YouCompleteMe')
+    "endfunction
+
+    "function! Defer_markdown(timer) abort
+      "call plug#load('vim-markdown')
+    "endfunction
+
+    "function! Defer_rust(timer) abort
+      "call plug#load('rust.vim')
+    "endfunction
+
+    "function! Defer_go(timer) abort
+       "call plug#load('vim-go')
+    "endfunction
+
+    "function! Defer_python(timer) abort
+      "call plug#load('python-mode')
+      "call plug#load('SimpylFold')
+    "endfunction
+" }}}
