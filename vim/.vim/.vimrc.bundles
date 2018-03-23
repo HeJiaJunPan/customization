@@ -6,37 +6,26 @@
     Plug 'scrooloose/nerdcommenter' "多行注释，leader键+cc生成, leader+cu删除注释
     Plug 'ctrlpvim/ctrlp.vim', { 'on': ['CtrlP', 'CtrlPMRU'] }
     Plug 'vim-scripts/grep.vim' "在命令行模式使用grep命令，:Grep
-    
     Plug 'scrooloose/nerdtree', { 'on':  ['NERDTreeToggle', 'NERDTreeFind'] }
     Plug 'Xuyuanp/nerdtree-git-plugin', { 'on': ['NERDTreeToggle', 'NERDTreeFind'] }
-    
     Plug 'godlygeek/tabular'
     Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
     Plug 'mzlogin/vim-markdown-toc', { 'on': ['GenTocGFM', 'GenTocRedcarpet', 'GenTocGitLab', 'UpdateToc', 'RemoveToc'] }
-    
     "Plug 'aperezdc/vim-template'
     Plug 'maralla/completor.vim'
-    
     Plug 'vim-airline/vim-airline'
     Plug 'vim-airline/vim-airline-themes'
-    
     Plug 'liuchengxu/space-vim-dark'
     "Plug 'tyrannicaltoucan/vim-quantum'
-    
     Plug 'mbbill/undotree', { 'on':  'UndotreeToggle' }
-    Plug 'w0rp/ale', { 'on': [] }
-    call timer_start(200, 'Defer_ale')
-    
+    Plug 'w0rp/ale'
     Plug 'skywind3000/asyncrun.vim'
     Plug 'tpope/vim-surround'
-    Plug 'easymotion/vim-easymotion', { 'on': [] }
-    call timer_start(600, 'Defer_motion')
-    
+    Plug 'easymotion/vim-easymotion'
     if executable('git')
-        Plug 'tpope/vim-fugitive', { 'on': [] }
+        Plug 'tpope/vim-fugitive'
     endif
-    call timer_start(800, 'Defer_fugitive')
-    
+
     if executable('ctags') || isdirectory(expand("~/.vim/depend/ctags"))
         Plug 'majutsushi/tagbar', { 'on': ['TagbarToggle', 'TagbarOpen'] }
     endif
@@ -132,61 +121,6 @@
                     \ "Ignored"   : "☒",
                     \ "Unknown"   : "?"
                     \ }
-            endif
-        endif
-    " }}}
-
-    " PyMode {{{
-        if isdirectory(expand("~/.vim/plugged/python-mode"))
-            " python version
-            if has('python3')
-                let g:pymode_python = 'python3'
-            else
-                let g:pymode_python = 'python'
-            endif
-            " disable pymode_rope and pymode_folding for slow problem
-            let g:pymode_rope = 0
-            let g:pymode_folding = 0
-            let g:pymode_trim_whitespaces = 1
-            let g:pymode_options = 0
-            " doc for python
-            let g:pymode_doc = 0
-            " motion
-            let g:pymode_motion = 1
-            " run python
-            let g:pymode_run_bind = '<leader>R'
-            " breakpoint
-            let g:pymode_breakpoint = 1
-            let g:pymode_breakpoint_bind = '<LocalLeader>p'
-            let g:pymode_breakpoint_cmd = 'import pdb;pdb.set_trace()'
-            " pymode check disable
-            if count(g:spf13_bundle_groups, 'syntax')
-                let g:pymode_lint = 0
-            else
-                let g:pymode_lint = 1
-                nmap <F9> :PymodeLint<CR>
-                let g:pymode_lint_signs = 1
-                " no check when white
-                let g:pymode_lint_on_write = 0
-                " check when save
-                let g:pymode_lint_unmodified = 0
-                " not check of fly
-                let g:pymode_lint_on_fly = 0
-                " show message of error line
-                let g:pymode_lint_message = 1
-                " checkers
-                let g:pymode_lint_checkers = ['pyflakes','pep8']
-                "let g:pymode_lint_checkers = ['pep8']
-                let g:pymode_lint_ignore = "E128,E2,E3,E501"
-                " not Auto open cwindow (quickfix) if any errors have been found
-                let g:pymode_lint_cwindow = 0
-            endif
-            if isdirectory(expand("~/.vim/plugged/python-syntax"))
-                let g:pymode_syntax = 0
-                let g:pymode_syntax_all = 0
-            else
-                let g:pymode_syntax = 1
-                let g:pymode_syntax_all = 1
             endif
         endif
     " }}}
