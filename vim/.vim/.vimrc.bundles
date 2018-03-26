@@ -281,16 +281,17 @@
         endif
         
         set laststatus=2
-        set statusline=%<%1*[B-%n]%*
-        set statusline+=%2*\ %F%=\ %*
-        set statusline+=%3*\ %m%r%y%w\ %*
-        set statusline+=%=%4*\ %{&ff}\ \|\ %{\"\".(&fenc==\"\"?&enc:&fenc).((exists(\"+bomb\")\ &&\ &bomb)?\",B\":\"\").\"\ \|\"}\ %-14.(%l:%c%V%)%*
-        set statusline+=%5*\ %P\ %*
-        hi User1 cterm=bold ctermfg=249 ctermbg=240
-        hi User2 cterm=bold ctermfg=169 ctermbg=238
-        hi User3 cterm=None ctermfg=250 ctermbg=238
-        hi User4 cterm=None ctermfg=250 ctermbg=238
-        hi User5 cterm=None ctermfg=249 ctermbg=240
+        "set statusline=%<%1*[B-%n]%*
+        "set statusline+=%2*\ %F%=\ %*
+        "set statusline+=%3*\ %m%r%y%w\ %*
+        "set statusline+=%=%4*\ %{&ff}\ \|\ %{\"\".(&fenc==\"\"?&enc:&fenc).((exists(\"+bomb\")\ &&\ &bomb)?\",B\":\"\").\"\ \|\"}\ %-14.(%l:%c%V%)%*
+        "set statusline+=%5*\ %P\ %*
+        set statusline=%<%1*[B-%n]%*%2*\ %F%=\ %*%3*\ %m%r%y%w\ %*%4*\ %{&ff}\ \|\ %{\"\".(&fenc==\"\"?&enc:&fenc).((exists(\"+bomb\")\ &&\ &bomb)?\",B\":\"\").\"\ \|\"}\ %-14.(%l:%c%V%)%*%5*\ %P\ %*
+        hi User1 cterm=bold ctermfg=249 ctermbg=240 gui=bold guifg=#b2b2b2 guibg=#585858
+        hi User2 cterm=bold ctermfg=169 ctermbg=238 gui=bold guifg=#d75faf guibg=#444444
+        hi User3 cterm=None ctermfg=250 ctermbg=238 gui=None guifg=#bcbcbc guibg=#444444
+        hi User4 cterm=None ctermfg=250 ctermbg=238 gui=None guifg=#bcbcbc guibg=#444444
+        hi User5 cterm=None ctermfg=249 ctermbg=240 gui=None guifg=#b2b2b2 guibg=#585858
     " }}}
 
 " PlugName {{{
