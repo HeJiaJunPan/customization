@@ -382,3 +382,55 @@ autocmd FileType python nnoremap <F5> :!start cmd /k cd %:p:h && python % && pau
       "call plug#load('SimpylFold')
     "endfunction
 " }}}
+
+
+    Plug 'vim-airline/vim-airline'
+    Plug 'vim-airline/vim-airline-themes'
+
+    " vim-airline {{{
+        if isdirectory(expand("~/.vim/plugged/vim-airline-themes"))
+            let g:airline_theme="bubblegum"
+            let g:airline_powerline_fonts = 0
+            let g:airline_symbols_ascii = 1
+            let g:airline_exclude_preview = 0
+            let g:airline_highlighting_cache = 1
+            let g:airline#extensions#whitespace#enabled = 0
+            " tab序号
+            let g:airline#extensions#tabline#tab_nr_type = 1
+            let g:airline#extensions#tabline#enabled = 0
+            " disable buffers on topright
+            "let g:airline#extensions#tabline#tabs_label = ''
+            "let g:airline#extensions#tabline#show_splits = 0
+            "let g:airline#extensions#tabline#show_close_button = 0
+            "let g:airline#extensions#tabline#buffer_nr_show = 0
+            "let g:airline#extensions#bufferline#enabled = 1
+            " shw full_path of the file,and the time
+            let g:airline_section_c = "\ %F\ \ %{strftime(\"%Y/%m/%d\ %H:%M\")}"
+	        if !exists('g:airline_symbols')
+                let g:airline_symbols = {}
+            endif
+            let g:airline_symbols.crypt = '🔒'
+            let g:airline_symbols.linenr = '☰'
+            let g:airline_symbols.maxlinenr = ''
+            let g:airline_symbols.branch = '⎇'
+            let g:airline_symbols.paste = 'ρ'
+            let g:airline_symbols.notexists = '∄'
+            let g:airline_symbols.whitespace = 'Ξ'
+            "let g:airline_left_sep = '▶'
+            let g:airline_left_alt_sep = '❯'
+            "let g:airline_right_sep = '◀'
+            let g:airline_right_alt_sep = '❮'
+        elseif has('statusline')
+            if isdirectory(expand("~/.vim/plugged/vim-fugitive"))
+                set statusline=\ %{fugitive#statusline()}
+            else
+                set statusline=%<
+            endif
+            set statusline+=\ %F\ \ %{strftime(\"%Y/%m/%d\ %H:%M\")}
+            if isdirectory(expand("~/.vim/plugged/ale"))
+                set statusline+=\ %{ALEGetStatusLine()}
+            endif
+            "set statusline+=\ [%{&ff}/%Y]
+	        set statusline+=%=%25([%{&ff}/%Y]\ %p%%\ \ %l/%L:\ %c%)\ %<
+		endif
+    " }}}
