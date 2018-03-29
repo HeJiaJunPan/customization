@@ -4,8 +4,6 @@
 
     Plug 'junegunn/vim-plug'
     Plug 'scrooloose/nerdcommenter' "多行注释，leader键+cc生成, leader+cu删除注释
-    Plug 'ctrlpvim/ctrlp.vim', { 'on': ['CtrlP', 'CtrlPMRU'] }
-    Plug 'vim-scripts/grep.vim' "在命令行模式使用grep命令，:Grep
     Plug 'scrooloose/nerdtree', { 'on':  ['NERDTreeToggle', 'NERDTreeFind'] }
     Plug 'Xuyuanp/nerdtree-git-plugin', { 'on': ['NERDTreeToggle', 'NERDTreeFind'] }
     Plug 'godlygeek/tabular'
@@ -75,44 +73,6 @@
         endif
     " }}}
     
-    " ctrlp {{{
-        if isdirectory(expand("~/.vim/plugged/ctrlp.vim"))
-            let g:ctrlp_working_path_mode = 'ar'
-            let g:ctrlp_custom_ignore = {
-                \ 'dir':  '\.git$\|\.hg$\|\.svn$',
-                \ 'file': '\.exe$\|\.so$\|\.dll$\|\.pyc$' }
-            if executable('ag')
-                let s:ctrlp_fallback = 'ag %s --nocolor -l -g ""'
-            elseif executable('ack-grep')
-                let s:ctrlp_fallback = 'ack-grep %s --nocolor -f'
-            elseif executable('ack')
-                let s:ctrlp_fallback = 'ack %s --nocolor -f'
-            " On Windows use "dir" as fallback command.
-            elseif WINDOWS()
-                let s:ctrlp_fallback = 'dir %s /-n /b /s /a-d'
-            else
-                let s:ctrlp_fallback = 'find %s -type f'
-            endif
-            if exists("g:ctrlp_user_command")
-                unlet g:ctrlp_user_command
-            endif
-            let g:ctrlp_user_command = {
-                    \ 'types': {
-                    \ 1: ['.git', 'cd %s && git ls-files . --cached --exclude-standard --others'],
-                    \ 2: ['.hg', 'hg --cwd %s locate -I .'],
-                    \ },
-                    \ 'fallback': s:ctrlp_fallback
-                \ }
-            if isdirectory(expand("~/.vim/plugged/ctrlp-funky"))
-                " CtrlP extensions
-                let g:ctrlp_extensions = ['funky']
-                " funky
-                nnoremap <Leader>fu :CtrlPFunky<Cr>
-            endif
-            nnoremap <leader>mu :CtrlPMRU<CR>
-        endif
-    " }}}
-
     " ale {{{
         if isdirectory(expand("~/.vim/plugged/ale"))
             let g:ale_completion_enabled   = 1
@@ -161,6 +121,27 @@
     "    endfunction
     " }}}
 
+    " tabular {{{
+        if isdirectory(expand("~/.vim/plugged/tabular"))
+            nmap <Leader>a&     :Tabularize /&<CR>
+            vmap <Leader>a&     :Tabularize /&<CR>
+            nmap <Leader>a=     :Tabularize /^[^=]*\zs=<CR>
+            vmap <Leader>a=     :Tabularize /^[^=]*\zs=<CR>
+            nmap <Leader>a=>    :Tabularize /=><CR>
+            vmap <Leader>a=>    :Tabularize /=><CR>
+            nmap <Leader>a:     :Tabularize /:<CR>
+            vmap <Leader>a:     :Tabularize /:<CR>
+            nmap <Leader>a::    :Tabularize /:\zs<CR>
+            vmap <Leader>a::    :Tabularize /:\zs<CR>
+            nmap <Leader>a,     :Tabularize /,<CR>
+            vmap <Leader>a,     :Tabularize /,<CR>
+            nmap <Leader>a,,    :Tabularize /,\zs<CR>
+            vmap <Leader>a,,    :Tabularize /,\zs<CR>
+            nmap <Leader>a<Bar> :Tabularize /<Bar><CR>
+            vmap <Leader>a<Bar> :Tabularize /<Bar><CR>
+        endif
+    " }}}
+
     " markdown {{{
         if isdirectory(expand("~/.vim/plugged/vim-markdown"))
             let g:vim_markdown_folding_disabled = 1
@@ -181,8 +162,10 @@
         if isdirectory(expand("~/.vim/plugged/completor.vim"))
 			if LINUX()
 				let g:completor_python_binary = '/usr/bin/python3'
+                let g:completor_node_binary = '/usr/local/node/bin/node'
 			elseif WINDOWS()
 				let g:completor_python_binary = 'D:/Anaconda3/python.exe'   "windows10企业版python3莫名卡顿，换用Anaconda3
+                let g:completor_node_binary = 'D:/Node/node.exe'
 			endif
         endif
         "Use Tab to select completion
@@ -190,13 +173,6 @@
         inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
         inoremap <expr> <cr> pumvisible() ? "\<C-y>\<cr>" : "\<cr>"
 
-    " }}}
-
-    " vim-fugitive {{{
-    "    if isdirectory(expand("~/.vim/plugged/vim-fugitive"))
-    "        nnoremap <leader>GG :Git<Space>
-    "        nnoremap + :Git<Space>
-    "    endif
     " }}}
 
     " tagbar {{{
