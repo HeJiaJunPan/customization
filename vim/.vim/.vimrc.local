@@ -116,7 +116,7 @@
     nnoremap <Down> <Nop>
     nnoremap <Left> <Nop>
     nnoremap <Right> <Nop>
-    nnoremap // :nohlsearch<CR>
+    nnoremap <leader>/ :nohlsearch<CR>
     inoremap {} {<CR>}<ESC>O
     
     "nnoremap <leader>sv :source $MYVIMRC<cr>    "重载配置文件
