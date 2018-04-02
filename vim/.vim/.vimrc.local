@@ -155,7 +155,7 @@
     "代码格式化
     autocmd FileType python nnoremap <leader>= :0,$!yapf<CR>
     
-    autocmd FileType python nnoremap <Enter> <Space><Space><Enter>
+    autocmd FileType markdown inoremap <Enter> <Space><Space><Enter>
 
     nnoremap <F4> :call NumberToggle()<cr>  " <F4> 相对和绝对行号切换
     function! NumberToggle()
