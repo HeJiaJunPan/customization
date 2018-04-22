@@ -166,6 +166,9 @@
 			elseif WINDOWS()
 				let g:completor_python_binary = 'D:/Anaconda3/python.exe'   "windows10企业版python3莫名卡顿，换用Anaconda3
                 let g:completor_node_binary = 'D:/Node/node.exe'
+            elseif has('win32unix')
+                let g:completor_python_binary = '/usr/bin/python3'   "Cygwin,use python3.5
+                let g:completor_node_binary = 'D:/Node/node.exe'
 			endif
         endif
         "Use Tab to select completion
@@ -213,19 +216,31 @@
                 exec "w"
                 cclose
                 call asyncrun#quickfix_toggle(8)
+                " ; 链接多条命令（linux）或者 & 链接多条命令（windows）
                 if &filetype == 'c'
-                    exec ":AsyncRun g++ % -o %<"
-                    exec ":AsyncRun ./%<"
+                    if !WINDOWS()
+                        exec ":AsyncRun gcc % -o %<; ./%<"
+                    else
+                        exec ":AsyncRun gcc % -o %<& ./%<"
+                    endif
                 elseif &filetype == 'cpp'
-                    exec ":AsyncRun g++ % -o %<"
-                    exec ":AsyncRun ./%<"
+                    if !WINDOWS()
+                        exec ":AsyncRun g++ % -o %<; ./%<"
+                    else
+                        exec ":AsyncRun g++ % -o %<& ./%<"
+                    endif
                 elseif &filetype == 'java'
-                    exec ":AsyncRun javac %"
-                    exec ":AsyncRun java %<"
+                    if !WINDOWS()
+                        exec ":AsyncRun javac %; java %<"
+                    else
+                        exec ":AsyncRun javac %& java %<"
+                    endif
                 elseif &filetype == 'sh'
                     exec ":AsyncRun bash %"
                 elseif &filetype == 'python'
                     if LINUX()
+                        exec ":AsyncRun python3 %"
+                    elseif has('win32unix')
                         exec ":AsyncRun python3 %"
                     else
                         exec ":AsyncRun python %"
