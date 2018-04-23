@@ -219,21 +219,21 @@
                 " ; 链接多条命令（linux）或者 & 链接多条命令（windows）
                 if &filetype == 'c'
                     if !WINDOWS()
-                        exec ":AsyncRun gcc % -o %<; ./%<"
+                        exec ":AsyncRun gcc % -o %<;./%<"
                     else
-                        exec ":AsyncRun gcc % -o %<& ./%<"
+                        exec ":AsyncRun gcc % -o %<&%<"
                     endif
                 elseif &filetype == 'cpp'
                     if !WINDOWS()
-                        exec ":AsyncRun g++ % -o %<; ./%<"
+                        exec ":AsyncRun g++ % -o %<;./%<"
                     else
-                        exec ":AsyncRun g++ % -o %<& ./%<"
+                        exec ":AsyncRun g++ % -o %<&%<"
                     endif
                 elseif &filetype == 'java'
                     if !WINDOWS()
-                        exec ":AsyncRun javac %; java %<"
+                        exec ":AsyncRun javac %;java %<"
                     else
-                        exec ":AsyncRun javac %& java %<"
+                        exec ":AsyncRun javac %&java %<"
                     endif
                 elseif &filetype == 'sh'
                     exec ":AsyncRun bash %"
