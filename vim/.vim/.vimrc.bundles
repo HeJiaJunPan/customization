@@ -219,9 +219,9 @@
                 " ; 链接多条命令（linux）或者 & 链接多条命令（windows）
                 if &filetype == 'c'
                     if !WINDOWS()
-                        exec ":AsyncRun gcc % -o %<;./%<"
+                        exec ":AsyncRun gcc -std=c99 % -o %<;./%<"
                     else
-                        exec ":AsyncRun gcc % -o %<&%<"
+                        exec ":AsyncRun gcc -std=c99 % -o %<&%<"
                     endif
                 elseif &filetype == 'cpp'
                     if !WINDOWS()
