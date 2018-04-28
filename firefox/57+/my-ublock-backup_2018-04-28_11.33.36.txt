@@ -1,0 +1,50 @@
+{
+  "timeStamp": 1524886416006,
+  "version": "1.16.2",
+  "userSettings": {
+    "advancedUserEnabled": true,
+    "alwaysDetachLogger": false,
+    "autoUpdate": true,
+    "cloudStorageEnabled": false,
+    "collapseBlocked": true,
+    "colorBlindFriendly": false,
+    "contextMenuEnabled": false,
+    "dynamicFilteringEnabled": false,
+    "externalLists": "https://git.oschina.net/halflife/list/raw/master/ad.txt\nhttps://raw.github.com/reek/anti-adblock-killer/master/anti-adblock-killer-filters.txt\nhttps://raw.githubusercontent.com/ZeroDot1/CoinBlockerLists/master/list_browser.txt",
+    "firewallPaneMinimized": true,
+    "hyperlinkAuditingDisabled": true,
+    "ignoreGenericCosmeticFilters": false,
+    "largeMediaSize": 50,
+    "parseAllABPHideFilters": true,
+    "prefetchingDisabled": true,
+    "requestLogMaxEntries": 1000,
+    "showIconBadge": true,
+    "tooltipsDisabled": false,
+    "webrtcIPAddressHidden": false
+  },
+  "selectedFilterLists": [
+    "https://git.oschina.net/halflife/list/raw/master/ad.txt",
+    "https://raw.github.com/reek/anti-adblock-killer/master/anti-adblock-killer-filters.txt",
+    "https://raw.githubusercontent.com/ZeroDot1/CoinBlockerLists/master/list_browser.txt",
+    "malware-1",
+    "malware-0",
+    "easyprivacy",
+    "user-filters"
+  ],
+  "hiddenSettings": {
+    "assetFetchTimeout": 30,
+    "autoUpdateAssetFetchPeriod": 120,
+    "autoUpdatePeriod": 7,
+    "ignoreRedirectFilters": false,
+    "ignoreScriptInjectFilters": false,
+    "manualUpdateAssetFetchPeriod": 500,
+    "popupFontSize": "unset",
+    "suspendTabsUntilReady": false,
+    "userResourcesLocation": "unset"
+  },
+  "netWhitelist": "about-scheme\nchrome-extension-scheme\nchrome-scheme\nmoz-extension-scheme\nopera-scheme\nvivaldi-scheme",
+  "dynamicFilteringString": "behind-the-scene * * noop\nbehind-the-scene * inline-script noop\nbehind-the-scene * 1p-script noop\nbehind-the-scene * 3p-script noop\nbehind-the-scene * 3p-frame noop\nbehind-the-scene * image noop\nbehind-the-scene * 3p noop",
+  "urlFilteringString": "",
+  "hostnameSwitchesString": "no-large-media: behind-the-scene false",
+  "userFilters": "! 2018/3/14 下午9:53:55 https://www.jianshu.com/p/04d180d90a3f\n||cdn2.jianshu.io/assets/web/web-note-ad-2-34aca030621fb9127ddd544eedfebb30.png$image\n\n! 2018/4/20 下午8:49:52 https://baike.baidu.com/item/%E9%87%91%E5%85%89%E5%BE%A1%E4%B9%9D%E7%95%8C%E4%B9%8B%E9%AC%BC%E9%80%94%E5%A5%87%E8%A1%8C%E5%BD%95/22474571?fr=aladdin\n||gss3.bdstatic.com/-Po3dSag_xI4khGkpoWK1HF6hhy/baike/whfpf%3D135%2C180%2C50/sign=6f96101be7f81a4c2667bf89b117516a/b8014a90f603738dcad2ae4dbf1bb051f919ecc1.jpg$image\n\n! 2018/4/22 下午3:28:21 https://tieba.baidu.com/\ntieba.baidu.com##.tbshare_popup_enter\n\n! 2018/4/22 下午3:28:31 https://tieba.baidu.com/\n||tb2.bdstatic.com/tb/static-spage/widget/stats/stats_z_cea5452.png$image\n"
+}
