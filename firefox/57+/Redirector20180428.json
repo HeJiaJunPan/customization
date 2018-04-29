@@ -1,7 +1,22 @@
 {
     "createdBy": "Redirector v3.1.1",
-    "createdAt": "2018-04-28T03:42:02.234Z",
+    "createdAt": "2018-04-29T14:17:49.972Z",
     "redirects": [
+        {
+            "description": "修正Discuz 论坛relatedlink的bug",
+            "exampleUrl": "https://bbs.kafan.cn/forum.php?mod=viewthread&tid=2097322&highlight=%D2%F4%C0%D6",
+            "exampleResult": "https://bbs.kafan.cn/forum.php?mod=viewthread&ttid=2097322",
+            "error": null,
+            "includePattern": "*forum*id=*&highlight*",
+            "excludePattern": "",
+            "redirectUrl": "$1forum$2tid=$3",
+            "patternType": "W",
+            "processMatches": "noProcessing",
+            "disabled": true,
+            "appliesTo": [
+                "main_frame"
+            ]
+        },
         {
             "description": "观察者网全文",
             "exampleUrl": "http://www.guancha.cn/LiangJianZhang/2018_04_28_455180.shtml",
@@ -217,7 +232,7 @@
             "exampleUrl": "https://www.douban.com/link2/?url=http%3A%2F%2Fblog.sina.com.cn%2Fs%2Fblog_69a4e04201014j4w.html",
             "exampleResult": "http://blog.sina.com.cn/s/blog_69a4e04201014j4w.html",
             "error": null,
-            "includePattern": "https://www.douban.com/link\\d*?/\\?url=(.*)",
+            "includePattern": "https?://www.douban.com/link\\d*?/\\?url=(.*)",
             "excludePattern": "",
             "redirectUrl": "$1",
             "patternType": "R",
@@ -232,7 +247,7 @@
             "exampleUrl": "http://www.pixiv.net/jump.php?http%3A%2F%2Fcocoronica.weebly.com%2F",
             "exampleResult": "http://cocoronica.weebly.com/",
             "error": null,
-            "includePattern": "http://www.pixiv.net/jump.php\\?(http.*)",
+            "includePattern": "https?://www.pixiv.net/jump.php\\?(http.*)",
             "excludePattern": "",
             "redirectUrl": "$1",
             "patternType": "R",
@@ -306,7 +321,7 @@
             "exampleUrl": "http://bbs.kafan.cn/forum.php?mod=viewthread&tid=1480897&highlight=noscript",
             "exampleResult": "http://bbs.kafan.cn/forum.php?mod=viewthread&tid=1480897",
             "error": null,
-            "includePattern": "^(http:\\/\\/.*\\.(com|cn|net)\\/.*?)&highlight=(.*)",
+            "includePattern": "^(https?:\\/\\/.*\\.(com|cn|net)\\/.*?)&highlight=(.*)",
             "excludePattern": "",
             "redirectUrl": "$1",
             "patternType": "R",
