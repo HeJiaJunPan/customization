@@ -1,6 +1,6 @@
 {
     "createdBy": "Redirector v3.1.1",
-    "createdAt": "2018-04-29T14:17:49.972Z",
+    "createdAt": "2018-04-30T04:08:36.660Z",
     "redirects": [
         {
             "description": "修正Discuz 论坛relatedlink的bug",
@@ -22,7 +22,7 @@
             "exampleUrl": "http://www.guancha.cn/LiangJianZhang/2018_04_28_455180.shtml",
             "exampleResult": "http://www.guancha.cn/LiangJianZhang/2018_04_28_455180_s.shtml",
             "error": null,
-            "includePattern": "^https?:\\/\\/www.guancha.cn\\/(.*)\\/(.*)\\.shtml$",
+            "includePattern": "^https?:\\/\\/www.guancha.cn\\/(.*)\\/(.*)\\.shtml(\\?.*){0,1}$",
             "excludePattern": "",
             "redirectUrl": "http://www.guancha.cn/$1/$2_s.shtml",
             "patternType": "R",
