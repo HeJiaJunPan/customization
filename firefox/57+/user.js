@@ -44,7 +44,8 @@ user_pref("dom.webnotifications.serviceworker.enabled", false);/*关闭WEB推送
 user_pref("browser.reader.detectedFirstArticle", true);/*关闭阅读界面提示*/
 user_pref("network.IDN_show_punycode", true);/*防止第三方钓鱼网站*/
 user_pref("reader.parse-on-load.enabled", false);/*禁用阅读模式*/
-user_pref("general.useragent.locale", "zh-cn");/*使用中文语言*/
+//user_pref("general.useragent.locale", "zh-cn");/*使用中文语言*/
+user_pref("intl.locale.requested", "zh-CN");/*使用中文语言*/
 user_pref("extensions.screenshots.disabled", true);/*禁用自带截图*/
 user_pref("browser.download.animateNotifications",false); /*取消下载提醒动画*/
 user_pref("browser.fullscreen.animate",false); /*取消全屏动画*/
@@ -102,7 +103,12 @@ user_pref("mousewheel.default.delta_multiplier_y", 160);
 
 
 //标签页固定的网站
+pref("browser.newtabpage.activity-stream.migrationExpired", true);//newtab不提示导入书签
+pref("browser.newtabpage.activity-stream.feeds.section.highlights", false);//newtab关闭集锦
+pref("browser.newtabpage.activity-stream.prerender", false);//newtab关闭集锦
+pref("browser.newtabpage.activity-stream.feeds.section.topstories", false);//newtab关闭Pocket推荐
+pref("browser.newtabpage.activity-stream.feeds.snippets", false);//newtab关闭只言片语
 user_pref("browser.newtabpage.activity-stream.enabled", false);/*旧版 New Tab*/
 user_pref("browser.newtabpage.columns", 6);//新标签页列数
 user_pref("browser.newtabpage.rows", 3);//新标签页行数
-user_pref("browser.newtabpage.pinned", "[{\"url\":\"https://music.163.com/\",\"label\":\"Music\"},{\"url\":\"https://www.bilibili.com/\",\"label\":\"Bilibili\"},{\"url\":\"https://www.zhihu.com/\",\"label\":\"Zhihu\"},{\"url\":\"https://flipboard.com/\",\"label\":\"Flipboard\"},{\"url\":\"https://tieba.baidu.com/\",\"label\":\"Tieba\"},{\"url\":\"https://pan.baidu.com/disk/home\",\"label\":\"百度云\"},{\"url\":\"https://www.cnblogs.com/\",\"label\":\" cnblogs\"},{\"url\":\"https://zh.wikipedia.org/zh-cn/\",\"label\":\"Wiki\"},{\"url\":\"https://www.google.com.hk/\",\"label\":\"Google\"},{\"url\":\"https://plus.google.com/\",\"label\":\"Google+\"},{\"url\":\"https://www.youtube.com/\",\"label\":\" YouTube\"},{\"url\":\"https://translate.google.cn/#auto/zh-CN/\",\"label\":\"Translate\"},{\"url\":\"http://www.runningcheese.com/\",\"label\":\"奶酪\"},{\"url\":\"http://www.guancha.cn/\",\"label\":\"观察者\"},{\"url\":\"http://www.ifeng.com/\",\"label\":\"凤凰网\"},{\"url\":\"https://www.ted.com/\",\"label\":\"TED\"},{\"url\":\"https://www.landiannews.com/\",\"label\":\"蓝点网\"},{\"url\":\"https://github.com/\",\"label\":\"Github\"}]");
+user_pref("browser.newtabpage.pinned", "[{\"url\":\"https://music.163.com/\",\"label\":\"Music\"},{\"url\":\"https://www.bilibili.com/\",\"label\":\"Bilibili\"},{\"url\":\"https://www.facebook.com/\",\"label\":\"Facebook\"},{\"url\":\"https://flipboard.com/\",\"label\":\"Flipboard\"},{\"url\":\"https://tieba.baidu.com/\",\"label\":\"Tieba\"},{\"url\":\"https://pan.baidu.com/disk/home\",\"label\":\"百度云\"},{\"url\":\"https://www.cnblogs.com/\",\"label\":\" cnblogs\"},{\"url\":\"https://zh.wikipedia.org/zh-cn/\",\"label\":\"Wiki\"},{\"url\":\"https://www.google.com.hk/\",\"label\":\"Google\"},{\"url\":\"https://plus.google.com/\",\"label\":\"Google+\"},{\"url\":\"https://www.youtube.com/\",\"label\":\" YouTube\"},{\"url\":\"https://translate.google.cn/#auto/zh-CN/\",\"label\":\"Translate\"},{\"url\":\"http://www.runningcheese.com/\",\"label\":\"奶酪\"},{\"url\":\"https://www.instagram.com/\",\"label\":\"Instagram\"},{\"url\":\"http://www.guancha.cn/\",\"label\":\"观察者\"},{\"url\":\"http://www.ifeng.com/\",\"label\":\"凤凰网\"},{\"url\":\"https://www.landiannews.com/\",\"label\":\"蓝点网\"},{\"url\":\"https://github.com/\",\"label\":\"Github\"},{\"url\":\"https://www.zhihu.com/\",\"label\":\"Zhihu\"},{\"url\":\"https://www.ted.com/\",\"label\":\"TED\"}]");
