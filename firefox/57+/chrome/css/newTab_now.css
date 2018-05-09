@@ -7,6 +7,13 @@
 */
 @-moz-document url("about:newtab") {
 
+/*背景图片*/
+body {
+background-image:url("https://www.runningcheese.com/cheese.php") !important;
+background-color:#fafafa !important;
+background-size: cover !important;
+}
+
 /*拨号设置*/
 #newtab-customize-button {display: none !important;}
 #newtab-intro-what {display: none !important;}
