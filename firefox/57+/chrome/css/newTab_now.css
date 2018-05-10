@@ -17,7 +17,8 @@ body {
 
 /*搜索框设置*/
 #newtab-search-text:active,
-#newtab-search-text:focus {
+#newtab-search-text:focus,
+#newtab-search-text {
     border-color: transparent !important;
     box-shadow: none !important;
 }
