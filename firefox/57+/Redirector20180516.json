@@ -1,7 +1,110 @@
 {
     "createdBy": "Redirector v3.1.1",
-    "createdAt": "2018-04-30T04:08:36.660Z",
+    "createdAt": "2018-05-16T15:53:35.241Z",
     "redirects": [
+        {
+            "description": "google fonts >> 科大",
+            "exampleUrl": "https://fonts.googleapis.com/example",
+            "exampleResult": "https://fonts.proxy.ustclug.org/example",
+            "error": null,
+            "includePattern": "^https?:\\/\\/fonts\\.googleapis\\.com\\/(.*)$",
+            "excludePattern": "",
+            "redirectUrl": "https://fonts.proxy.ustclug.org/$1",
+            "patternType": "R",
+            "processMatches": "noProcessing",
+            "disabled": false,
+            "appliesTo": [
+                "main_frame",
+                "sub_frame",
+                "stylesheet",
+                "script",
+                "image",
+                "object",
+                "xmlhttprequest",
+                "other"
+            ]
+        },
+        {
+            "description": "google ajax >> 科大",
+            "exampleUrl": "https://ajax.googleapis.com/example",
+            "exampleResult": "https://ajax.proxy.ustclug.org/example",
+            "error": null,
+            "includePattern": "^https?:\\/\\/ajax\\.googleapis\\.com\\/(.*)$",
+            "excludePattern": "",
+            "redirectUrl": "https://ajax.proxy.ustclug.org/$1",
+            "patternType": "R",
+            "processMatches": "noProcessing",
+            "disabled": false,
+            "appliesTo": [
+                "main_frame",
+                "sub_frame",
+                "stylesheet",
+                "script",
+                "image",
+                "object",
+                "xmlhttprequest",
+                "other"
+            ]
+        },
+        {
+            "description": "google fonts.gstatic >> 科大",
+            "exampleUrl": "https://fonts.gstatic.com/example",
+            "exampleResult": "https://fonts-gstatic.proxy.ustclug.org/example",
+            "error": null,
+            "includePattern": "^https?:\\/\\/fonts\\.gstatic\\.com\\/(.*)$",
+            "excludePattern": "",
+            "redirectUrl": "https://fonts-gstatic.proxy.ustclug.org/$1",
+            "patternType": "R",
+            "processMatches": "noProcessing",
+            "disabled": false,
+            "appliesTo": [
+                "main_frame",
+                "sub_frame",
+                "stylesheet",
+                "script",
+                "image",
+                "object",
+                "xmlhttprequest",
+                "other"
+            ]
+        },
+        {
+            "description": "google themes >> 科大",
+            "exampleUrl": "https://themes.googleusercontent.com/example",
+            "exampleResult": "https://google-themes.proxy.ustclug.org/example",
+            "error": null,
+            "includePattern": "^https?:\\/\\/themes\\.googleusercontent\\.com\\/(.*)$",
+            "excludePattern": "",
+            "redirectUrl": "https://google-themes.proxy.ustclug.org/$1",
+            "patternType": "R",
+            "processMatches": "noProcessing",
+            "disabled": false,
+            "appliesTo": [
+                "main_frame",
+                "sub_frame",
+                "stylesheet",
+                "script",
+                "image",
+                "object",
+                "xmlhttprequest",
+                "other"
+            ]
+        },
+        {
+            "description": "谷歌学术",
+            "exampleUrl": "https://scholar.google.com/scholar_url?url=http://fs.gongkong.com/files/technicalPaper/201004/2010042115550600001.pdf&hl=zh-CN&sa=X&scisig=AAGBfm3vMu2Ywqt0WtmfkghkgZ8enwdvdQ&nossl=1&oi=scholarr",
+            "exampleResult": "http://fs.gongkong.com/files/technicalPaper/201004/2010042115550600001.pdf",
+            "error": null,
+            "includePattern": "https?:\\/\\/scholar\\.google\\.com\\/scholar_url\\?url=(.*?)&(.*)",
+            "excludePattern": "",
+            "redirectUrl": "$1",
+            "patternType": "R",
+            "processMatches": "noProcessing",
+            "disabled": false,
+            "appliesTo": [
+                "main_frame"
+            ]
+        },
         {
             "description": "修正Discuz 论坛relatedlink的bug",
             "exampleUrl": "https://bbs.kafan.cn/forum.php?mod=viewthread&tid=2097322&highlight=%D2%F4%C0%D6",
@@ -177,9 +280,16 @@
             "redirectUrl": "https://gapis.geekzu.org/g-themes/$1",
             "patternType": "R",
             "processMatches": "noProcessing",
-            "disabled": false,
+            "disabled": true,
             "appliesTo": [
-                "main_frame"
+                "main_frame",
+                "sub_frame",
+                "stylesheet",
+                "script",
+                "image",
+                "object",
+                "xmlhttprequest",
+                "other"
             ]
         },
         {
@@ -192,9 +302,16 @@
             "redirectUrl": "https://gapis.geekzu.org/$1",
             "patternType": "R",
             "processMatches": "noProcessing",
-            "disabled": false,
+            "disabled": true,
             "appliesTo": [
-                "main_frame"
+                "main_frame",
+                "sub_frame",
+                "stylesheet",
+                "script",
+                "image",
+                "object",
+                "xmlhttprequest",
+                "other"
             ]
         },
         {
@@ -207,9 +324,16 @@
             "redirectUrl": "https://gapis.geekzu.org/ajax/$1",
             "patternType": "R",
             "processMatches": "noProcessing",
-            "disabled": false,
+            "disabled": true,
             "appliesTo": [
-                "main_frame"
+                "main_frame",
+                "sub_frame",
+                "stylesheet",
+                "script",
+                "image",
+                "object",
+                "xmlhttprequest",
+                "other"
             ]
         },
         {
@@ -222,9 +346,16 @@
             "redirectUrl": "https://fonts.geekzu.org/$1",
             "patternType": "R",
             "processMatches": "noProcessing",
-            "disabled": false,
+            "disabled": true,
             "appliesTo": [
-                "main_frame"
+                "main_frame",
+                "sub_frame",
+                "stylesheet",
+                "script",
+                "image",
+                "object",
+                "xmlhttprequest",
+                "other"
             ]
         },
         {
@@ -262,7 +393,7 @@
             "exampleUrl": "http://link.zhihu.com/?target=https://play.google.com",
             "exampleResult": "https://play.google.com",
             "error": null,
-            "includePattern": "https?://link.zhihu.com/\\?target=(.+)",
+            "includePattern": "https?://link\\.zhihu\\.com/\\?target=(.+)",
             "excludePattern": "",
             "redirectUrl": "$1",
             "patternType": "R",
@@ -270,50 +401,6 @@
             "disabled": false,
             "appliesTo": [
                 "main_frame"
-            ]
-        },
-        {
-            "description": "Google ajax/fonts >> 科大",
-            "exampleUrl": "https://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js",
-            "exampleResult": "https://ajax.proxy.ustclug.org/ajax/libs/jquery/1.8.1/jquery.min.js",
-            "error": null,
-            "includePattern": "https?://(ajax|fonts)\\.googleapis\\.com/(.*)$",
-            "excludePattern": "",
-            "redirectUrl": "https://$1.proxy.ustclug.org/$2",
-            "patternType": "R",
-            "processMatches": "noProcessing",
-            "disabled": true,
-            "appliesTo": [
-                "main_frame",
-                "sub_frame",
-                "stylesheet",
-                "script",
-                "image",
-                "object",
-                "xmlhttprequest",
-                "other"
-            ]
-        },
-        {
-            "description": "Google themes >> 科大",
-            "exampleUrl": "http://themes.googleusercontent.com/",
-            "exampleResult": "https://google-themes.proxy.ustclug.org/",
-            "error": null,
-            "includePattern": "https?://themes\\.googleusercontent\\.com/(.*)$",
-            "excludePattern": "",
-            "redirectUrl": "https://google-themes.proxy.ustclug.org/$1",
-            "patternType": "R",
-            "processMatches": "noProcessing",
-            "disabled": true,
-            "appliesTo": [
-                "main_frame",
-                "sub_frame",
-                "stylesheet",
-                "script",
-                "image",
-                "object",
-                "xmlhttprequest",
-                "other"
             ]
         },
         {
