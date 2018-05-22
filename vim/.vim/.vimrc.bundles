@@ -150,16 +150,16 @@
 
     " completor.vim {{{
         if isdirectory(expand("~/.vim/plugged/completor.vim"))
-			if g:platform['unix']
-				let g:completor_python_binary = '/usr/bin/python3'
+            if g:platform['unix']
+                let g:completor_python_binary = '/usr/bin/python3'
                 let g:completor_node_binary = '/usr/local/node/bin/node'
-			elseif g:platform['windows']
-				let g:completor_python_binary = 'D:/Anaconda3/python.exe'   "windows10企业版python3莫名卡顿，换用Anaconda3
+            elseif g:platform['windows']
+                let g:completor_python_binary = 'D:/Anaconda3/python.exe'   "windows10企业版python3莫名卡顿，换用Anaconda3
                 let g:completor_node_binary = 'D:/Node/node.exe'
             elseif g:platform['cygwin']
                 let g:completor_python_binary = '/usr/bin/python3'   "Cygwin,use python3.5
                 let g:completor_node_binary = 'D:/Node/node.exe'
-			endif
+            endif
         endif
         "Use Tab to select completion
         inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
