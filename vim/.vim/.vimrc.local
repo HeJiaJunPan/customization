@@ -80,11 +80,11 @@
 
 " GUI {{{
 
-    if has('gui_running')
+    if g:has_gui_running
         set lines=32 columns=120
     endif
     
-    if WINDOWS()
+    if g:platform['windows']
         set guifont=Consolas:h12
     endif
     
@@ -155,7 +155,7 @@
     "代码格式化
     autocmd FileType python nnoremap <leader>= :0,$!yapf<CR>
     
-    "autocmd FileType markdown inoremap <Enter> <Space><Space><Enter>
+    autocmd FileType markdown inoremap <Enter> <Space><Space><Enter>
 
     nnoremap <F4> :call NumberToggle()<cr>  " <F4> 相对和绝对行号切换
     function! NumberToggle()
@@ -166,7 +166,7 @@
         endif
     endfunc
     
-    if WINDOWS()
+    if g:platform['windows']
         " 打开当前目录 windows
         nnoremap <silent> <leader>ex :!start explorer %:p:h<CR> 
         " 打开当前目录CMD
@@ -185,4 +185,3 @@
     autocmd FileType python set textwidth=79
 
 " }}}
-

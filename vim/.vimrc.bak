@@ -554,3 +554,538 @@ autocmd FileType python nnoremap <F5> :!start cmd /k cd %:p:h && python % && pau
     "        nnoremap + :Git<Space>
     "    endif
     " }}}
+    
+    set nocompatible        " Must be first line
+
+autocmd FileType vim setlocal foldmethod=marker
+
+" Environment {{{
+
+    " Identify platform {{{
+        silent function! OSX()
+            return has('macunix')
+        endfunction
+        silent function! LINUX()
+            return has('unix') && !has('macunix') && !has('win32unix')
+        endfunction
+        silent function! WINDOWS()
+            return  (has('win32') || has('win64'))
+        endfunction
+    " }}}
+
+    " Basics {{{
+        if !WINDOWS()
+            set shell=/bin/sh
+        endif
+    " }}}
+
+    " Windows Compatible {{{
+        " On Windows, also use '.vim' instead of 'vimfiles'; this makes synchronization
+        " across (heterogeneous) systems easier.
+        if WINDOWS()
+          set runtimepath=$HOME/.vim,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,$HOME/.vim/after
+        endif
+    " }}}
+    
+    " Arrow Key Fix {{{
+        " https://github.com/spf13/spf13-vim/issues/780
+        if &term[:4] == "xterm" || &term[:5] == 'screen' || &term[:3] == 'rxvt'
+            inoremap <silent> <C-[>OC <RIGHT>
+        endif
+    " }}}
+    
+" }}}
+
+" Use before config if available {{{
+    if filereadable(expand("~/.vim/.vimrc.local"))
+        source ~/.vim/.vimrc.local
+    endif
+" }}}
+
+" Use bundles config {{{
+    if filereadable(expand("~/.vim/.vimrc.bundles"))
+        source ~/.vim/.vimrc.bundles
+    endif
+" }}}
+
+" General {{{
+
+    filetype plugin indent on   " Automatically detect file types.
+    filetype on                 " 开启文件类型侦测
+    filetype plugin on          " 根据侦测到的不同类型:加载对应的插件
+    syntax on                   " Syntax highlighting
+    
+    " 插入模式下用绝对行号, 普通模式下用相对
+    set relativenumber  "初始状态，相对行号
+    autocmd InsertEnter * :set norelativenumber number
+    autocmd InsertLeave * :set relativenumber
+    
+    " auto close qfixwindows when leave vim
+    aug QFClose
+        au!
+        au WinEnter * if winnr('$') == 1 && getbufvar(winbufnr(winnr()), "&buftype") == "quickfix"|q|endif
+    aug END
+
+    "set mouse=a                 " Automatically enable mouse usage
+    "set mousehide               " Hide the mouse cursor while typing
+    set ruler
+    set showmode
+    set hlsearch
+    set nobackup
+    set noswapfile  "禁止生成临时文件
+    set history=1024    "历史记录数
+    set autoread    "设置当文件在外部被修改，自动更新该文件
+    set autochdir
+    "set whichwrap=b,s,<,>,[,]
+    set nobomb
+    "使回格键（backspace）正常处理indent, eol, start等
+    set backspace=indent,eol,start whichwrap+=<,>,[,]
+    set winaltkeys=no   " 设置 alt 键不映射到菜单栏
+
+    if has('clipboard')
+        if has('unnamedplus')  " When possible use + register for copy-paste
+            set clipboard=unnamed,unnamedplus
+        else         " On mac and Windows, use * register for copy-paste
+            set clipboard=unnamed
+        endif
+    endif
+    
+    " 打开文件时自动回到上次编辑的地方
+    if has("autocmd")
+        autocmd BufReadPost *
+            \ if line("'\"") > 0 && line ("'\"") <= line("$") |
+            \   exe "normal g'\"" |
+            \ endif
+    endif
+    
+    " take config into effect after saving
+    au! bufwritepost .vimrc source %
+    au! bufwritepost .vimrc.bundles source %
+    au! bufwritepost .vimrc.local source %
+
+" }}}
+
+" Lang & Encoding {{{
+    
+    "查询当前编辑的文件的字符编码方式并打开
+    set fileencodings=utf-8,gbk2312,gbk,gb18030,cp936
+
+    "vim内部使用的字符编码方式
+    set encoding=utf-8
+    
+    let $LANG = 'en_US.UTF-8'
+    "vim提示信息乱码的解决
+    "language messages zh_CN.UTF-8
+    "工作的终端或者Windows的Console窗口的字符编码方式
+    "set termencoding=utf-8
+
+    if has('gui_running')
+        set langmenu=zh_CN.UTF-8
+        "vim的菜单乱码解决
+        source $VIMRUNTIME/delmenu.vim
+        source $VIMRUNTIME/menu.vim
+    endif
+    
+" }}}
+
+" GUI {{{
+
+    if has('gui_running')
+        set lines=32 columns=120
+    endif
+    
+    if WINDOWS()
+        set guifont=Consolas:h12
+    endif
+    
+    " 分割出来的窗口位于当前窗口下边/右边
+    set splitbelow
+    set splitright
+    
+    set showtabline=1   "1不显示书签栏
+    set guioptions-=T   " 隐藏工具栏
+    set guioptions-=m   " 隐藏菜单栏
+    set guioptions-=L
+    set guioptions-=r
+    set guioptions-=b
+    set guioptions-=e   " 使用内置 tab 样式而不是 gui
+    set nolist
+
+    " set listchars=tab:▶\ ,eol:¬,trail:·,extends:>,precedes:<
+    "set guifont=Consolas:h12:cANSI
+" }}}
+
+" Keymap {{{
+
+    let mapleader=" "   "配置前缀键
+    nnoremap \ ,
+    nnoremap J j
+    nnoremap K k
+    inoremap jk <ESC>
+    nnoremap <Up> <Nop>
+    nnoremap <Down> <Nop>
+    nnoremap <Left> <Nop>
+    nnoremap <Right> <Nop>
+    nnoremap <leader>/ :nohlsearch<CR>
+    inoremap {} {<CR>}<ESC>O
+    
+    "nnoremap <leader>sv :source $MYVIMRC<cr>    "重载配置文件
+    "nnoremap <leader>ev :vs $MYVIMRC<cr>    "打开配置文件
+
+    nnoremap <leader>tn :tabnew<cr>
+    nnoremap <leader>tc :tabclose<cr>
+    nnoremap <leader>th :tabp<cr>
+    nnoremap <leader>tl :tabn<cr>
+
+    " 当前文件父目录
+    "cnoremap <expr> %% getcmdtype( ) == ':' ? expand('%:h').'/' : '%%'
+
+    " 移动分割窗口
+    nnoremap <C-j> <C-W>j
+    nnoremap <C-k> <C-W>k
+    nnoremap <C-h> <C-W>h
+    nnoremap <C-l> <C-W>l
+
+    " 正常模式下 alt+j,k,h,l 调整分割窗口大小
+    nnoremap <M-j> :resize +5<cr>
+    nnoremap <M-k> :resize -5<cr>
+    nnoremap <M-h> :vertical resize -5<cr>
+    nnoremap <M-l> :vertical resize +5<cr>
+
+    " 打印当前时间
+    nnoremap <F3> a<C-R>=strftime("%Y-%m-%d %a %I:%M %p")<CR><Esc>
+
+    " 复制当前文件/路径到剪贴板
+    nnoremap ,fn :let @*=substitute(expand("%"), "/", "\\", "g")<CR>
+    nnoremap ,fp :let @*=substitute(expand("%:p"), "/", "\\", "g")<CR>
+    
+    nnoremap <F2> :g/^\s*$/d<CR>    " <F2> 去空行
+    map <F3> :%s/\s\+$//<CR>    " <F3> 删除多余空格
+
+    "代码格式化
+    autocmd FileType python nnoremap <leader>= :0,$!yapf<CR>
+    
+    "autocmd FileType markdown inoremap <Enter> <Space><Space><Enter>
+
+    nnoremap <F4> :call NumberToggle()<cr>  " <F4> 相对和绝对行号切换
+    function! NumberToggle()
+        if(&relativenumber == 1)
+            set norelativenumber number
+        else
+            set relativenumber
+        endif
+    endfunc
+    
+    if WINDOWS()
+        " 打开当前目录 windows
+        nnoremap <silent> <leader>ex :!start explorer %:p:h<CR> 
+        " 打开当前目录CMD
+        nnoremap <silent> <leader>cmd :!start cmd /k cd %:p:h<cr>
+    endif
+
+" }}}
+
+" 代码风格 {{{
+
+    set autoindent
+    set shiftwidth=4
+    set tabstop=4
+    set softtabstop=4
+    set expandtab
+    autocmd FileType python set textwidth=79
+
+" }}}
+
+" Plug {{{
+
+    call plug#begin('~/.vim/plugged')
+
+    Plug 'junegunn/vim-plug'
+    Plug 'scrooloose/nerdcommenter' "多行注释，leader键+cc生成, leader+cu删除注释
+    Plug 'scrooloose/nerdtree', { 'on':  ['NERDTreeToggle', 'NERDTreeFind'] }
+    Plug 'Xuyuanp/nerdtree-git-plugin', { 'on': ['NERDTreeToggle', 'NERDTreeFind'] }
+    Plug 'godlygeek/tabular'
+    Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
+    Plug 'mzlogin/vim-markdown-toc', { 'on': ['GenTocGFM', 'GenTocRedcarpet', 'GenTocGitLab', 'UpdateToc', 'RemoveToc'] }
+    "Plug 'aperezdc/vim-template'
+    Plug 'maralla/completor.vim'
+    Plug 'liuchengxu/space-vim-dark'
+    "Plug 'tyrannicaltoucan/vim-quantum'
+    Plug 'mbbill/undotree', { 'on':  'UndotreeToggle' }
+    Plug 'w0rp/ale'
+    Plug 'skywind3000/asyncrun.vim'
+    Plug 'tpope/vim-surround'
+    Plug 'easymotion/vim-easymotion',
+    if executable('git')
+        Plug 'tpope/vim-fugitive'
+    endif
+    
+    if executable('ctags') || isdirectory(expand("~/.vim/depend/ctags"))
+        Plug 'majutsushi/tagbar', { 'on': ['TagbarToggle', 'TagbarOpen'] }
+    endif
+    
+    call plug#end()
+
+" }}}
+
+" Config {{{
+    " NerdTree {{{
+        if isdirectory(expand("~/.vim/plugged/nerdtree"))
+            nmap <leader>nn :NERDTreeToggle<CR>
+            nmap <leader>nf :NERDTreeFind<CR>
+            let g:NERDShutUp=1
+            let s:has_nerdtree = 1
+            let g:nerdtree_tabs_open_on_gui_startup=0
+            let g:nerdtree_tabs_open_on_console_startup = 0
+            let g:nerdtree_tabs_smart_startup_focus = 2
+            let g:nerdtree_tabs_focus_on_files = 1
+            let g:NERDTreeWinSize=30
+            let g:NERDTreeShowBookmarks=1
+            let g:nerdtree_tabs_smart_startup_focus = 0
+            let g:NERDTreeIgnore=['\.py[cd]$', '\~$', '\.swo$', '\.swp$', '^\.git$', '^\.hg$', '^\.svn$', '\.bzr$']
+            let g:NERDTreeChDirMode=0
+            let g:NERDTreeQuitOnOpen=1
+            let g:NERDTreeMouseMode=2
+            let g:NERDTreeShowHidden=1
+            let g:NERDTreeKeepTreeInNewTab=1
+            let g:nerdtree_tabs_focus_on_files = 1
+            let g:nerdtree_tabs_open_on_gui_startup = 0
+            let g:NERDTreeWinPos=0
+            let g:NERDTreeDirArrowExpandable = '▸'
+            let g:NERDTreeDirArrowCollapsible = '▾'
+            au bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") &&b:NERDTreeType == "primary") | q | endif
+            if isdirectory(expand("~/.vim/plugged/nerdtree-git-plugin"))
+                let g:NERDTreeIndicatorMapCustom = {
+                    \ "Modified"  : "*",
+                    \ "Staged"    : "+",
+                    \ "Untracked" : "★",
+                    \ "Renamed"   : "→ ",
+                    \ "Unmerged"  : "=",
+                    \ "Deleted"   : "X",
+                    \ "Dirty"     : "●",
+                    \ "Clean"     : "√",
+                    \ "Ignored"   : "☒",
+                    \ "Unknown"   : "?"
+                    \ }
+            endif
+        endif
+    " }}}
+    
+    " ale {{{
+        if isdirectory(expand("~/.vim/plugged/ale"))
+            let g:ale_completion_enabled   = 1
+            let g:ale_lint_on_enter        = 0
+            let g:ale_lint_on_text_changed = 'always'
+            nmap <F9> :ALEToggle<CR>
+            " signs fo
+            let g:ale_sign_column_always   = 1
+            let g:ale_set_signs            = 1
+            let g:ale_set_highlights       = 0
+            let g:ale_sign_error           = 'E'
+            let g:ale_sign_warning         = 'w'
+            " message format
+            let g:ale_echo_msg_error_str   = 'E'
+            let g:ale_echo_msg_warning_str = 'W'
+            let g:ale_echo_msg_format      = '[%linter%] %s [%code%]'
+
+            let g:ale_fix_on_save          = 0
+            let g:ale_set_loclist          = 0
+            let g:ale_set_quickfix         = 0
+            let g:ale_statusline_format    = ['E:%d', 'W:%d', '']
+            "highlight clear ALEErrorSign
+            "highlight clear ALEWarningSign
+            nmap <silent> <leader>[ <Plug>(ale_previous_wrap)
+            nmap <silent> <leader>] <Plug>(ale_next_wrap)
+            " 特定后缀指定lint方式
+            let g:ale_pattern_options_enabled = 1
+            let b:ale_warn_about_trailing_whitespace = 0
+            let g:ale_fixers ={}
+            nmap <leader>gt :ALEGoToDefinition<CR>
+        endif
+    " }}}
+
+    " vim-template {{{
+    "   if isdirectory(expand("~/.vim/plugged/vim-template"))
+    "       let g:templates_directory = ['/home/pylego/.vim/templates',]
+    "       let g:templates_user_variables = [['EMAIL', 'GetMail'], ['FULLPATH', 'GetFullPath']]
+    "   endif
+
+    "    function GetMail()
+    "        return 'zhiyeyou@gmail.com'
+    "    endfunction
+
+    "    function GetFullPath()
+    "        return expand('%:p')
+    "    endfunction
+    " }}}
+
+    " tabular {{{
+        if isdirectory(expand("~/.vim/plugged/tabular"))
+            nmap <Leader>a&     :Tabularize /&<CR>
+            vmap <Leader>a&     :Tabularize /&<CR>
+            nmap <Leader>a=     :Tabularize /^[^=]*\zs=<CR>
+            vmap <Leader>a=     :Tabularize /^[^=]*\zs=<CR>
+            nmap <Leader>a=>    :Tabularize /=><CR>
+            vmap <Leader>a=>    :Tabularize /=><CR>
+            nmap <Leader>a:     :Tabularize /:<CR>
+            vmap <Leader>a:     :Tabularize /:<CR>
+            nmap <Leader>a::    :Tabularize /:\zs<CR>
+            vmap <Leader>a::    :Tabularize /:\zs<CR>
+            nmap <Leader>a,     :Tabularize /,<CR>
+            vmap <Leader>a,     :Tabularize /,<CR>
+            nmap <Leader>a,,    :Tabularize /,\zs<CR>
+            vmap <Leader>a,,    :Tabularize /,\zs<CR>
+            nmap <Leader>a<Bar> :Tabularize /<Bar><CR>
+            vmap <Leader>a<Bar> :Tabularize /<Bar><CR>
+        endif
+    " }}}
+
+    " markdown {{{
+        if isdirectory(expand("~/.vim/plugged/vim-markdown"))
+            let g:vim_markdown_folding_disabled = 1
+            let g:vim_markdown_math = 1
+            let g:vim_markdown_frontmatter = 1
+            let g:vim_markdown_conceal = 0
+        endif
+
+        if isdirectory(expand("~/.vim/plugged/vim-markdown-toc"))
+            let g:vmt_auto_update_on_save = 1
+            let g:vmt_dont_insert_fence = 0
+            let g:vim_markdown_toc_autofit = 1
+            autocmd FileType markdown nnoremap <C-m> :GenTocGFM<CR>
+        endif
+    " }}}
+
+    " completor.vim {{{
+        if isdirectory(expand("~/.vim/plugged/completor.vim"))
+			if LINUX()
+				let g:completor_python_binary = '/usr/bin/python3'
+                let g:completor_node_binary = '/usr/local/node/bin/node'
+			elseif WINDOWS()
+				let g:completor_python_binary = 'D:/Anaconda3/python.exe'   "windows10企业版python3莫名卡顿，换用Anaconda3
+                let g:completor_node_binary = 'D:/Node/node.exe'
+            elseif has('win32unix')
+                let g:completor_python_binary = '/usr/bin/python3'   "Cygwin,use python3.5
+                let g:completor_node_binary = 'D:/Node/node.exe'
+			endif
+        endif
+        "Use Tab to select completion
+        inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+        inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+        inoremap <expr> <cr> pumvisible() ? "\<C-y>\<cr>" : "\<cr>"
+
+    " }}}
+
+    " tagbar {{{
+        if isdirectory(expand("~/.vim/plugged/tagbar"))
+            if WINDOWS()
+                let g:tagbar_ctags_bin='~/.vim/depend/ctags/ctags.exe'  "默认/usr/bin/ctags
+            endif
+
+            let g:tagbar_width=30
+            let g:tagbar_sort = 0
+            set tags=./tags;/,~/.vimtags
+            " Make tags placed in .git/tags file available in all levels of a repository
+            let gitroot = substitute(system('git rev-parse --show-toplevel'), '[\n\r]', '', 'g')
+            if gitroot != ''
+                let &tags = &tags . ',' . gitroot . '/.git/tags'
+            endif
+            nnoremap <silent><leader>tt :TagbarToggle<CR>
+            nnoremap <silent><leader>tj :TagbarOpen j<CR>
+            " AutoCloseTag
+            " Make it so AutoCloseTag works for xml and xhtml files as well
+            au FileType xhtml,xml ru ftplugin/html/autoclosetag.vim
+            nnoremap <Leader>ta <Plug>ToggleAutoCloseMappings
+        endif
+    " }}}
+
+    " UndoTree {{{
+        if isdirectory(expand("~/.vim/plugged/undotree"))
+            nnoremap <silent><Leader>u :UndotreeToggle<CR>
+            " If undotree is opened, it is likely one wants to interact with it.
+            let g:undotree_SetFocusWhenToggle=1
+        endif
+    " }}}
+
+    " asyncrun {{{
+        if isdirectory(expand("~/.vim/plugged/asyncrun.vim"))
+            nmap <Leader>tr :AsyncRun
+            function! RUNIT()
+                exec "w"
+                cclose
+                call asyncrun#quickfix_toggle(8)
+                " ; 链接多条命令（linux）或者 & 链接多条命令（windows）
+                if &filetype == 'c'
+                    if !WINDOWS()
+                        exec ":AsyncRun gcc -std=c99 % -o %<;./%<"
+                    else
+                        exec ":AsyncRun gcc -std=c99 % -o %<&%<"
+                    endif
+                elseif &filetype == 'cpp'
+                    if !WINDOWS()
+                        exec ":AsyncRun g++ % -o %<;./%<"
+                    else
+                        exec ":AsyncRun g++ % -o %<&%<"
+                    endif
+                elseif &filetype == 'java'
+                    if !WINDOWS()
+                        exec ":AsyncRun javac %;java %<"
+                    else
+                        exec ":AsyncRun javac %&java %<"
+                    endif
+                elseif &filetype == 'sh'
+                    exec ":AsyncRun bash %"
+                elseif &filetype == 'python'
+                    if LINUX()
+                        exec ":AsyncRun python3 %"
+                    elseif has('win32unix')
+                        exec ":AsyncRun python3 %"
+                    else
+                        exec ":AsyncRun python %"
+                    endif
+                elseif &filetype == 'perl'
+                    exec ":AsyncRun perl %"
+                elseif &filetype == 'go'
+                    exec ":AsyncRun go run %"
+                endif
+            endfunction
+            nmap <F5> :call RUNIT()<CR>
+            nmap <leader><F5> :call asyncrun#quickfix_toggle(8)<CR>
+        endif
+    " }}}
+
+    " Theme {{{
+        if  filereadable(expand("~/.vim/plugged/space-vim-dark/colors/space-vim-dark.vim"))
+            set t_Co=256
+            "set background=dark
+            "set termguicolors
+            colorscheme space-vim-dark
+            hi LineNr ctermbg=NONE guibg=NONE
+            hi CursorLineNr ctermbg=NONE guibg=NONE
+            if !has('gui_running')
+                hi Normal ctermbg=NONE guibg=NONE
+                hi LineNr ctermfg=DarkGray  "行号颜色修正，终端透明情况下
+                hi SignColumn ctermbg=NONE guibg=NONE    
+            endif
+        endif
+        
+        set laststatus=2
+        "set statusline=%<%1*[B-%n]%*
+        "set statusline+=%2*\ %F%=\ %*
+        "set statusline+=%3*\ %m%r%y%w\ %*
+        "set statusline+=%=%4*\ %{&ff}\ \|\ %{\"\".(&fenc==\"\"?&enc:&fenc).((exists(\"+bomb\")\ &&\ &bomb)?\",B\":\"\").\"\ \|\"}\ %-14.(%l:%c%V%)%*
+        "set statusline+=%5*\ %P\ %*
+        set statusline=%<%1*[B-%n]%*%2*\ %F%=\ %*%3*\ %m%r%y%w\ %*%4*\ %{&ff}\ \|\ %{\"\".(&fenc==\"\"?&enc:&fenc).((exists(\"+bomb\")\ &&\ &bomb)?\",B\":\"\").\"\ \|\"}\ %-14.(%l:%c%V%)%*%5*\ %P\ %*
+        hi User1 cterm=bold ctermfg=249 ctermbg=240 gui=bold guifg=#b2b2b2 guibg=#585858
+        hi User2 cterm=bold ctermfg=169 ctermbg=238 gui=bold guifg=#d75faf guibg=#444444
+        hi User3 cterm=None ctermfg=250 ctermbg=238 gui=None guifg=#bcbcbc guibg=#444444
+        hi User4 cterm=None ctermfg=250 ctermbg=238 gui=None guifg=#bcbcbc guibg=#444444
+        hi User5 cterm=None ctermfg=249 ctermbg=240 gui=None guifg=#b2b2b2 guibg=#585858
+    " }}}
+
+" PlugName {{{
+"        if isdirectory(expand("~/.vim/plugged/PlugDir"))
+"        endif
+" }}}
+
+" }}}

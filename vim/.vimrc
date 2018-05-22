@@ -1,23 +1,29 @@
 set nocompatible        " Must be first line
 
 autocmd FileType vim setlocal foldmethod=marker
-
+let g:platform = {'mac':0,'unix':0,'cygwin':0,'windows':0}
 " Environment {{{
-
-    " Identify platform {{{
-        silent function! OSX()
-            return has('macunix')
-        endfunction
-        silent function! LINUX()
-            return has('unix') && !has('macunix') && !has('win32unix')
-        endfunction
-        silent function! WINDOWS()
-            return  (has('win32') || has('win64'))
-        endfunction
-    " }}}
+    
+    if has('unix')
+        if has('win32unix')
+            let g:platform['cygwin'] = 1
+        elseif has('macunix')
+            let g:platform['mac'] = 1
+        else
+            let g:platform['unix'] = 1
+        endif
+    else
+        let g:platform['windows'] = 1
+    endif
+    
+    if has('gui_running')
+        let g:has_gui_running = 1
+    else
+        let g:has_gui_running = 0
+    endif 
 
     " Basics {{{
-        if !WINDOWS()
+        if !g:platform['windows']
             set shell=/bin/sh
         endif
     " }}}
@@ -25,7 +31,7 @@ autocmd FileType vim setlocal foldmethod=marker
     " Windows Compatible {{{
         " On Windows, also use '.vim' instead of 'vimfiles'; this makes synchronization
         " across (heterogeneous) systems easier.
-        if WINDOWS()
+        if g:platform['windows']
           set runtimepath=$HOME/.vim,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,$HOME/.vim/after
         endif
     " }}}

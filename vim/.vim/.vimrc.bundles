@@ -35,23 +35,13 @@
         if isdirectory(expand("~/.vim/plugged/nerdtree"))
             nmap <leader>nn :NERDTreeToggle<CR>
             nmap <leader>nf :NERDTreeFind<CR>
-            let g:NERDShutUp=1
-            let s:has_nerdtree = 1
-            let g:nerdtree_tabs_open_on_gui_startup=0
-            let g:nerdtree_tabs_open_on_console_startup = 0
-            let g:nerdtree_tabs_smart_startup_focus = 2
-            let g:nerdtree_tabs_focus_on_files = 1
             let g:NERDTreeWinSize=30
             let g:NERDTreeShowBookmarks=1
-            let g:nerdtree_tabs_smart_startup_focus = 0
             let g:NERDTreeIgnore=['\.py[cd]$', '\~$', '\.swo$', '\.swp$', '^\.git$', '^\.hg$', '^\.svn$', '\.bzr$']
-            let g:NERDTreeChDirMode=0
             let g:NERDTreeQuitOnOpen=1
             let g:NERDTreeMouseMode=2
             let g:NERDTreeShowHidden=1
             let g:NERDTreeKeepTreeInNewTab=1
-            let g:nerdtree_tabs_focus_on_files = 1
-            let g:nerdtree_tabs_open_on_gui_startup = 0
             let g:NERDTreeWinPos=0
             let g:NERDTreeDirArrowExpandable = '▸'
             let g:NERDTreeDirArrowCollapsible = '▾'
@@ -160,13 +150,13 @@
 
     " completor.vim {{{
         if isdirectory(expand("~/.vim/plugged/completor.vim"))
-			if LINUX()
+			if g:platform['unix']
 				let g:completor_python_binary = '/usr/bin/python3'
                 let g:completor_node_binary = '/usr/local/node/bin/node'
-			elseif WINDOWS()
+			elseif g:platform['windows']
 				let g:completor_python_binary = 'D:/Anaconda3/python.exe'   "windows10企业版python3莫名卡顿，换用Anaconda3
                 let g:completor_node_binary = 'D:/Node/node.exe'
-            elseif has('win32unix')
+            elseif g:platform['cygwin']
                 let g:completor_python_binary = '/usr/bin/python3'   "Cygwin,use python3.5
                 let g:completor_node_binary = 'D:/Node/node.exe'
 			endif
@@ -180,7 +170,7 @@
 
     " tagbar {{{
         if isdirectory(expand("~/.vim/plugged/tagbar"))
-            if WINDOWS()
+            if g:platform['windows']
                 let g:tagbar_ctags_bin='~/.vim/depend/ctags/ctags.exe'  "默认/usr/bin/ctags
             endif
 
@@ -218,19 +208,19 @@
                 call asyncrun#quickfix_toggle(8)
                 " ; 链接多条命令（linux）或者 & 链接多条命令（windows）
                 if &filetype == 'c'
-                    if !WINDOWS()
+                    if !g:platform['windows']
                         exec ":AsyncRun gcc -std=c99 % -o %<;./%<"
                     else
                         exec ":AsyncRun gcc -std=c99 % -o %<&%<"
                     endif
                 elseif &filetype == 'cpp'
-                    if !WINDOWS()
+                    if !g:platform['windows']
                         exec ":AsyncRun g++ % -o %<;./%<"
                     else
                         exec ":AsyncRun g++ % -o %<&%<"
                     endif
                 elseif &filetype == 'java'
-                    if !WINDOWS()
+                    if !g:platform['windows']
                         exec ":AsyncRun javac %;java %<"
                     else
                         exec ":AsyncRun javac %&java %<"
@@ -238,9 +228,7 @@
                 elseif &filetype == 'sh'
                     exec ":AsyncRun bash %"
                 elseif &filetype == 'python'
-                    if LINUX()
-                        exec ":AsyncRun python3 %"
-                    elseif has('win32unix')
+                    if !g:platform['windows']
                         exec ":AsyncRun python3 %"
                     else
                         exec ":AsyncRun python %"
@@ -264,7 +252,7 @@
             colorscheme space-vim-dark
             hi LineNr ctermbg=NONE guibg=NONE
             hi CursorLineNr ctermbg=NONE guibg=NONE
-            if !has('gui_running')
+            if !g:has_gui_running
                 hi Normal ctermbg=NONE guibg=NONE
                 hi LineNr ctermfg=DarkGray  "行号颜色修正，终端透明情况下
                 hi SignColumn ctermbg=NONE guibg=NONE    
