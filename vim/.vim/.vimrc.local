@@ -69,7 +69,7 @@
     "工作的终端或者Windows的Console窗口的字符编码方式
     "set termencoding=utf-8
 
-    if has('gui_running')
+    if g:has_gui_running
         set langmenu=zh_CN.UTF-8
         "vim的菜单乱码解决
         source $VIMRUNTIME/delmenu.vim
