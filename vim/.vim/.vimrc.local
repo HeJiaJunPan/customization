@@ -185,3 +185,35 @@
     autocmd FileType python set textwidth=79
 
 " }}}
+
+" Plug {{{
+
+    call plug#begin('~/.vim/plugged')
+
+    Plug 'junegunn/vim-plug'
+    Plug 'scrooloose/nerdcommenter' "多行注释，leader键+cc生成, leader+cu删除注释
+    Plug 'scrooloose/nerdtree', { 'on':  ['NERDTreeToggle', 'NERDTreeFind'] }
+    Plug 'Xuyuanp/nerdtree-git-plugin', { 'on': ['NERDTreeToggle', 'NERDTreeFind'] }
+    Plug 'godlygeek/tabular'
+    Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
+    Plug 'mzlogin/vim-markdown-toc', { 'on': ['GenTocGFM', 'GenTocRedcarpet', 'GenTocGitLab', 'UpdateToc', 'RemoveToc'] }
+    "Plug 'aperezdc/vim-template'
+    Plug 'maralla/completor.vim'
+    Plug 'liuchengxu/space-vim-dark'
+    "Plug 'tyrannicaltoucan/vim-quantum'
+    Plug 'mbbill/undotree', { 'on':  'UndotreeToggle' }
+    Plug 'w0rp/ale'
+    Plug 'skywind3000/asyncrun.vim'
+    Plug 'tpope/vim-surround'
+    Plug 'easymotion/vim-easymotion',
+    if executable('git')
+        Plug 'tpope/vim-fugitive'
+    endif
+    
+    if executable('ctags') || isdirectory(expand("~/.vim/depend/ctags"))
+        Plug 'majutsushi/tagbar', { 'on': ['TagbarToggle', 'TagbarOpen'] }
+    endif
+    
+    call plug#end()
+
+" }}}
