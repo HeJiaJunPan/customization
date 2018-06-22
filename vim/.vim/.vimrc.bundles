@@ -189,9 +189,9 @@
                     endif
                 elseif &filetype == 'java'
                     if !g:platform['windows']
-                        exec ":AsyncRun javac %;java %<"
+                        exec ":AsyncRun javac -encoding UTF-8 %;java %<"
                     else
-                        exec ":AsyncRun javac %&java %<"
+                        exec ":AsyncRun javac -encoding UTF-8 %&java %<"
                     endif
                 elseif &filetype == 'sh'
                     exec ":AsyncRun bash %"
