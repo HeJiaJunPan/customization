@@ -1,0 +1,131 @@
+{
+  "sVersion": "5.18",
+  "websiteList": [
+    {
+      "contexts": [
+        "selection"
+      ],
+      "id": 1,
+      "recentLen": 1,
+      "type": "recent"
+    },
+    {
+      "contexts": [
+        "selection"
+      ],
+      "id": 2,
+      "type": "separator"
+    },
+    {
+      "address": "https://www.baidu.com/s?wd=",
+      "contexts": [
+        "selection"
+      ],
+      "id": 37,
+      "name": "Baidu",
+      "type": "link"
+    },
+    {
+      "address": "https://www.google.com/search?q=",
+      "contexts": [
+        "selection",
+        "tab"
+      ],
+      "id": 3,
+      "name": "Google",
+      "popup": true,
+      "prompt": true,
+      "type": "link"
+    },
+    {
+      "address": "https://www.bing.com/search?q=",
+      "contexts": [
+        "selection"
+      ],
+      "id": 12,
+      "name": "Bing",
+      "type": "link"
+    },
+    {
+      "address": "https://translate.google.cn/#view=home&op=translate&sl=auto&tl=zh-CN&text=",
+      "contexts": [
+        "selection"
+      ],
+      "id": 39,
+      "name": "Translate",
+      "type": "link"
+    },
+    {
+      "address": "https://www.dogedoge.com/results?q=",
+      "contexts": [
+        "selection"
+      ],
+      "id": 38,
+      "name": "Dogedoge",
+      "type": "link"
+    },
+    {
+      "address": "https://search.yahoo.com/search?p=",
+      "contexts": [
+        "selection"
+      ],
+      "id": 10,
+      "name": "Yahoo",
+      "type": "link"
+    },
+    {
+      "address": "https://duckduckgo.com/html?q=",
+      "contexts": [
+        "selection"
+      ],
+      "id": 11,
+      "name": "DuckDuckGo",
+      "type": "link"
+    },
+    {
+      "address": "https://zh.wikipedia.org/wiki/",
+      "contexts": [
+        "selection"
+      ],
+      "id": 7,
+      "name": "Wikipedia",
+      "popup": true,
+      "type": "link"
+    },
+    {
+      "address": "https://www.thefreedictionary.com/",
+      "contexts": [
+        "selection"
+      ],
+      "id": 21,
+      "name": "Dictionary",
+      "type": "link"
+    },
+    {
+      "address": "https://segmentfault.com/search?q=",
+      "contexts": [
+        "selection"
+      ],
+      "id": 40,
+      "name": "SegmentFault",
+      "type": "link"
+    }
+  ],
+  "sMenuLabel": "Find '%s' using ...",
+  "bShowPopup": false,
+  "iPopupMaxColumns": 6,
+  "iPopupIconSize": 21,
+  "bClosePopupOnClick": true,
+  "bClosePopupOnScroll": true,
+  "bClosePopupOnTimeout": true,
+  "iPopupCloseTimeout": 4,
+  "bShowAddSearchPage": false,
+  "bCopySelection": false,
+  "sOpenSearchIn": "opnt",
+  "oPlaceHolder": {
+    "domain": "~$D$~",
+    "keywords": "~$S$~",
+    "subdomain": "~$B$~",
+    "url": "~$U$~"
+  }
+}

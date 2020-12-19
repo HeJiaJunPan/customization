@@ -1,0 +1,52 @@
+{
+  "timeStamp": 1608395185283,
+  "version": "1.31.2",
+  "userSettings": {
+    "advancedUserEnabled": true,
+    "alwaysDetachLogger": false,
+    "autoUpdate": true,
+    "cloudStorageEnabled": false,
+    "collapseBlocked": true,
+    "colorBlindFriendly": false,
+    "contextMenuEnabled": false,
+    "dynamicFilteringEnabled": true,
+    "externalLists": "https://cdn.jsdelivr.net/gh/reek/anti-adblock-killer@master/anti-adblock-killer-filters.txt\nhttps://git.oschina.net/halflife/list/raw/master/ad.txt\nhttps://gitee.com/xinggsf/Adblock-Rule/raw/master/mv.txt\nhttps://raw.github.com/reek/anti-adblock-killer/master/anti-adblock-killer-filters.txt",
+    "firewallPaneMinimized": true,
+    "hyperlinkAuditingDisabled": true,
+    "ignoreGenericCosmeticFilters": false,
+    "largeMediaSize": 50,
+    "parseAllABPHideFilters": true,
+    "popupPanelSections": 31,
+    "prefetchingDisabled": true,
+    "requestLogMaxEntries": 1000,
+    "showIconBadge": true,
+    "tooltipsDisabled": false,
+    "webrtcIPAddressHidden": false
+  },
+  "selectedFilterLists": [
+    "user-filters",
+    "easyprivacy",
+    "urlhaus-1",
+    "https://gitee.com/xinggsf/Adblock-Rule/raw/master/mv.txt",
+    "https://git.oschina.net/halflife/list/raw/master/ad.txt"
+  ],
+  "hiddenSettings": {
+    "cloudStorageCompression": false
+  },
+  "whitelist": [
+    "about-scheme",
+    "chrome-extension-scheme",
+    "chrome-scheme",
+    "moz-extension-scheme",
+    "opera-scheme",
+    "vivaldi-scheme",
+    "www.jetbrains.com",
+    "www.niuga.cn",
+    "www.youneed.win"
+  ],
+  "netWhitelist": "about-scheme\nchrome-extension-scheme\nchrome-scheme\nmoz-extension-scheme\nopera-scheme\nvivaldi-scheme\nwww.jetbrains.com\nwww.niuga.cn\nwww.youneed.win",
+  "dynamicFilteringString": "behind-the-scene * * noop\nbehind-the-scene * inline-script noop\nbehind-the-scene * 1p-script noop\nbehind-the-scene * 3p-script noop\nbehind-the-scene * 3p-frame noop\nbehind-the-scene * image noop\nbehind-the-scene * 3p noop",
+  "urlFilteringString": "",
+  "hostnameSwitchesString": "no-large-media: behind-the-scene false",
+  "userFilters": "! 2018/3/14 下午9:53:55 https://www.jianshu.com/p/04d180d90a3f\n||cdn2.jianshu.io/assets/web/web-note-ad-2-34aca030621fb9127ddd544eedfebb30.png$image\n\n! 2018/4/20 下午8:49:52 https://baike.baidu.com/item/%E9%87%91%E5%85%89%E5%BE%A1%E4%B9%9D%E7%95%8C%E4%B9%8B%E9%AC%BC%E9%80%94%E5%A5%87%E8%A1%8C%E5%BD%95/22474571?fr=aladdin\n||gss3.bdstatic.com/-Po3dSag_xI4khGkpoWK1HF6hhy/baike/whfpf%3D135%2C180%2C50/sign=6f96101be7f81a4c2667bf89b117516a/b8014a90f603738dcad2ae4dbf1bb051f919ecc1.jpg$image\n\n! 2018/4/22 下午3:28:21 https://tieba.baidu.com/\ntieba.baidu.com##.tbshare_popup_enter\n\n! 2018/4/22 下午3:28:31 https://tieba.baidu.com/\n||tb2.bdstatic.com/tb/static-spage/widget/stats/stats_z_cea5452.png$image\n\n! 2018/4/28 下午6:04:29 https://pan.baidu.com/play/video#/video?path=%2FD-%E4%BA%AC%E5%A5%B3%E5%AD%90%E5%9B%BE%E9%89%B4%2FE01.mp4&t=-1\npan.baidu.com##.tips-box\n\n! 2018/4/28 下午6:04:37 https://pan.baidu.com/play/video#/video?path=%2FD-%E4%BA%AC%E5%A5%B3%E5%AD%90%E5%9B%BE%E9%89%B4%2FE01.mp4&t=-1\npan.baidu.com##.privilege-button\n\n! 2018/4/29 下午12:31:47 https://pan.baidu.com/disk/home#/all?path=%2F&vmode=list\n||pan.baidu.com/box-static/function-widget-1/guide/util/marchActivityTip/img/tip_f63c3f0.png$image\n\n! 2018/4/29 下午12:32:00 https://pan.baidu.com/disk/home#/all?path=%2F&vmode=list\n||pan.baidu.com/box-static/function-widget-1/guide/util/marchActivityTip/img/er_fa10fec.png$image\n\niqiyi.com##div.vip_rec_main,div.box_right.rightAdv,div[data-widget-3rdads],div.crossAd,#widget-indexad,div.ad-wrapper,#addiv,div.s_main.liveTop_adv,div.leftAd,#sina_anywhere_iframe,#adflash,div[id^=\"100000000\"],#widget-jingdongAd,div[data-widget-adparam]\n*/videos/other/201$xmlhttprequest,object-subrequest,domain=pps.tv|iqiyi.com\n||t7z.cupid.iqiyi.com/$domain=~iqiyi.com|~pps.tv\n||qiyipic.com/common/201$object-subrequest\n||a.ckm.iqiyi.com/\n||am.cupid.iqiyi.com/am\n\n! 2020-12-03 https://www.zhihu.com\n||static.zhihu.com/heifetz/main.signflow.*.js$script,domain=www.zhihu.com\n\n! 2020-12-12 https://www.cnblogs.com\n||cdn.jsdelivr.net/gh/*/*/src/script/RibbonsEffect.min.js$script,domain=www.cnblogs.com\n"
+}
