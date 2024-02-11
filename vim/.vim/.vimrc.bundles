@@ -1,249 +1,259 @@
-" Config {{{
-    " NerdTree {{{
-        if isdirectory(expand("~/.vim/plugged/nerdtree"))
-            nmap <leader>nn :NERDTreeToggle<CR>
-            nmap <leader>nf :NERDTreeFind<CR>
-            let g:NERDTreeWinSize=30
-            let g:NERDTreeShowBookmarks=1
-            let g:NERDTreeIgnore=['\.py[cd]$', '\~$', '\.swo$', '\.swp$', '^\.git$', '^\.hg$', '^\.svn$', '\.bzr$']
-            let g:NERDTreeQuitOnOpen=1
-            let g:NERDTreeMouseMode=2
-            let g:NERDTreeShowHidden=1
-            let g:NERDTreeKeepTreeInNewTab=1
-            let g:NERDTreeWinPos=0
-            let g:NERDTreeDirArrowExpandable = '▸'
-            let g:NERDTreeDirArrowCollapsible = '▾'
-            au bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") &&b:NERDTreeType == "primary") | q | endif
-            if isdirectory(expand("~/.vim/plugged/nerdtree-git-plugin"))
-                let g:NERDTreeIndicatorMapCustom = {
-                    \ "Modified"  : "*",
-                    \ "Staged"    : "+",
-                    \ "Untracked" : "★",
-                    \ "Renamed"   : "→ ",
-                    \ "Unmerged"  : "=",
-                    \ "Deleted"   : "X",
-                    \ "Dirty"     : "●",
-                    \ "Clean"     : "√",
-                    \ "Ignored"   : "☒",
-                    \ "Unknown"   : "?"
-                    \ }
-            endif
+" NerdTree {{{
+    if isdirectory(expand("~/.vim/plugged/nerdtree"))
+        nmap <leader>nn :NERDTreeToggle<CR>
+        nmap <leader>nf :NERDTreeFind<CR>
+        let g:NERDTreeWinSize=30
+        let g:NERDTreeShowBookmarks=1
+        let g:NERDTreeIgnore=['\.py[cd]$', '\~$', '\.swo$', '\.swp$', '^\.git$', '^\.hg$', '^\.svn$', '\.bzr$']
+        let g:NERDTreeQuitOnOpen=1
+        let g:NERDTreeMouseMode=2
+        let g:NERDTreeShowHidden=1
+        let g:NERDTreeKeepTreeInNewTab=1
+        let g:NERDTreeWinPos=0
+        let g:NERDTreeDirArrowExpandable = '▸'
+        let g:NERDTreeDirArrowCollapsible = '▾'
+        au bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") &&b:NERDTreeType == "primary") | q | endif
+        if isdirectory(expand("~/.vim/plugged/nerdtree-git-plugin"))
+            let g:NERDTreeIndicatorMapCustom = {
+                \ "Modified"  : "*",
+                \ "Staged"    : "+",
+                \ "Untracked" : "★",
+                \ "Renamed"   : "→ ",
+                \ "Unmerged"  : "=",
+                \ "Deleted"   : "X",
+                \ "Dirty"     : "●",
+                \ "Clean"     : "√",
+                \ "Ignored"   : "☒",
+                \ "Unknown"   : "?"
+                \ }
         endif
-    " }}}
-    
-    " ale {{{
-        if isdirectory(expand("~/.vim/plugged/ale"))
-            let g:ale_completion_enabled   = 1
-            let g:ale_lint_on_enter        = 0
-            let g:ale_lint_on_text_changed = 'always'
-            nmap <F9> :ALEToggle<CR>
-            " signs fo
-            let g:ale_sign_column_always   = 1
-            let g:ale_set_signs            = 1
-            let g:ale_set_highlights       = 0
-            let g:ale_sign_error           = 'E'
-            let g:ale_sign_warning         = 'w'
-            " message format
-            let g:ale_echo_msg_error_str   = 'E'
-            let g:ale_echo_msg_warning_str = 'W'
-            let g:ale_echo_msg_format      = '[%linter%] %s [%code%]'
+    endif
+" }}}
 
-            let g:ale_fix_on_save          = 0
-            let g:ale_set_loclist          = 0
-            let g:ale_set_quickfix         = 0
-            let g:ale_statusline_format    = ['E:%d', 'W:%d', '']
-            "highlight clear ALEErrorSign
-            "highlight clear ALEWarningSign
-            nmap <silent> <leader>[ <Plug>(ale_previous_wrap)
-            nmap <silent> <leader>] <Plug>(ale_next_wrap)
-            " 特定后缀指定lint方式
-            let g:ale_pattern_options_enabled = 1
-            let b:ale_warn_about_trailing_whitespace = 0
-            let g:ale_fixers ={}
-            nmap <leader>gt :ALEGoToDefinition<CR>
+" ale {{{
+    if isdirectory(expand("~/.vim/plugged/ale"))
+        let g:ale_completion_enabled   = 1
+        let g:ale_lint_on_enter        = 0
+        let g:ale_lint_on_text_changed = 'always'
+        nmap <F9> :ALEToggle<CR>
+        " signs fo
+        let g:ale_sign_column_always   = 1
+        let g:ale_set_signs            = 1
+        let g:ale_set_highlights       = 0
+        let g:ale_sign_error           = 'E'
+        let g:ale_sign_warning         = 'w'
+        " message format
+        let g:ale_echo_msg_error_str   = 'E'
+        let g:ale_echo_msg_warning_str = 'W'
+        let g:ale_echo_msg_format      = '[%linter%] %s [%code%]'
+
+        let g:ale_fix_on_save          = 0
+        let g:ale_set_loclist          = 0
+        let g:ale_set_quickfix         = 0
+        let g:ale_statusline_format    = ['E:%d', 'W:%d', '']
+        "highlight clear ALEErrorSign
+        "highlight clear ALEWarningSign
+        nmap <silent> <leader>[ <Plug>(ale_previous_wrap)
+        nmap <silent> <leader>] <Plug>(ale_next_wrap)
+        " 特定后缀指定lint方式
+        let g:ale_pattern_options_enabled = 1
+        let b:ale_warn_about_trailing_whitespace = 0
+        let g:ale_fixers ={}
+        nmap <leader>gt :ALEGoToDefinition<CR>
+    endif
+" }}}
+
+" vim-template {{{
+    if isdirectory(expand("~/.vim/plugged/vim-template"))
+        let g:templates_directory = ['/home/pylego/.vim/templates',]
+        let g:templates_user_variables = [['EMAIL', 'GetMail'], ['FULLPATH', 'GetFullPath']]
+    endif
+
+    function GetMail()
+        return 'zhiyeyou@gmail.com'
+    endfunction
+
+    function GetFullPath()
+        return expand('%:p')
+    endfunction
+" }}}
+
+" tabular {{{
+    if isdirectory(expand("~/.vim/plugged/tabular"))
+        nmap <Leader>a&     :Tabularize /&<CR>
+        vmap <Leader>a&     :Tabularize /&<CR>
+        nmap <Leader>a=     :Tabularize /^[^=]*\zs=<CR>
+        vmap <Leader>a=     :Tabularize /^[^=]*\zs=<CR>
+        nmap <Leader>a=>    :Tabularize /=><CR>
+        vmap <Leader>a=>    :Tabularize /=><CR>
+        nmap <Leader>a:     :Tabularize /:<CR>
+        vmap <Leader>a:     :Tabularize /:<CR>
+        nmap <Leader>a::    :Tabularize /:\zs<CR>
+        vmap <Leader>a::    :Tabularize /:\zs<CR>
+        nmap <Leader>a,     :Tabularize /,<CR>
+        vmap <Leader>a,     :Tabularize /,<CR>
+        nmap <Leader>a,,    :Tabularize /,\zs<CR>
+        vmap <Leader>a,,    :Tabularize /,\zs<CR>
+        nmap <Leader>a<Bar> :Tabularize /<Bar><CR>
+        vmap <Leader>a<Bar> :Tabularize /<Bar><CR>
+    endif
+" }}}
+
+" markdown {{{
+    if isdirectory(expand("~/.vim/plugged/vim-markdown"))
+        let g:vim_markdown_folding_disabled = 1
+        let g:vim_markdown_math = 1
+        let g:vim_markdown_frontmatter = 1
+        let g:vim_markdown_conceal = 0
+    endif
+
+    if isdirectory(expand("~/.vim/plugged/vim-markdown-toc"))
+        let g:vmt_auto_update_on_save = 1
+        let g:vmt_dont_insert_fence = 0
+        let g:vim_markdown_toc_autofit = 1
+        autocmd FileType markdown nnoremap <C-m> :GenTocGFM<CR>
+    endif
+" }}}
+
+" completor.vim {{{
+    if isdirectory(expand("~/.vim/plugged/completor.vim"))
+        if g:platform['unix']
+            let g:completor_python_binary = '/usr/bin/python3'
+            let g:completor_node_binary = '/usr/local/node/bin/node'
+        elseif g:platform['windows']
+            let g:completor_python_binary = 'D:/Anaconda3/python.exe'   "windows10企业版python3莫名卡顿，换用Anaconda3
+            let g:completor_node_binary = 'D:/Node/node.exe'
+        elseif g:platform['cygwin']
+            let g:completor_python_binary = '/usr/bin/python3'   "Cygwin,use python3.5
+            let g:completor_node_binary = 'D:/Node/node.exe'
         endif
-    " }}}
+    endif
+    "Use Tab to select completion
+    inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+    inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+    inoremap <expr> <cr> pumvisible() ? "\<C-y>\<cr>" : "\<cr>"
 
-    " vim-template {{{
-    "   if isdirectory(expand("~/.vim/plugged/vim-template"))
-    "       let g:templates_directory = ['/home/pylego/.vim/templates',]
-    "       let g:templates_user_variables = [['EMAIL', 'GetMail'], ['FULLPATH', 'GetFullPath']]
-    "   endif
+" }}}
 
-    "    function GetMail()
-    "        return 'zhiyeyou@gmail.com'
-    "    endfunction
-
-    "    function GetFullPath()
-    "        return expand('%:p')
-    "    endfunction
-    " }}}
-
-    " tabular {{{
-        if isdirectory(expand("~/.vim/plugged/tabular"))
-            nmap <Leader>a&     :Tabularize /&<CR>
-            vmap <Leader>a&     :Tabularize /&<CR>
-            nmap <Leader>a=     :Tabularize /^[^=]*\zs=<CR>
-            vmap <Leader>a=     :Tabularize /^[^=]*\zs=<CR>
-            nmap <Leader>a=>    :Tabularize /=><CR>
-            vmap <Leader>a=>    :Tabularize /=><CR>
-            nmap <Leader>a:     :Tabularize /:<CR>
-            vmap <Leader>a:     :Tabularize /:<CR>
-            nmap <Leader>a::    :Tabularize /:\zs<CR>
-            vmap <Leader>a::    :Tabularize /:\zs<CR>
-            nmap <Leader>a,     :Tabularize /,<CR>
-            vmap <Leader>a,     :Tabularize /,<CR>
-            nmap <Leader>a,,    :Tabularize /,\zs<CR>
-            vmap <Leader>a,,    :Tabularize /,\zs<CR>
-            nmap <Leader>a<Bar> :Tabularize /<Bar><CR>
-            vmap <Leader>a<Bar> :Tabularize /<Bar><CR>
-        endif
-    " }}}
-
-    " markdown {{{
-        if isdirectory(expand("~/.vim/plugged/vim-markdown"))
-            let g:vim_markdown_folding_disabled = 1
-            let g:vim_markdown_math = 1
-            let g:vim_markdown_frontmatter = 1
-            let g:vim_markdown_conceal = 0
+" tagbar {{{
+    if isdirectory(expand("~/.vim/plugged/tagbar"))
+        if g:platform['windows']
+            let g:tagbar_ctags_bin='~/.vim/depend/ctags/ctags.exe'  "默认/usr/bin/ctags
         endif
 
-        if isdirectory(expand("~/.vim/plugged/vim-markdown-toc"))
-            let g:vmt_auto_update_on_save = 1
-            let g:vmt_dont_insert_fence = 0
-            let g:vim_markdown_toc_autofit = 1
-            autocmd FileType markdown nnoremap <C-m> :GenTocGFM<CR>
+        let g:tagbar_width=30
+        let g:tagbar_sort = 0
+        set tags=./tags;/,~/.vimtags
+        " Make tags placed in .git/tags file available in all levels of a repository
+        let gitroot = substitute(system('git rev-parse --show-toplevel'), '[\n\r]', '', 'g')
+        if gitroot != ''
+            let &tags = &tags . ',' . gitroot . '/.git/tags'
         endif
-    " }}}
+        nnoremap <silent><leader>tt :TagbarToggle<CR>
+        nnoremap <silent><leader>tj :TagbarOpen j<CR>
+        " AutoCloseTag
+        " Make it so AutoCloseTag works for xml and xhtml files as well
+        au FileType xhtml,xml ru ftplugin/html/autoclosetag.vim
+        nnoremap <Leader>ta <Plug>ToggleAutoCloseMappings
+    endif
+" }}}
 
-    " completor.vim {{{
-        if isdirectory(expand("~/.vim/plugged/completor.vim"))
-            if g:platform['unix']
-                let g:completor_python_binary = '/usr/bin/python3'
-                let g:completor_node_binary = '/usr/local/node/bin/node'
-            elseif g:platform['windows']
-                let g:completor_python_binary = 'D:/Anaconda3/python.exe'   "windows10企业版python3莫名卡顿，换用Anaconda3
-                let g:completor_node_binary = 'D:/Node/node.exe'
-            elseif g:platform['cygwin']
-                let g:completor_python_binary = '/usr/bin/python3'   "Cygwin,use python3.5
-                let g:completor_node_binary = 'D:/Node/node.exe'
-            endif
-        endif
-        "Use Tab to select completion
-        inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-        inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-        inoremap <expr> <cr> pumvisible() ? "\<C-y>\<cr>" : "\<cr>"
+" UndoTree {{{
+    if isdirectory(expand("~/.vim/plugged/undotree"))
+        nnoremap <silent><Leader>u :UndotreeToggle<CR>
+        " If undotree is opened, it is likely one wants to interact with it.
+        let g:undotree_SetFocusWhenToggle=1
+    endif
+" }}}
 
-    " }}}
-
-    " tagbar {{{
-        if isdirectory(expand("~/.vim/plugged/tagbar"))
-            if g:platform['windows']
-                let g:tagbar_ctags_bin='~/.vim/depend/ctags/ctags.exe'  "默认/usr/bin/ctags
-            endif
-
-            let g:tagbar_width=30
-            let g:tagbar_sort = 0
-            set tags=./tags;/,~/.vimtags
-            " Make tags placed in .git/tags file available in all levels of a repository
-            let gitroot = substitute(system('git rev-parse --show-toplevel'), '[\n\r]', '', 'g')
-            if gitroot != ''
-                let &tags = &tags . ',' . gitroot . '/.git/tags'
-            endif
-            nnoremap <silent><leader>tt :TagbarToggle<CR>
-            nnoremap <silent><leader>tj :TagbarOpen j<CR>
-            " AutoCloseTag
-            " Make it so AutoCloseTag works for xml and xhtml files as well
-            au FileType xhtml,xml ru ftplugin/html/autoclosetag.vim
-            nnoremap <Leader>ta <Plug>ToggleAutoCloseMappings
-        endif
-    " }}}
-
-    " UndoTree {{{
-        if isdirectory(expand("~/.vim/plugged/undotree"))
-            nnoremap <silent><Leader>u :UndotreeToggle<CR>
-            " If undotree is opened, it is likely one wants to interact with it.
-            let g:undotree_SetFocusWhenToggle=1
-        endif
-    " }}}
-
-    " asyncrun {{{
-        if isdirectory(expand("~/.vim/plugged/asyncrun.vim"))
-            nmap <Leader>tr :AsyncRun
-            function! RUNIT()
-                exec "w"
-                cclose
-                call asyncrun#quickfix_toggle(8)
-                " ; 链接多条命令（linux）或者 & 链接多条命令（windows）
-                if &filetype == 'c'
-                    if !g:platform['windows']
-                        exec ":AsyncRun gcc -std=c99 % -o %<;./%<"
-                    else
-                        exec ":AsyncRun gcc -std=c99 % -o %<&%<"
-                    endif
-                elseif &filetype == 'cpp'
-                    if !g:platform['windows']
-                        exec ":AsyncRun g++ % -o %<;./%<"
-                    else
-                        exec ":AsyncRun g++ % -o %<&%<"
-                    endif
-                elseif &filetype == 'java'
-                    if !g:platform['windows']
-                        exec ":AsyncRun javac -encoding UTF-8 %;java %<"
-                    else
-                        exec ":AsyncRun javac -encoding UTF-8 %&java %<"
-                    endif
-                elseif &filetype == 'sh'
-                    exec ":AsyncRun bash %"
-                elseif &filetype == 'python'
-                    if !g:platform['windows']
-                        exec ":AsyncRun python3 %"
-                    else
-                        exec ":AsyncRun python %"
-                    endif
-                elseif &filetype == 'perl'
-                    exec ":AsyncRun perl %"
-                elseif &filetype == 'go'
-                    exec ":AsyncRun go run %"
+" asyncrun {{{
+    if isdirectory(expand("~/.vim/plugged/asyncrun.vim"))
+        nmap <Leader>tr :AsyncRun
+        function! RUNIT()
+            exec "w"
+            cclose
+            call asyncrun#quickfix_toggle(8)
+            " ; 链接多条命令（linux）或者 & 链接多条命令（windows）
+            if &filetype == 'c'
+                if !g:platform['windows']
+                    exec ":AsyncRun gcc -std=c99 % -o %<;./%<"
+                else
+                    exec ":AsyncRun gcc -std=c99 % -o %<&%<"
                 endif
-            endfunction
-            nmap <F5> :call RUNIT()<CR>
-            nmap <leader><F5> :call asyncrun#quickfix_toggle(8)<CR>
-        endif
-    " }}}
-
-    " Theme {{{
-        if  filereadable(expand("~/.vim/plugged/space-vim-dark/colors/space-vim-dark.vim"))
-            set t_Co=256
-            "set background=dark
-            "set termguicolors
-            colorscheme space-vim-dark
-            hi LineNr ctermbg=NONE guibg=NONE
-            hi CursorLineNr ctermbg=NONE guibg=NONE
-            if !g:has_gui_running
-                hi Normal ctermbg=NONE guibg=NONE
-                hi LineNr ctermfg=DarkGray  "行号颜色修正，终端透明情况下
-                hi SignColumn ctermbg=NONE guibg=NONE    
+            elseif &filetype == 'cpp'
+                if !g:platform['windows']
+                    exec ":AsyncRun g++ % -o %<;./%<"
+                else
+                    exec ":AsyncRun g++ % -o %<&%<"
+                endif
+            elseif &filetype == 'java'
+                if !g:platform['windows']
+                    exec ":AsyncRun javac -encoding UTF-8 %;java %<"
+                else
+                    exec ":AsyncRun javac -encoding UTF-8 %&java %<"
+                endif
+            elseif &filetype == 'sh'
+                exec ":AsyncRun bash %"
+            elseif &filetype == 'python'
+                if !g:platform['windows']
+                    exec ":AsyncRun python3 %"
+                else
+                    exec ":AsyncRun python %"
+                endif
+            elseif &filetype == 'perl'
+                exec ":AsyncRun perl %"
+            elseif &filetype == 'go'
+                exec ":AsyncRun go run %"
             endif
+        endfunction
+        nmap <F5> :call RUNIT()<CR>
+        nmap <leader><F5> :call asyncrun#quickfix_toggle(8)<CR>
+    endif
+" }}}
+
+" fzf {{{
+    if isdirectory(expand("~/.vim/plugged/fzf.vim"))
+        "<Leader>f在当前目录搜索文件
+        nnoremap <silent> <Leader>f :Files<CR>
+        "<Leader>b切换Buffer中的文件
+        nnoremap <silent> <Leader>b :Buffers<CR>
+        "<Leader>p在当前所有加载的Buffer中搜索包含目标词的所有行，:BLines只在当前Buffer中搜索
+        nnoremap <silent> <Leader>p :Lines<CR>
+        "<Leader>h在Vim打开的历史文件中搜索，相当于是在MRU中搜索，:History：命令历史查找
+        nnoremap <silent> <Leader>h :History<CR>
+    endif
+" }}}
+
+" Theme {{{
+    if  filereadable(expand("~/.vim/plugged/space-vim-dark/colors/space-vim-dark.vim"))
+        set t_Co=256
+        "set background=dark
+        "set termguicolors
+        colorscheme space-vim-dark
+        hi LineNr ctermbg=NONE guibg=NONE
+        hi CursorLineNr ctermbg=NONE guibg=NONE
+        if !g:has_gui_running
+            hi Normal ctermbg=NONE guibg=NONE
+            hi LineNr ctermfg=DarkGray  "行号颜色修正，终端透明情况下
+            hi SignColumn ctermbg=NONE guibg=NONE    
         endif
-        
-        set laststatus=2
-        "set statusline=%<%1*[B-%n]%*
-        "set statusline+=%2*\ %F%=\ %*
-        "set statusline+=%3*\ %m%r%y%w\ %*
-        "set statusline+=%=%4*\ %{&ff}\ \|\ %{\"\".(&fenc==\"\"?&enc:&fenc).((exists(\"+bomb\")\ &&\ &bomb)?\",B\":\"\").\"\ \|\"}\ %-14.(%l:%c%V%)%*
-        "set statusline+=%5*\ %P\ %*
-        set statusline=%<%1*[B-%n]%*%2*\ %F%=\ %*%3*\ %m%r%y%w\ %*%4*\ %{&ff}\ \|\ %{\"\".(&fenc==\"\"?&enc:&fenc).((exists(\"+bomb\")\ &&\ &bomb)?\",B\":\"\").\"\ \|\"}\ %-14.(%l:%c%V%)%*%5*\ %P\ %*
-        hi User1 cterm=bold ctermfg=249 ctermbg=240 gui=bold guifg=#b2b2b2 guibg=#585858
-        hi User2 cterm=bold ctermfg=169 ctermbg=238 gui=bold guifg=#d75faf guibg=#444444
-        hi User3 cterm=None ctermfg=250 ctermbg=238 gui=None guifg=#bcbcbc guibg=#444444
-        hi User4 cterm=None ctermfg=250 ctermbg=238 gui=None guifg=#bcbcbc guibg=#444444
-        hi User5 cterm=None ctermfg=249 ctermbg=240 gui=None guifg=#b2b2b2 guibg=#585858
-    " }}}
+    endif
+    
+    set laststatus=2
+    "set statusline=%<%1*[B-%n]%*
+    "set statusline+=%2*\ %F%=\ %*
+    "set statusline+=%3*\ %m%r%y%w\ %*
+    "set statusline+=%=%4*\ %{&ff}\ \|\ %{\"\".(&fenc==\"\"?&enc:&fenc).((exists(\"+bomb\")\ &&\ &bomb)?\",B\":\"\").\"\ \|\"}\ %-14.(%l:%c%V%)%*
+    "set statusline+=%5*\ %P\ %*
+    set statusline=%<%1*[B-%n]%*%2*\ %F%=\ %*%3*\ %m%r%y%w\ %*%4*\ %{&ff}\ \|\ %{\"\".(&fenc==\"\"?&enc:&fenc).((exists(\"+bomb\")\ &&\ &bomb)?\",B\":\"\").\"\ \|\"}\ %-14.(%l:%c%V%)%*%5*\ %P\ %*
+    hi User1 cterm=bold ctermfg=249 ctermbg=240 gui=bold guifg=#b2b2b2 guibg=#585858
+    hi User2 cterm=bold ctermfg=169 ctermbg=238 gui=bold guifg=#d75faf guibg=#444444
+    hi User3 cterm=None ctermfg=250 ctermbg=238 gui=None guifg=#bcbcbc guibg=#444444
+    hi User4 cterm=None ctermfg=250 ctermbg=238 gui=None guifg=#bcbcbc guibg=#444444
+    hi User5 cterm=None ctermfg=249 ctermbg=240 gui=None guifg=#b2b2b2 guibg=#585858
+" }}}
 
 " PlugName {{{
 "        if isdirectory(expand("~/.vim/plugged/PlugDir"))
 "        endif
-" }}}
-
 " }}}
