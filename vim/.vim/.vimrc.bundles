@@ -1,6 +1,6 @@
 " NerdTree {{{
     if isdirectory(expand("~/.vim/plugged/nerdtree"))
-        nmap <leader>nn :NERDTreeToggle<CR>
+        nmap <c-n> :NERDTreeToggle<CR>
         nmap <leader>nf :NERDTreeFind<CR>
         let g:NERDTreeWinSize=30
         let g:NERDTreeShowBookmarks=1
@@ -213,6 +213,9 @@
 
 " fzf {{{
     if isdirectory(expand("~/.vim/plugged/fzf.vim"))
+        "为了搜索隐藏文件，安装fd命令:apt install fdfind
+        ".bashrc文件添加：export FZF_DEFAULT_COMMAND='fd --type=file --hidden --exclude .git'
+        "预览窗口高亮：apt install bat
         "<Leader>f在当前目录搜索文件
         nnoremap <silent> <Leader>f :Files<CR>
         "<Leader>b切换Buffer中的文件
