@@ -25,7 +25,7 @@
     set noswapfile  "禁止生成临时文件
     set history=1024    "历史记录数
     set autoread    "设置当文件在外部被修改，自动更新该文件
-    set autochdir
+    "set autochdir
     "set whichwrap=b,s,<,>,[,]
     set nobomb
     "使回格键（backspace）正常处理indent, eol, start等
@@ -193,7 +193,7 @@
     Plug 'junegunn/vim-plug'
     Plug 'scrooloose/nerdcommenter' "多行注释，leader键+cc生成, leader+cu删除注释
     Plug 'scrooloose/nerdtree', { 'on':  ['NERDTreeToggle', 'NERDTreeFind'] }
-    Plug 'Xuyuanp/nerdtree-git-plugin', { 'on': ['NERDTreeToggle', 'NERDTreeFind'] }
+    "Plug 'Xuyuanp/nerdtree-git-plugin', { 'on': ['NERDTreeToggle', 'NERDTreeFind'] }
     Plug 'godlygeek/tabular'
     Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
     Plug 'mzlogin/vim-markdown-toc', { 'on': ['GenTocGFM', 'GenTocRedcarpet', 'GenTocGitLab', 'UpdateToc', 'RemoveToc'] }
@@ -202,17 +202,20 @@
     Plug 'liuchengxu/space-vim-dark'
     "Plug 'tyrannicaltoucan/vim-quantum'
     Plug 'mbbill/undotree', { 'on':  'UndotreeToggle' }
-    Plug 'w0rp/ale'
+    "Plug 'w0rp/ale'
     Plug 'skywind3000/asyncrun.vim'
     Plug 'tpope/vim-surround'
     Plug 'easymotion/vim-easymotion',
-    if executable('git')
-        Plug 'tpope/vim-fugitive'
-    endif
+    "if executable('git')
+    "    Plug 'tpope/vim-fugitive'
+    "endif
     
     if executable('ctags') || isdirectory(expand("~/.vim/depend/ctags"))
         Plug 'majutsushi/tagbar', { 'on': ['TagbarToggle', 'TagbarOpen'] }
     endif
+
+    Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+    Plug 'junegunn/fzf.vim'
     
     call plug#end()
 
