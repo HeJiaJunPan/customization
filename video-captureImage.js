@@ -1,11 +1,13 @@
 // ==UserScript==
-// @name        New script bilibili.com
+// @name        B站和油管html视频截图
 // @namespace   Violentmonkey Scripts
+// @match       https://www.youtube.com/watch*
 // @match       https://www.bilibili.com/video/*
+// @match       https://www.bilibili.com/bangumi/play/*
 // @grant       none
 // @version     1.0
-// @author      -
-// @description 2024/7/20 17:46:50
+// @author      HeJiaJunPan
+// @description 2024/7/21 20:52:22
 // ==/UserScript==
 
 (function () {
@@ -20,8 +22,8 @@
         } else if (domain === 'www.bilibili.com') {
             return {
                 host: 'bilibili',
-                video: document.querySelector('#playerWrap .bpx-player-video-wrap video'),
-                control: document.querySelector('#arc_toolbar_report .video-toolbar-left')
+                video: document.querySelector('#bilibili-player .bpx-player-video-wrap video'),
+                control: document.querySelector('#bilibili-player .bpx-player-control-bottom-right')
             };
         }
     }
@@ -64,21 +66,29 @@
 
     } else if (localElement().host === 'bilibili') {
         button = document.createElement('div');
-        button.classList.add('toolbar-left-item-wrap')
-        button.innerHTML = `<div class="video-toolbar-left-item" style="width:100%;padding-right:25px;"><svg t="1721473203177" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4302" width="28" height="28"><path d="M896 192H781.1c-30.8 0-57.2-21.9-62.9-52.2L706.5 77c-1.4-7.6-8-13-15.7-13H333.3c-7.7 0-14.3 5.5-15.7 13l-11.8 62.7c-5.7 30.3-32.1 52.2-62.9 52.2H128C57.3 192 0 249.3 0 320v512c0 70.7 57.3 128 128 128h768c70.7 0 128-57.3 128-128V320c0-70.7-57.3-128-128-128zM160 352c-17.7 0-32-14.3-32-32 0-8.8 3.6-16.8 9.4-22.6 5.8-5.8 13.8-9.4 22.6-9.4h64c17.7 0 32 14.3 32 32 0 8.8-3.6 16.8-9.4 22.6-5.8 5.8-13.8 9.4-22.6 9.4h-64z m352 512c-150.2 0-272-121.8-272-272s121.8-272 272-272 272 121.8 272 272-121.8 272-272 272z" p-id="4303" fill="#515151"></path><path d="M720 592c0 55.6-21.6 107.8-60.9 147.1S567.6 800 512 800s-107.8-21.6-147.1-60.9S304 647.6 304 592s21.6-107.8 60.9-147.1S456.4 384 512 384s107.8 21.6 147.1 60.9S720 536.4 720 592z" p-id="4304" fill="#61666d"></path></svg></div>`;
+        button.innerHTML = `<div class="bpx-player-ctrl-btn bpx-player-ctrl-playbackrate-result" style="font-size: 14px;margin-right: 20px;">截屏</div>`;
     }
 
+    // 点击事件监听
     button.addEventListener('click', function () {
         let video = localElement().video;
         capture(video);
 
     });
 
+    // 按键P进行截图
+    document.querySelector('body').addEventListener('keydown', function(event) {
+        if (event.key === 'P') {
+            let video = localElement().video;
+            capture(video);
+        }
+    });
+
 
     // 若播放器控制条出现，添加截图按钮，并取消元素监听
     observer = new MutationObserver((mutationList, observer) => {
         let = control = localElement().control;
-        if (control) {
+        if (control && control.childElementCount > 0) {
             control.insertBefore(button, control.firstChild);
             observer.disconnect();
         }
