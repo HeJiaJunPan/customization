@@ -1,0 +1,10 @@
+services:
+  danmu-api:
+    image: docker.1ms.run/logvar/danmu-api:latest
+    ports:
+      - "19321:9321"
+    # 热更新支持：挂载 config/.env 文件，修改后容器会自动重新加载配置（无需重启容器）
+    volumes:
+      - ./config:/app/config    # config目录下需要创建.env
+      - ./.cache:/app/.cache    # 配置.chche目录，会将缓存实时保存在本地文件
+    restart: unless-stopped
