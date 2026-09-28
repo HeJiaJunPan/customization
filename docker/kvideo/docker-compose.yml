@@ -1,0 +1,13 @@
+services:
+  kvideo:
+    image: docker.1ms.run/kuekhaoyang/kvideo:latest
+    container_name: kvideo
+    ports:
+      - "30006:3000"
+    environment:
+      ADMIN_PASSWORD: password
+      SUBSCRIPTION_SOURCES: '[{"name":"默认源","url":"https://gh-proxy.com/raw.githubusercontent.com/rapier15sapper/ew/refs/heads/main/test.json"}]'
+      DANMAKU_API_URL: my-rul
+      NEXT_PUBLIC_DANMAKU_API_URL: my-rul
+      IPTV_SOURCES: '[{"name":"IPTV4","url":"https://gh-proxy.com/raw.githubusercontent.com/vbskycn/iptv/refs/heads/master/tv/iptv4.m3u"},{"name":"IPTV6","url":"https://gh-proxy.com/raw.githubusercontent.com/vbskycn/iptv/refs/heads/master/tv/iptv6.m3u"}]'
+    restart: always
