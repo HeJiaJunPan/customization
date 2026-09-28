@@ -1,0 +1,28 @@
+version: '3.1'
+
+services:
+
+  typecho:
+    image: joyqi/typecho:nightly-php8.2-apache
+    restart: always
+    ports:
+      - 8086:80
+    environment:
+      TYPECHO_DB_USER: username
+      TYPECHO_DB_PASSWORD: password
+      TYPECHO_DB_DATABASE: typecho
+    volumes:
+      - ~/typecho/data:/app/usr
+    depends_on:
+      - typecho_db
+
+  typecho_db:
+    image: mysql:5.7
+    restart: always
+    environment:
+      MYSQL_DATABASE: typecho
+      MYSQL_USER: username
+      MYSQL_PASSWORD: password
+      MYSQL_RANDOM_ROOT_PASSWORD: '1'
+    volumes:
+      - ~/typecho/mysql:/var/lib/mysql
